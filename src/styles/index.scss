@@ -1,9 +1,12 @@
+@import './fonts.scss';
 @import './reset.scss';
-@import './variables.scss';
+@import './variables/sizes.scss';
+@import './variables/colors.scss';
 
 html,
 body {
-  font-size: 1rem;
+  font-family: var(--font-family);
+  font-size: var(--font-size);
   min-height: 100vh;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
