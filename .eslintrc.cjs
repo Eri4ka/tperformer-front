@@ -9,23 +9,23 @@ module.exports = {
     'import/order': [
       'error',
       {
-        'newlines-between': 'always',
-        warnOnUnassignedImports: true,
-        groups: ['builtin', 'external', 'internal', ['index', 'object'], 'parent', 'sibling', 'type'],
+        groups: ['builtin', 'external', 'internal', ['parent', 'sibling', 'index']],
         pathGroups: [
           {
-            pattern: '~/**',
+            pattern: '@/**',
             group: 'internal',
           },
           {
-            pattern: './**/*.scss',
-            group: 'type',
-          },
-          {
-            pattern: '../**/*.scss',
-            group: 'type',
+            pattern: '**/*.{scss,png}',
+            group: 'index',
           },
         ],
+        pathGroupsExcludedImportTypes: ['react'],
+        'newlines-between': 'always',
+        alphabetize: {
+          order: 'asc',
+          caseInsensitive: true,
+        },
       },
     ],
   },
