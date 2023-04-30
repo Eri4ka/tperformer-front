@@ -1,0 +1,6 @@
+@import './mixins.scss';
+
+@include font($family: 'Manrope', $weight: 400, $url: '../assets/fonts/Manrope/Manrope-Regular.ttf');
+@include font($family: 'Manrope', $weight: 500, $url: '../assets/fonts/Manrope/Manrope-Medium.ttf');
+@include font($family: 'Manrope', $weight: 600, $url: '../assets/fonts/Manrope/Manrope-SemiBold.ttf');
+@include font($family: 'JetBrains Mono', $weight: 400, $url: '../assets/fonts/JetBrainsMono/JetBrainsMono-Regular.ttf');
