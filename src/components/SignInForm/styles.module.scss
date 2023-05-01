@@ -14,3 +14,14 @@
     color: var(--purple-01);
   }
 }
+
+.forgot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &Text {
+    font-family: var(--secondary-font);
+    color: var(--purple-02);
+  }
+}

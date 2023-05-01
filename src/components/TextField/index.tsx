@@ -14,10 +14,22 @@ type Props = {
   value: string;
   error?: string;
   handleChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  handleBlur: (event: ChangeEvent<HTMLInputElement>) => void;
   handleClear: (field: Props['name'], value: Props['value']) => void;
 } & InputHTMLAttributes<HTMLInputElement>;
 
-export const TextField: FC<Props> = ({ name, label, value, error, handleChange, type, placeholder, handleClear }) => {
+export const TextField: FC<Props> = ({
+  name,
+  label,
+  type,
+  placeholder,
+  value,
+  error,
+  handleChange,
+  handleBlur,
+
+  handleClear,
+}) => {
   const [togglePasswordShown, setTogglePasswordShown] = useState(false);
 
   const handleClearField = () => handleClear(name, '');
@@ -37,6 +49,7 @@ export const TextField: FC<Props> = ({ name, label, value, error, handleChange, 
           placeholder={placeholder}
           value={value}
           onChange={handleChange}
+          onBlur={handleBlur}
         />
         <div className={styles.iconWrapper}>
           {type === 'password' && (

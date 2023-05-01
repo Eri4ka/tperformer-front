@@ -1,3 +1,5 @@
+@import 'src/styles/variables/media.scss';
+
 .signIn {
   background-color: var(--gray-07);
   flex: 1 1 auto;
@@ -40,5 +42,11 @@
     height: 100%;
     top: 0;
     right: 0;
+  }
+}
+
+@media (max-width: $xl) {
+  .aside {
+    display: none;
   }
 }
