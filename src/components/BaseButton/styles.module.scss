@@ -1,0 +1,28 @@
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 13px 1.25rem;
+  width: 100%;
+  transition: all var(--transition-delay) var(--transition-timing);
+
+  &_primary {
+    background-color: var(--black-00);
+    color: var(--white-00);
+
+    &:hover {
+      background-color: var(--indigo);
+    }
+
+    &:focus {
+      background-color: var(--purple-00);
+    }
+
+    &:disabled {
+      background-color: var(--gray-03);
+    }
+  }
+}

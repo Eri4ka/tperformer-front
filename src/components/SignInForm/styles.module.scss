@@ -1,4 +1,6 @@
 .heading {
+  margin-bottom: 2.5rem;
+
   &Text {
     font-weight: 600;
     font-size: 2rem;
@@ -15,6 +17,12 @@
   }
 }
 
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
 .forgot {
   display: flex;
   align-items: center;
@@ -24,4 +32,9 @@
     font-family: var(--secondary-font);
     color: var(--purple-02);
   }
+}
+
+.button {
+  width: 100%;
+  margin-top: 2.5rem;
 }

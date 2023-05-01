@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
 
 import { AuthLayout } from '@/components/AuthLayout';
+import { BaseButton, ButtonClass } from '@/components/BaseButton';
 import { CheckBox } from '@/components/CheckBox';
 import { TextField } from '@/components/TextField';
 
@@ -67,7 +68,11 @@ export const SignInForm = () => {
                 <span className={styles.forgotText}>Forgot your password?</span>
               </Link>
             </div>
-            <button type='submit'>Sub</button>
+            <div className={styles.button}>
+              <BaseButton type='submit' className={ButtonClass.primary}>
+                Sign in
+              </BaseButton>
+            </div>
           </form>
         )}
       </Formik>
