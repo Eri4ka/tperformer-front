@@ -9,7 +9,7 @@ type Props = {
 
 export const FieldIcon: FC<Props> = ({ Icon, onClick }) => {
   return (
-    <span className={styles.iconWrapper} onClick={onClick}>
+    <span className={styles.icon} onClick={onClick}>
       {Icon}
     </span>
   );

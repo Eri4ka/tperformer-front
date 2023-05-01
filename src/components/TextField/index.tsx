@@ -1,6 +1,9 @@
-import { FC, InputHTMLAttributes, ChangeEvent } from 'react';
+import cl from 'classnames';
+import { FC, InputHTMLAttributes, ChangeEvent, useState } from 'react';
 
 import { ReactComponent as CancelIc } from '@/assets/images/text-field/cancel.svg';
+import { ReactComponent as HideIc } from '@/assets/images/text-field/hide.svg';
+import { ReactComponent as ShowIc } from '@/assets/images/text-field/show.svg';
 
 import { FieldIcon } from './components/FieldIcon';
 import styles from './styles.module.scss';
@@ -9,15 +12,17 @@ type Props = {
   name: string;
   label: string;
   value: string;
-  handleChange: (value: string) => void;
+  error?: string;
+  handleChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  handleClear: (field: Props['name'], value: Props['value']) => void;
 } & InputHTMLAttributes<HTMLInputElement>;
 
-export const TextField: FC<Props> = ({ name, type, label, value, placeholder, handleChange }) => {
-  const handleChangeField = (event: ChangeEvent<HTMLInputElement>) => {
-    handleChange(event.target.value);
-  };
+export const TextField: FC<Props> = ({ name, label, value, error, handleChange, type, placeholder, handleClear }) => {
+  const [togglePasswordShown, setTogglePasswordShown] = useState(false);
 
-  const handleClearField = () => handleChange('');
+  const handleClearField = () => handleClear(name, '');
+
+  const handleTogglePasswordShown = () => setTogglePasswordShown((current) => !current);
 
   return (
     <div className={styles.textField}>
@@ -26,15 +31,21 @@ export const TextField: FC<Props> = ({ name, type, label, value, placeholder, ha
       </label>
       <div className={styles.inputWrapper}>
         <input
-          className={styles.input}
+          className={cl(styles.input, { [styles.input_error]: error })}
           name={name}
-          type={type}
+          type={togglePasswordShown ? type : 'text'}
           placeholder={placeholder}
           value={value}
-          onChange={handleChangeField}
+          onChange={handleChange}
         />
-        {value.length > 0 && <FieldIcon Icon={<CancelIc />} onClick={handleClearField} />}
+        <div className={styles.iconWrapper}>
+          {type === 'password' && (
+            <FieldIcon Icon={togglePasswordShown ? <ShowIc /> : <HideIc />} onClick={handleTogglePasswordShown} />
+          )}
+          {value.length > 0 && <FieldIcon Icon={<CancelIc />} onClick={handleClearField} />}
+        </div>
       </div>
+      <span className={styles.error}>{error}</span>
     </div>
   );
 };
