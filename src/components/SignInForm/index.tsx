@@ -6,7 +6,7 @@ import { ReactComponent as AppleIc } from '@/assets/images/social/apple.svg';
 import { ReactComponent as DiscordIc } from '@/assets/images/social/discord.svg';
 import { ReactComponent as GoogleIc } from '@/assets/images/social/google.svg';
 import { AuthLayout } from '@/components/AuthLayout';
-import { BaseButton, ButtonClass } from '@/components/BaseButton';
+import { BaseButton, ButtonVariant } from '@/components/BaseButton';
 import { CheckBox } from '@/components/CheckBox';
 import { TextField } from '@/components/TextField';
 
@@ -71,39 +71,31 @@ export const SignInForm = () => {
                 <span className={styles.linkText}>Forgot your password?</span>
               </Link>
             </div>
-            <div className={styles.button}>
-              <BaseButton type='submit' className={ButtonClass.primary}>
-                Sign in
-              </BaseButton>
-            </div>
-            <div className={styles.divider}>
-              <span className={styles.dividerLine} />
-              Or
-              <span className={styles.dividerLine} />
-            </div>
-            <div className={styles.login}>
-              <div className={styles.button}>
-                <BaseButton className={ButtonClass.flat} Icon={<GoogleIc />}>
-                  Continue with Google
-                </BaseButton>
-              </div>
-              <div className={styles.button}>
-                <BaseButton className={ButtonClass.flat} Icon={<AppleIc />}>
-                  Continue with Apple
-                </BaseButton>
-              </div>
-              <div className={styles.button}>
-                <BaseButton className={ButtonClass.flat} Icon={<DiscordIc />}>
-                  Continue with Discord
-                </BaseButton>
-              </div>
-              <Link to='/cant'>
-                <span className={styles.linkText}>Сant't log in?</span>
-              </Link>
-            </div>
+            <BaseButton type='submit' variant={ButtonVariant.primary} className={styles.buttonWrapper}>
+              Sign in
+            </BaseButton>
           </form>
         )}
       </Formik>
+      <div className={styles.divider}>
+        <span className={styles.dividerLine} />
+        Or
+        <span className={styles.dividerLine} />
+      </div>
+      <div className={styles.buttonsBlock}>
+        <BaseButton variant={ButtonVariant.flat} className={styles.buttonWrapper} Icon={<GoogleIc />}>
+          Continue with Google
+        </BaseButton>
+        <BaseButton variant={ButtonVariant.flat} className={styles.buttonWrapper} Icon={<AppleIc />}>
+          Continue with Apple
+        </BaseButton>
+        <BaseButton variant={ButtonVariant.flat} className={styles.buttonWrapper} Icon={<DiscordIc />}>
+          Continue with Discord
+        </BaseButton>
+        <Link to='/cant'>
+          <span className={styles.linkText}>Сant't log in?</span>
+        </Link>
+      </div>
     </AuthLayout>
   );
 };

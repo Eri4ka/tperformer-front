@@ -3,15 +3,15 @@ import { FC } from 'react';
 
 import styles from './styles.module.scss';
 
-export enum LoaderClass {
+export enum LoaderVariant {
   primary = 'loader_primary',
   secondary = 'loader_secondary',
 }
 
 type Props = {
-  className: LoaderClass;
+  variant: LoaderVariant;
 };
 
-export const Loader: FC<Props> = ({ className }) => {
-  return <span className={cl(styles.loader, styles[className])} />;
+export const Loader: FC<Props> = ({ variant }) => {
+  return <span className={cl(styles.loader, styles[variant])} />;
 };

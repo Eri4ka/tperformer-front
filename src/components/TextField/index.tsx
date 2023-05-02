@@ -4,18 +4,19 @@ import { FC, InputHTMLAttributes, ChangeEvent, useState } from 'react';
 import { ReactComponent as CancelIc } from '@/assets/images/text-field/cancel.svg';
 import { ReactComponent as HideIc } from '@/assets/images/text-field/hide.svg';
 import { ReactComponent as ShowIc } from '@/assets/images/text-field/show.svg';
+import { IconLayout } from '@/components/IconLayout';
 
-import { FieldIcon } from './components/FieldIcon';
 import styles from './styles.module.scss';
 
 type Props = {
   name: string;
   label: string;
   value: string;
-  error?: string;
   handleChange: (event: ChangeEvent<HTMLInputElement>) => void;
   handleBlur: (event: ChangeEvent<HTMLInputElement>) => void;
   handleClear: (field: Props['name'], value: Props['value']) => void;
+  error?: string;
+  className?: string;
 } & InputHTMLAttributes<HTMLInputElement>;
 
 export const TextField: FC<Props> = ({
@@ -24,11 +25,11 @@ export const TextField: FC<Props> = ({
   type,
   placeholder,
   value,
-  error,
   handleChange,
   handleBlur,
-
   handleClear,
+  error,
+  className,
 }) => {
   const [togglePasswordShown, setTogglePasswordShown] = useState(false);
 
@@ -37,7 +38,7 @@ export const TextField: FC<Props> = ({
   const handleTogglePasswordShown = () => setTogglePasswordShown((current) => !current);
 
   return (
-    <div className={styles.textField}>
+    <div className={cl(styles.textField, className)}>
       <label className={styles.label} htmlFor={name}>
         {label}
       </label>
@@ -53,9 +54,9 @@ export const TextField: FC<Props> = ({
         />
         <div className={styles.iconWrapper}>
           {type === 'password' && (
-            <FieldIcon Icon={togglePasswordShown ? <ShowIc /> : <HideIc />} onClick={handleTogglePasswordShown} />
+            <IconLayout Icon={togglePasswordShown ? <ShowIc /> : <HideIc />} onClick={handleTogglePasswordShown} />
           )}
-          {value.length > 0 && <FieldIcon Icon={<CancelIc />} onClick={handleClearField} />}
+          {value.length > 0 && <IconLayout Icon={<CancelIc />} onClick={handleClearField} />}
         </div>
       </div>
       <span className={styles.error}>{error}</span>

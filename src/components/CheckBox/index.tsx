@@ -1,3 +1,4 @@
+import cl from 'classnames';
 import { ChangeEvent, FC, InputHTMLAttributes } from 'react';
 
 import styles from './styles.module.scss';
@@ -6,12 +7,13 @@ type Props = {
   name: string;
   label: string;
   error?: string;
+  className?: string;
   handleCheck: (event: ChangeEvent<HTMLInputElement>) => void;
 } & InputHTMLAttributes<HTMLInputElement>;
 
-export const CheckBox: FC<Props> = ({ name, label, checked, handleCheck }) => {
+export const CheckBox: FC<Props> = ({ name, label, checked, className, handleCheck }) => {
   return (
-    <div className={styles.checkbox}>
+    <div className={cl(styles.checkbox, className)}>
       <input
         className={styles.checkboxInput}
         name={name}
