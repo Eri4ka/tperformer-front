@@ -2,6 +2,9 @@ import { Formik } from 'formik';
 import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
 
+import { ReactComponent as AppleIc } from '@/assets/images/social/apple.svg';
+import { ReactComponent as DiscordIc } from '@/assets/images/social/discord.svg';
+import { ReactComponent as GoogleIc } from '@/assets/images/social/google.svg';
 import { AuthLayout } from '@/components/AuthLayout';
 import { BaseButton, ButtonClass } from '@/components/BaseButton';
 import { CheckBox } from '@/components/CheckBox';
@@ -65,13 +68,38 @@ export const SignInForm = () => {
             <div className={styles.forgot}>
               <CheckBox name='remember' label='Remember me' checked={values.remember} handleCheck={handleChange} />
               <Link to='/recovery'>
-                <span className={styles.forgotText}>Forgot your password?</span>
+                <span className={styles.linkText}>Forgot your password?</span>
               </Link>
             </div>
             <div className={styles.button}>
               <BaseButton type='submit' className={ButtonClass.primary}>
                 Sign in
               </BaseButton>
+            </div>
+            <div className={styles.divider}>
+              <span className={styles.dividerLine} />
+              Or
+              <span className={styles.dividerLine} />
+            </div>
+            <div className={styles.login}>
+              <div className={styles.button}>
+                <BaseButton className={ButtonClass.flat} Icon={<GoogleIc />}>
+                  Continue with Google
+                </BaseButton>
+              </div>
+              <div className={styles.button}>
+                <BaseButton className={ButtonClass.flat} Icon={<AppleIc />}>
+                  Continue with Apple
+                </BaseButton>
+              </div>
+              <div className={styles.button}>
+                <BaseButton className={ButtonClass.flat} Icon={<DiscordIc />}>
+                  Continue with Discord
+                </BaseButton>
+              </div>
+              <Link to='/cant'>
+                <span className={styles.linkText}>Сant't log in?</span>
+              </Link>
             </div>
           </form>
         )}
