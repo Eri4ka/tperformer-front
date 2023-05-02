@@ -1,0 +1,62 @@
+.heading {
+  margin-bottom: 2.5rem;
+
+  &Text {
+    font-weight: 600;
+    font-size: 2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  &Sub {
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+
+  &Link {
+    color: var(--purple-01);
+  }
+}
+
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.forgot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2.5rem;
+}
+
+.linkText {
+  font-family: var(--secondary-font);
+  color: var(--purple-02);
+  font-size: 0.875rem;
+}
+
+.button {
+  width: 100%;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--secondary-font);
+  font-size: 0.875rem;
+  margin: 2rem 0;
+
+  &Line {
+    border-bottom: 1px solid var(--gray-02);
+    width: 43%;
+  }
+}
+
+.login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
