@@ -1,32 +1,49 @@
 import cl from 'classnames';
 import { FC, ReactNode, ReactElement, ButtonHTMLAttributes } from 'react';
 
-import { Loader, LoaderClass } from '@/components/Loader';
+import { ReactComponent as PlusIc } from '@/assets/images/button/plus.svg';
+import { IconLayout } from '@/components/IconLayout';
+import { Loader, LoaderVariant } from '@/components/Loader';
 
 import styles from './styles.module.scss';
-import { IconLayout } from '../IconLayout';
 
-export enum ButtonClass {
+export enum ButtonVariant {
   primary = 'button_primary',
   secondary = 'button_secondary',
   flat = 'button_flat',
 }
 
 type Props = {
-  className: ButtonClass;
-  isLoading?: boolean;
   children: ReactNode;
+  className?: string;
+  variant?: ButtonVariant;
+  /**
+   * отображается иконка "Плюса"
+   */
+  additional?: boolean;
   Icon?: ReactElement;
+  isLoading?: boolean;
 } & ButtonHTMLAttributes<HTMLButtonElement>;
 
-export const BaseButton: FC<Props> = ({ className, isLoading, children, Icon, ...props }) => {
+export const BaseButton: FC<Props> = ({
+  className,
+  variant = ButtonVariant.primary,
+  additional,
+  isLoading,
+  children,
+  Icon,
+  ...props
+}) => {
+  const icon = additional ? <PlusIc /> : Icon;
+  const loaderClass = variant === ButtonVariant.primary ? LoaderVariant.primary : LoaderVariant.secondary;
+
   return (
-    <button className={cl(styles.button, styles[className])} {...props}>
+    <button className={cl(styles.button, styles[variant], className)} {...props}>
       {isLoading ? (
-        <Loader className={className === ButtonClass.primary ? LoaderClass.primary : LoaderClass.secondary} />
+        <Loader variant={loaderClass} />
       ) : (
         <>
-          {Icon && <IconLayout Icon={Icon} />}
+          {icon && <IconLayout Icon={icon} />}
           {children}
         </>
       )}
