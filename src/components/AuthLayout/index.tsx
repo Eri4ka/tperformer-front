@@ -7,9 +7,5 @@ type Props = {
 };
 
 export const AuthLayout: FC<Props> = ({ children }) => {
-  return (
-    <section className={styles.authLayout}>
-      <div className={styles.authLayout_wrapper}>{children}</div>
-    </section>
-  );
+  return <main className={styles.authLayout}>{children}</main>;
 };

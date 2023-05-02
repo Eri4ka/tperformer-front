@@ -46,7 +46,7 @@ export const TextField: FC<Props> = ({
         <input
           className={cl(styles.input, { [styles.input_error]: error })}
           name={name}
-          type={togglePasswordShown ? type : 'text'}
+          type={togglePasswordShown ? 'text' : type}
           placeholder={placeholder}
           value={value}
           onChange={handleChange}
@@ -54,7 +54,7 @@ export const TextField: FC<Props> = ({
         />
         <div className={styles.iconWrapper}>
           {type === 'password' && (
-            <IconLayout Icon={togglePasswordShown ? <ShowIc /> : <HideIc />} onClick={handleTogglePasswordShown} />
+            <IconLayout Icon={togglePasswordShown ? <HideIc /> : <ShowIc />} onClick={handleTogglePasswordShown} />
           )}
           {value.length > 0 && <IconLayout Icon={<CancelIc />} onClick={handleClearField} />}
         </div>

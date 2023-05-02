@@ -5,7 +5,7 @@ import * as Yup from 'yup';
 import { ReactComponent as AppleIc } from '@/assets/images/social/apple.svg';
 import { ReactComponent as DiscordIc } from '@/assets/images/social/discord.svg';
 import { ReactComponent as GoogleIc } from '@/assets/images/social/google.svg';
-import { AuthLayout } from '@/components/AuthLayout';
+import { AuthFormLayout } from '@/components/AuthFormLayout';
 import { BaseButton, ButtonVariant } from '@/components/BaseButton';
 import { CheckBox } from '@/components/CheckBox';
 import { TextField } from '@/components/TextField';
@@ -25,12 +25,12 @@ export const SignInForm = () => {
   });
 
   return (
-    <AuthLayout>
+    <AuthFormLayout>
       <div className={styles.heading}>
         <h1 className={styles.headingText}>Sign in to your account</h1>
         <p className={styles.headingSub}>
           Or
-          <Link to='/'>
+          <Link to='/signup'>
             <span className={styles.headingLink}> create a new account</span>
           </Link>
         </p>
@@ -46,7 +46,7 @@ export const SignInForm = () => {
             <TextField
               type='email'
               name='email'
-              label='Email'
+              label='Email*'
               placeholder='example@gmail.com'
               value={values.email}
               error={touched.email && errors.email ? errors.email : ''}
@@ -96,6 +96,6 @@ export const SignInForm = () => {
           <span className={styles.linkText}>Сant't log in?</span>
         </Link>
       </div>
-    </AuthLayout>
+    </AuthFormLayout>
   );
 };

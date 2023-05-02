@@ -55,10 +55,10 @@
 
   &Label {
     display: inline-flex;
-    align-items: center;
+    align-items: flex-start;
     user-select: none;
     font-family: var(--secondary-font);
-    font-size: 0.875rem;
+    font-size: 1rem;
     color: var(--black-00);
     cursor: pointer;
 
@@ -72,5 +72,17 @@
       margin-right: 0.75rem;
       transition: background-color var(--transition-delay) var(--transition-timing);
     }
+
+    &_error {
+      color: var(--red-01);
+
+      &::before {
+        background-color: var(--red-00);
+      }
+    }
+  }
+
+  &Text {
+    flex: 1;
   }
 }
