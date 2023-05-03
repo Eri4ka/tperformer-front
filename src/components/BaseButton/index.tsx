@@ -21,7 +21,7 @@ type Props = {
    * отображается иконка "Плюса"
    */
   additional?: boolean;
-  Icon?: ReactElement;
+  icon?: ReactElement;
   isLoading?: boolean;
 } & ButtonHTMLAttributes<HTMLButtonElement>;
 
@@ -31,10 +31,10 @@ export const BaseButton: FC<Props> = ({
   additional,
   isLoading,
   children,
-  Icon,
+  icon,
   ...props
 }) => {
-  const icon = additional ? <PlusIc /> : Icon;
+  const resultIcon = additional ? <PlusIc /> : icon;
   const loaderClass = variant === ButtonVariant.primary ? LoaderVariant.primary : LoaderVariant.secondary;
 
   return (
@@ -43,7 +43,7 @@ export const BaseButton: FC<Props> = ({
         <Loader variant={loaderClass} />
       ) : (
         <>
-          {icon && <IconLayout Icon={icon} />}
+          {resultIcon && <IconLayout icon={resultIcon} />}
           {children}
         </>
       )}

@@ -1,15 +1,19 @@
 import { FC, ReactNode } from 'react';
 
+import { BackButton } from '@/components/BackButton';
+
 import styles from './styles.module.scss';
 
 type Props = {
   children: ReactNode;
+  shouldGoToPrevPage?: boolean;
 };
 
-export const AuthLayout: FC<Props> = ({ children }) => {
+export const AuthLayout: FC<Props> = ({ children, shouldGoToPrevPage = false }) => {
   return (
-    <section className={styles.authLayout}>
-      <div className={styles.authLayout_wrapper}>{children}</div>
-    </section>
+    <main className={styles.authLayout}>
+      {shouldGoToPrevPage && <BackButton className={styles.button} />}
+      {children}
+    </main>
   );
 };
