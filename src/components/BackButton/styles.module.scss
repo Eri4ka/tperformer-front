@@ -1,0 +1,21 @@
+.button {
+  display: flex;
+  align-items: center;
+  text-transform: uppercase;
+  color: var(--gray-03);
+  gap: 0.44rem;
+  transition: all var(--transition-delay) var(--transition-timing);
+
+  &:hover {
+    color: var(--black-00);
+  }
+
+  &:active {
+    color: var(--purple-01);
+  }
+
+  &Text {
+    font-weight: 600;
+    font-size: 2rem;
+  }
+}

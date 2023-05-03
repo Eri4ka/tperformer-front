@@ -1,0 +1,13 @@
+.authFormLayout {
+  max-width: 521px;
+  width: 100%;
+  background-color: var(--white-00);
+  box-shadow: var(--box-shadow-modal);
+  border-radius: 20px;
+  padding: 40px;
+
+  &_wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+}
