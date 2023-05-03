@@ -1,6 +1,6 @@
 import { ReactComponent as LogoIc } from '@/assets/images/signin/logo.svg';
-import { SignInForm } from '@/components/SignInForm';
 
+import { SignInForm } from './components/SignInForm';
 import styles from './styles.module.scss';
 
 export const SignInPage = () => {

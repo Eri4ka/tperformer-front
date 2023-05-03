@@ -11,7 +11,7 @@ import { IconLayout } from '@/components/IconLayout';
 import { TextField } from '@/components/TextField';
 
 import styles from './styles.module.scss';
-import { Tooltip } from '../Tooltip';
+import { Tooltip } from '../../../../components/Tooltip';
 
 export const SignUpForm = () => {
   const navigate = useNavigate();
