@@ -83,13 +83,13 @@ export const SignInForm = () => {
         <span className={styles.dividerLine} />
       </div>
       <div className={styles.buttonsBlock}>
-        <BaseButton variant={ButtonVariant.flat} className={styles.buttonWrapper} Icon={<GoogleIc />}>
+        <BaseButton variant={ButtonVariant.flat} className={styles.buttonWrapper} icon={<GoogleIc />}>
           Continue with Google
         </BaseButton>
-        <BaseButton variant={ButtonVariant.flat} className={styles.buttonWrapper} Icon={<AppleIc />}>
+        <BaseButton variant={ButtonVariant.flat} className={styles.buttonWrapper} icon={<AppleIc />}>
           Continue with Apple
         </BaseButton>
-        <BaseButton variant={ButtonVariant.flat} className={styles.buttonWrapper} Icon={<DiscordIc />}>
+        <BaseButton variant={ButtonVariant.flat} className={styles.buttonWrapper} icon={<DiscordIc />}>
           Continue with Discord
         </BaseButton>
         <Link to='/cant'>

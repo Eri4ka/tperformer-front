@@ -1,13 +1,16 @@
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
+import { ReactComponent as QuestIc } from '@/assets/images/text-field/question.svg';
 import { AuthFormLayout } from '@/components/AuthFormLayout';
 import { AuthHeading } from '@/components/AuthHeading';
 import { BaseButton, ButtonVariant } from '@/components/BaseButton';
 import { CheckBox } from '@/components/CheckBox';
+import { IconLayout } from '@/components/IconLayout';
 import { TextField } from '@/components/TextField';
 
 import styles from './styles.module.scss';
+import { Tooltip } from '../Tooltip';
 
 export const SignUpForm = () => {
   const initialValues = {
@@ -86,6 +89,11 @@ set-up your account'
               handleChange={handleChange}
               handleBlur={handleBlur}
               handleClear={setFieldValue}
+              icon={
+                <Tooltip id='apikey' content='OpenAI API key (optional)'>
+                  <IconLayout icon={<QuestIc />} />
+                </Tooltip>
+              }
             />
             <div className={styles.sign}>
               <CheckBox

@@ -3,14 +3,14 @@ import { FC, ReactElement } from 'react';
 import styles from './styles.module.scss';
 
 type Props = {
-  Icon: ReactElement;
+  icon: ReactElement;
   onClick?: () => void;
 };
 
-export const IconLayout: FC<Props> = ({ Icon, onClick }) => {
+export const IconLayout: FC<Props> = ({ icon, onClick }) => {
   return (
     <span className={styles.icon} onClick={onClick}>
-      {Icon}
+      {icon}
     </span>
   );
 };

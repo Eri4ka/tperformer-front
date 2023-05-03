@@ -1,5 +1,5 @@
 import cl from 'classnames';
-import { FC, InputHTMLAttributes, ChangeEvent, useState } from 'react';
+import { FC, InputHTMLAttributes, ChangeEvent, useState, ReactElement } from 'react';
 
 import { ReactComponent as CancelIc } from '@/assets/images/text-field/cancel.svg';
 import { ReactComponent as HideIc } from '@/assets/images/text-field/hide.svg';
@@ -17,6 +17,7 @@ type Props = {
   handleClear: (field: Props['name'], value: Props['value']) => void;
   error?: string;
   className?: string;
+  icon?: ReactElement;
 } & InputHTMLAttributes<HTMLInputElement>;
 
 export const TextField: FC<Props> = ({
@@ -30,6 +31,7 @@ export const TextField: FC<Props> = ({
   handleClear,
   error,
   className,
+  icon,
 }) => {
   const [togglePasswordShown, setTogglePasswordShown] = useState(false);
 
@@ -54,9 +56,10 @@ export const TextField: FC<Props> = ({
         />
         <div className={styles.iconWrapper}>
           {type === 'password' && (
-            <IconLayout Icon={togglePasswordShown ? <HideIc /> : <ShowIc />} onClick={handleTogglePasswordShown} />
+            <IconLayout icon={togglePasswordShown ? <HideIc /> : <ShowIc />} onClick={handleTogglePasswordShown} />
           )}
-          {value.length > 0 && <IconLayout Icon={<CancelIc />} onClick={handleClearField} />}
+          {value.length > 0 && <IconLayout icon={<CancelIc />} onClick={handleClearField} />}
+          {icon}
         </div>
       </div>
       <span className={styles.error}>{error}</span>
