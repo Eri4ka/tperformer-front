@@ -1,0 +1,10 @@
+.linkText {
+  font-family: var(--secondary-font);
+  color: var(--purple-01);
+  font-size: 0.875rem;
+  font-weight: 500;
+
+  &:hover {
+    color: var(--purple-02);
+  }
+}

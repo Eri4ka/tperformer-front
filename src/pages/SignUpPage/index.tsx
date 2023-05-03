@@ -3,7 +3,7 @@ import { SignUpForm } from '@/components/SignUpForm';
 
 export const SignUpPage = () => {
   return (
-    <AuthLayout>
+    <AuthLayout shouldGoToPrevPage>
       <SignUpForm />
     </AuthLayout>
   );

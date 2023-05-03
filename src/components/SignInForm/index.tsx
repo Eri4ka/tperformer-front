@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 import { ReactComponent as AppleIc } from '@/assets/images/social/apple.svg';
 import { ReactComponent as DiscordIc } from '@/assets/images/social/discord.svg';
 import { ReactComponent as GoogleIc } from '@/assets/images/social/google.svg';
+import AppLink from '@/components/AppLink';
 import { AuthFormLayout } from '@/components/AuthFormLayout';
 import { BaseButton, ButtonVariant } from '@/components/BaseButton';
 import { CheckBox } from '@/components/CheckBox';
@@ -67,9 +68,7 @@ export const SignInForm = () => {
             />
             <div className={styles.forgot}>
               <CheckBox name='remember' label='Remember me' checked={values.remember} handleCheck={handleChange} />
-              <Link to='/recovery'>
-                <span className={styles.linkText}>Forgot your password?</span>
-              </Link>
+              <AppLink text='Forgot your password?' href='/recovery' />
             </div>
             <BaseButton type='submit' variant={ButtonVariant.primary} className={styles.buttonWrapper}>
               Sign in
@@ -92,9 +91,7 @@ export const SignInForm = () => {
         <BaseButton variant={ButtonVariant.flat} className={styles.buttonWrapper} icon={<DiscordIc />}>
           Continue with Discord
         </BaseButton>
-        <Link to='/cant'>
-          <span className={styles.linkText}>Сant't log in?</span>
-        </Link>
+        <AppLink text="Сant't log in?" href='/cant' />
       </div>
     </AuthFormLayout>
   );
