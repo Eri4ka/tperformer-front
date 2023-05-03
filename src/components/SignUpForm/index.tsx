@@ -26,7 +26,7 @@ export const SignUpForm = () => {
     fullname: Yup.string().min(2, 'Min 2 symbols').required('Required'),
     email: Yup.string().email('Not valid e-mail').required('Required'),
     password: Yup.string().min(6, 'Min 6 symbols').required('Required'),
-    apikey: Yup.string().min(12, 'Min 12 symbols'),
+    apikey: Yup.string().matches(/^sk-\w{48}$/gi, 'Not valid apikey'),
     privacy: Yup.bool().oneOf([true]),
   });
 
