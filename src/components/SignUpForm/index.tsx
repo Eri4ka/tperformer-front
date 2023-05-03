@@ -1,4 +1,5 @@
 import { Formik } from 'formik';
+import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 
 import { ReactComponent as QuestIc } from '@/assets/images/text-field/question.svg';
@@ -13,6 +14,8 @@ import styles from './styles.module.scss';
 import { Tooltip } from '../Tooltip';
 
 export const SignUpForm = () => {
+  const navigate = useNavigate();
+
   const initialValues = {
     fullname: '',
     email: '',
@@ -43,6 +46,7 @@ set-up your account'
         validationSchema={validationSchema}
         onSubmit={(values) => {
           console.log(values);
+          navigate('success');
         }}>
         {({ handleSubmit, handleChange, handleBlur, setFieldValue, values, errors, touched }) => (
           <form onSubmit={handleSubmit} noValidate>

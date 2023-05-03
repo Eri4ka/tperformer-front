@@ -1,0 +1,15 @@
+.heading {
+  margin-bottom: 1.5rem;
+}
+
+.content {
+  margin-bottom: 2.5rem;
+
+  &Text:not(:last-child) {
+    margin-bottom: 0.75rem;
+  }
+
+  &Link {
+    text-decoration-line: underline !important;
+  }
+}
