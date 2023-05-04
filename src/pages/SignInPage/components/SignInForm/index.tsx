@@ -68,7 +68,7 @@ export const SignInForm = () => {
             />
             <div className={styles.forgot}>
               <CheckBox name='remember' label='Remember me' checked={values.remember} handleCheck={handleChange} />
-              <AppLink text='Forgot your password?' href='/recovery' />
+              <AppLink text='Forgot your password?' href='/forgot-password' />
             </div>
             <BaseButton type='submit' variant={ButtonVariant.primary} className={styles.buttonWrapper}>
               Sign in
