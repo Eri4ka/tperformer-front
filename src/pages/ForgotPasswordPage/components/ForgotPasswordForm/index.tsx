@@ -1,4 +1,5 @@
 import { Formik } from 'formik';
+import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 
 import { AuthFormLayout } from '@/components/AuthFormLayout';
@@ -9,6 +10,8 @@ import { TextField } from '@/components/TextField';
 import styles from './styles.module.scss';
 
 export const ForgotPasswordForm = () => {
+  const navigate = useNavigate();
+
   const initialValues = {
     email: '',
   };
@@ -28,8 +31,8 @@ export const ForgotPasswordForm = () => {
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
-        onSubmit={(values) => {
-          console.log(values);
+        onSubmit={({ email }) => {
+          navigate(`confirm?email=${email}`);
         }}>
         {({ handleSubmit, handleChange, handleBlur, setFieldValue, values, errors, touched }) => (
           <form onSubmit={handleSubmit} noValidate>

@@ -1,5 +1,6 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
+import { ForgotPasswordConfirmPage } from '@/pages/ForgotPasswordConfirmPage';
 import { ForgotPasswordPage } from '@/pages/ForgotPasswordPage';
 import { SignInPage } from '@/pages/SignInPage';
 import { SignUpConfirmPage } from '@/pages/SignUpConfirmPage';
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <ForgotPasswordPage />,
+      },
+      {
+        path: 'confirm',
+        element: <ForgotPasswordConfirmPage />,
       },
     ],
   },
