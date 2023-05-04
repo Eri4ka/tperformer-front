@@ -68,7 +68,7 @@ export const SignInForm = () => {
             />
             <div className={styles.forgot}>
               <CheckBox name='remember' label='Remember me' checked={values.remember} handleCheck={handleChange} />
-              <AppLink text='Forgot your password?' href='/recovery' />
+              <AppLink text='Forgot your password?' href='/forgot-password' />
             </div>
             <BaseButton type='submit' variant={ButtonVariant.primary} className={styles.buttonWrapper}>
               Sign in
@@ -91,7 +91,7 @@ export const SignInForm = () => {
         <BaseButton variant={ButtonVariant.flat} className={styles.buttonWrapper} icon={<DiscordIc />}>
           Continue with Discord
         </BaseButton>
-        <AppLink text="Сant't log in?" href='/cant' />
+        <AppLink text="Сant't log in?" href='help' />
       </div>
     </AuthFormLayout>
   );

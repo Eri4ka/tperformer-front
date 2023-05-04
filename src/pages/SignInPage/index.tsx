@@ -1,6 +1,6 @@
 import { ReactComponent as LogoIc } from '@/assets/images/signin/logo.svg';
-import { SignInForm } from '@/components/SignInForm';
 
+import { SignInForm } from './components/SignInForm';
 import styles from './styles.module.scss';
 
 export const SignInPage = () => {
@@ -9,10 +9,10 @@ export const SignInPage = () => {
       <div className={styles.content}>
         <SignInForm />
       </div>
-      <div className={styles.content}>
-        <div className={styles.contentLogo}>
+      <div className={styles.aside}>
+        <div className={styles.asideLogo}>
           <LogoIc />
-          <span className={styles.contentText}>TPerfromer</span>
+          <span className={styles.asideText}>TPerfromer</span>
         </div>
       </div>
     </main>

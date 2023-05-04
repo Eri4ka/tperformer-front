@@ -1,11 +1,11 @@
 import { AuthLayout } from '@/components/AuthLayout';
 
-import { SignUpForm } from './components/SignUpForm';
+import { SignInHelpForm } from './components/SignInHelpForm';
 
-export const SignUpPage = () => {
+export const SignInHelpPage = () => {
   return (
     <AuthLayout shouldGoToPrevPage>
-      <SignUpForm />
+      <SignInHelpForm />
     </AuthLayout>
   );
 };

@@ -1,3 +1,5 @@
+@import 'src/styles/variables/media.scss';
+
 .signIn {
   background-color: var(--gray-07);
   flex: 1 1 auto;
@@ -21,6 +23,18 @@
   align-items: center;
   justify-content: center;
   z-index: 1;
+}
+
+.aside {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+
+  @media (max-width: $lg) {
+    display: none;
+  }
 
   &Logo {
     display: flex;
