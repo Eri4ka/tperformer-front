@@ -6,7 +6,7 @@ import { BaseButton } from '@/components/BaseButton';
 
 import styles from './styles.module.scss';
 
-export const ResetPasswordSuccess = () => {
+export const ResetPasswordConfirm = () => {
   return (
     <AuthFormLayout>
       <AuthHeading

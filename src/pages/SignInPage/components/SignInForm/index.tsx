@@ -91,7 +91,7 @@ export const SignInForm = () => {
         <BaseButton variant={ButtonVariant.flat} className={styles.buttonWrapper} icon={<DiscordIc />}>
           Continue with Discord
         </BaseButton>
-        <AppLink text="Сant't log in?" href='/cant' />
+        <AppLink text="Сant't log in?" href='help' />
       </div>
     </AuthFormLayout>
   );

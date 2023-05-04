@@ -2,8 +2,10 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import { ForgotPasswordConfirmPage } from '@/pages/ForgotPasswordConfirmPage';
 import { ForgotPasswordPage } from '@/pages/ForgotPasswordPage';
+import { ResetPasswordConfirmPage } from '@/pages/ResetPasswordConfirmPage';
 import { ResetPasswordPage } from '@/pages/ResetPasswordPage';
-import { ResetPasswordSuccessPage } from '@/pages/ResetPasswordSuccessPage';
+import { SignInHelpConfirmPage } from '@/pages/SignInHelpConfirmPage';
+import { SignInHelpPage } from '@/pages/SignInHelpPage';
 import { SignInPage } from '@/pages/SignInPage';
 import { SignUpConfirmPage } from '@/pages/SignUpConfirmPage';
 import { SignUpPage } from '@/pages/SignUpPage';
@@ -15,7 +17,25 @@ const router = createBrowserRouter([
   },
   {
     path: '/signin',
-    element: <SignInPage />,
+    children: [
+      {
+        index: true,
+        element: <SignInPage />,
+      },
+      {
+        path: 'help',
+        children: [
+          {
+            index: true,
+            element: <SignInHelpPage />,
+          },
+          {
+            path: 'success',
+            element: <SignInHelpConfirmPage />,
+          },
+        ],
+      },
+    ],
   },
   {
     path: '/signup',
@@ -52,7 +72,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'success',
-        element: <ResetPasswordSuccessPage />,
+        element: <ResetPasswordConfirmPage />,
       },
     ],
   },

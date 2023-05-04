@@ -6,11 +6,12 @@ import styles from './styles.module.scss';
 type Props = {
   href: string;
   text: string;
+  replace?: boolean;
 };
 
-const AppLink: FC<Props> = ({ href, text }) => {
+const AppLink: FC<Props> = ({ href, text, replace = false }) => {
   return (
-    <Link to={href}>
+    <Link to={href} replace={replace}>
       <span className={styles.linkText}>{text}</span>
     </Link>
   );

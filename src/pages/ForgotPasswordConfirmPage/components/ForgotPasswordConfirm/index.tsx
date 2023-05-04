@@ -24,7 +24,7 @@ export const ForgotPasswordConfirm = () => {
       </Link>
       <div className={styles.resend}>
         <span className={styles.resendText}>Didn’t get the email?</span>
-        <AppLink href='/forgot-password' text='Resend mail' />
+        <AppLink href='/forgot-password' text='Resend mail' replace />
       </div>
     </AuthFormLayout>
   );

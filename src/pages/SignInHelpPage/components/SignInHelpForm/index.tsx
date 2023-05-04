@@ -9,7 +9,7 @@ import { TextField } from '@/components/TextField';
 
 import styles from './styles.module.scss';
 
-export const ForgotPasswordForm = () => {
+export const SignInHelpForm = () => {
   const navigate = useNavigate();
 
   const initialValues = {
@@ -23,16 +23,17 @@ export const ForgotPasswordForm = () => {
   return (
     <AuthFormLayout>
       <AuthHeading
-        headingText='Forgot password'
-        subHeadingText='Enter your email for a password 
-  reset link'
+        headingText='Can’t log in?'
+        subHeadingText='Write us an email and we will 
+        contact you'
         className={styles.heading}
       />
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
-        onSubmit={({ email }) => {
-          navigate(`confirm?email=${email}`, { replace: true });
+        onSubmit={(values) => {
+          console.log(values);
+          navigate('success');
         }}>
         {({ handleSubmit, handleChange, handleBlur, setFieldValue, values, errors, touched }) => (
           <form onSubmit={handleSubmit} noValidate>
@@ -48,7 +49,7 @@ export const ForgotPasswordForm = () => {
               handleClear={setFieldValue}
             />
             <BaseButton type='submit' className={styles.button}>
-              Get a recovery link
+              Heeeeelp
             </BaseButton>
           </form>
         )}
