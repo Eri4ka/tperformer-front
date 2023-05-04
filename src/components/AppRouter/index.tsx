@@ -2,6 +2,8 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import { ForgotPasswordConfirmPage } from '@/pages/ForgotPasswordConfirmPage';
 import { ForgotPasswordPage } from '@/pages/ForgotPasswordPage';
+import { ResetPasswordPage } from '@/pages/ResetPasswordPage';
+import { ResetPasswordSuccessPage } from '@/pages/ResetPasswordSuccessPage';
 import { SignInPage } from '@/pages/SignInPage';
 import { SignUpConfirmPage } from '@/pages/SignUpConfirmPage';
 import { SignUpPage } from '@/pages/SignUpPage';
@@ -38,6 +40,19 @@ const router = createBrowserRouter([
       {
         path: 'confirm',
         element: <ForgotPasswordConfirmPage />,
+      },
+    ],
+  },
+  {
+    path: '/reset-password',
+    children: [
+      {
+        index: true,
+        element: <ResetPasswordPage />,
+      },
+      {
+        path: 'success',
+        element: <ResetPasswordSuccessPage />,
       },
     ],
   },
