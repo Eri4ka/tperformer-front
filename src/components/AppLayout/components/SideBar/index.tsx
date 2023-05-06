@@ -1,3 +1,6 @@
+import cl from 'classnames';
+import { FC } from 'react';
+
 import { ReactComponent as HomeIc } from '@/assets/images/sidebar/home.svg';
 import { ReactComponent as SnippetsIc } from '@/assets/images/sidebar/snippets.svg';
 
@@ -18,12 +21,16 @@ const SECTIONS: TSection[] = [
   },
 ];
 
-export const SideBar = () => {
+type Props = {
+  isOpen: boolean;
+};
+
+export const SideBar: FC<Props> = ({ isOpen }) => {
   return (
-    <div className={styles.sidebar}>
+    <div className={cl(styles.sidebar, { [styles.sidebar_open]: isOpen })}>
       <nav className={styles.sidebarNav}>
         {SECTIONS.map((section) => (
-          <Section href={section.href} text={section.text} icon={section.icon} />
+          <Section key={section.text} href={section.href} text={section.text} icon={section.icon} />
         ))}
       </nav>
     </div>

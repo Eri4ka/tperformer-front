@@ -7,5 +7,5 @@ type Props = {
 };
 
 export const Content: FC<Props> = ({ children }) => {
-  return <section>{children}</section>;
+  return <section className={styles.content}>{children}</section>;
 };

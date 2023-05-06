@@ -1,10 +1,13 @@
 .sidebar {
-  transition-duration: 0.1s;
-  transition-timing-function: ease;
-  transition-delay: 0s;
-  transition-property: width;
+  width: 100%;
+  max-width: 80px;
+  transition: max-width var(--transition-delay) var(--transition-timing);
 
   &Nav {
     padding: 1.25rem 0;
+  }
+
+  &_open {
+    max-width: 182px;
   }
 }

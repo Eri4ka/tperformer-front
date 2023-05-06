@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import { Link } from 'react-router-dom';
 
 import { ReactComponent as HelpIc } from '@/assets/images/common/help.svg';
@@ -7,12 +8,16 @@ import { IconLayout, IconSize } from '@/components/IconLayout';
 
 import styles from './styles.module.scss';
 
-export const Header = () => {
+type Props = {
+  onBurger: () => void;
+};
+
+export const Header: FC<Props> = ({ onBurger }) => {
   return (
     <header className={styles.header}>
       <div className={styles.headerWrapper}>
         <div className={styles.left}>
-          <IconLayout icon={<BurgerIc />} size={IconSize.m} />
+          <IconLayout icon={<BurgerIc />} size={IconSize.m} onClick={onBurger} />
           <Link to='/'>
             <IconLayout icon={<LogoIc />} size={IconSize.l} />
           </Link>

@@ -14,7 +14,7 @@ type Props = {
 export const Section: FC<Props> = ({ href, icon, text }) => {
   return (
     <Link to={href} className={styles.section}>
-      <IconLayout icon={icon} size={IconSize.m} />
+      <IconLayout icon={icon} size={IconSize.m} className={styles.sectionIcon} />
       <span className={styles.sectionText}>{text}</span>
     </Link>
   );
