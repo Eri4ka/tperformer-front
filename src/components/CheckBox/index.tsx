@@ -5,7 +5,7 @@ import styles from './styles.module.scss';
 
 type Props = {
   name: string;
-  label: string | ReactElement;
+  label?: string | ReactElement;
   error?: string;
   className?: string;
   handleCheck: (event: ChangeEvent<HTMLInputElement>) => void;

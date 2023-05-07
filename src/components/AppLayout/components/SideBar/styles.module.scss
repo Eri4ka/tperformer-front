@@ -1,6 +1,6 @@
 .sidebar {
   width: 100%;
-  max-width: 80px;
+  max-width: 5rem;
   transition: max-width var(--transition-delay) var(--transition-timing);
 
   &Nav {
@@ -8,6 +8,6 @@
   }
 
   &_open {
-    max-width: 182px;
+    max-width: 11.75rem;
   }
 }
