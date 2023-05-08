@@ -1,4 +1,40 @@
 .table {
-  width: 100%;
   border-spacing: 0;
+
+  &Row {
+    color: var(--black-00);
+    position: relative;
+    font-size: 0.875rem;
+
+    &_body {
+      font-size: 1rem;
+      z-index: 0;
+
+      &::after {
+        content: '';
+        position: absolute;
+        background-color: transparent;
+        width: calc(100% + 4rem);
+        height: 100%;
+        left: -2rem;
+        z-index: -1;
+        transition: all var(--transition-delay) var(--transition-timing);
+      }
+
+      &:hover::after {
+        background-color: var(--wind-light);
+      }
+    }
+  }
+
+  &Cell {
+    padding: 1rem 0;
+    font-weight: 400;
+    text-align: left;
+    border-bottom: 1px solid var(--gray-04);
+
+    &_select {
+      width: 24px;
+    }
+  }
 }

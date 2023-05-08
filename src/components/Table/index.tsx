@@ -1,5 +1,6 @@
+import { ColumnDef, createColumnHelper, flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table';
+import cl from 'classnames';
 import { useState } from 'react';
-import { Column, useTable, useRowSelect } from 'react-table';
 
 import { CheckBox } from '@/components/CheckBox';
 
@@ -12,33 +13,20 @@ type TCanvas = {
 };
 
 export const Table = () => {
-  const data = [
+  const [rowSelection, setRowSelection] = useState({});
+
+  const columnHelper = createColumnHelper<TCanvas>();
+
+  const defaultData: TCanvas[] = [
     {
-      title: 'Hello',
-      content: 'World',
+      title: 'tanner',
+      content: 'linsley',
     },
     {
-      title: 'react-table',
-      content: 'rocks',
-    },
-    {
-      title: 'whatever',
-      content: 'you want',
+      title: 'miller',
+      content: 'Baccks',
     },
   ];
-
-  const columns: Column<TCanvas>[] = [
-    {
-      Header: 'Title',
-      accessor: 'title',
-    },
-    {
-      Header: 'Content',
-      accessor: 'content',
-    },
-  ];
-
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable({ columns, data });
 
   // const columns = [
   //   columnHelper.accessor((row) => row.title, {
@@ -68,28 +56,70 @@ export const Table = () => {
   //   }),
   // ];
 
+  const columns: ColumnDef<TCanvas>[] = [
+    {
+      id: 'select',
+      header: (info) => (
+        <CheckBox
+          name={info.header.id}
+          checked={table.getIsAllRowsSelected()}
+          handleCheck={table.getToggleAllRowsSelectedHandler()}
+        />
+      ),
+      cell: ({ row }) => (
+        <CheckBox name={row.id} checked={row.getIsSelected()} handleCheck={row.getToggleSelectedHandler()} />
+      ),
+    },
+    {
+      accessorKey: 'title',
+      cell: (info) => info.getValue(),
+    },
+    {
+      accessorKey: 'content',
+      cell: (info) => info.getValue(),
+    },
+  ];
+
+  const [data, setData] = useState(() => [...defaultData]);
+
+  const table = useReactTable({
+    data,
+    columns,
+    state: {
+      rowSelection,
+    },
+    onRowSelectionChange: setRowSelection,
+    getCoreRowModel: getCoreRowModel(),
+  });
+  console.log(rowSelection);
   return (
-    <table {...getTableProps()}>
+    // <div className={styles.table}>
+    //   <TableHeading />
+    // </div>
+    <table className={styles.table}>
       <thead>
-        {headerGroups.map((headerGroup) => (
-          <tr {...headerGroup.getHeaderGroupProps()}>
-            {headerGroup.headers.map((column) => (
-              <th {...column.getHeaderProps()}>{column.render('Header')}</th>
+        {table.getHeaderGroups().map((headerGroup) => (
+          <tr key={headerGroup.id} className={styles.tableRow}>
+            {headerGroup.headers.map((header) => (
+              <th
+                className={cl(styles.tableCell, { [styles.tableCell_select]: header.id === 'select' })}
+                key={header.id}>
+                {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
+              </th>
             ))}
           </tr>
         ))}
       </thead>
-      <tbody {...getTableBodyProps()}>
-        {rows.map((row) => {
-          prepareRow(row);
-          return (
-            <tr {...row.getRowProps()}>
-              {row.cells.map((cell) => {
-                return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>;
-              })}
-            </tr>
-          );
-        })}
+      <tbody>
+        {table.getRowModel().rows.map((row) => (
+          <tr key={row.id} className={cl(styles.tableRow, styles.tableRow_body)}>
+            {row.getVisibleCells().map((cell) => (
+              <td className={styles.tableCell} key={cell.id}>
+                {flexRender(cell.column.columnDef.cell, cell.getContext())}
+              </td>
+            ))}
+          </tr>
+        ))}
       </tbody>
     </table>
   );
