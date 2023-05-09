@@ -1,0 +1,10 @@
+.selection {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 2.75rem;
+
+  &Text {
+    font-weight: 600;
+  }
+}

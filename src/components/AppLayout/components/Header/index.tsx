@@ -17,7 +17,7 @@ export const Header: FC<Props> = ({ onBurger }) => {
     <header className={styles.header}>
       <div className={styles.headerWrapper}>
         <div className={styles.left}>
-          <IconLayout icon={<BurgerIc />} size={IconSize.m} onClick={onBurger} />
+          <IconLayout icon={<BurgerIc />} size={IconSize.m} onClick={onBurger} interactive />
           <Link to='/'>
             <IconLayout icon={<LogoIc />} size={IconSize.l} />
           </Link>

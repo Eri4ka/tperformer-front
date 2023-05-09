@@ -56,7 +56,11 @@ export const TextField: FC<Props> = ({
         />
         <div className={styles.iconWrapper}>
           {type === 'password' && (
-            <IconLayout icon={togglePasswordShown ? <HideIc /> : <ShowIc />} onClick={handleTogglePasswordShown} />
+            <IconLayout
+              icon={togglePasswordShown ? <HideIc /> : <ShowIc />}
+              onClick={handleTogglePasswordShown}
+              interactive
+            />
           )}
           {value.length > 0 && <IconLayout icon={<CancelIc />} onClick={handleClearField} />}
           {icon}
