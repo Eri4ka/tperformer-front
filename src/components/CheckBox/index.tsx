@@ -23,7 +23,7 @@ export const CheckBox: FC<Props> = ({ name, label, error, checked, className, ha
         onChange={handleCheck}
       />
       <label htmlFor={name} className={cl(styles.checkboxLabel, { [styles.checkboxLabel_error]: error })}>
-        <div className={styles.checkboxText}>{label}</div>
+        {label && <div className={styles.checkboxText}>{label}</div>}
       </label>
     </div>
   );

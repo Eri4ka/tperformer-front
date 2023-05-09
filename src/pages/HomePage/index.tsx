@@ -2,7 +2,8 @@ import { BaseButton } from '@/components/BaseButton';
 import { ButtonsGroup } from '@/components/ButtonsGroup';
 import { ContentLayout } from '@/components/ContentLayout';
 import Heading from '@/components/Heading';
-import { Table } from '@/components/Table';
+
+import { CanvasTable } from './components/CanvasTable';
 
 export const HomePage = () => {
   return (
@@ -11,7 +12,7 @@ export const HomePage = () => {
       <ButtonsGroup>
         <BaseButton additional>New Canvas</BaseButton>
       </ButtonsGroup>
-      <Table />
+      <CanvasTable />
     </ContentLayout>
   );
 };

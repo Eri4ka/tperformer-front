@@ -1,86 +1,17 @@
-import { ColumnDef, createColumnHelper, flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table';
+import { ColumnDef, flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table';
 import cl from 'classnames';
 import { useState } from 'react';
-
-import { CheckBox } from '@/components/CheckBox';
 
 import { TableHeading } from './components/TableHeading';
 import styles from './styles.module.scss';
 
-type TCanvas = {
-  title: string;
-  content: string;
+type Props<T> = {
+  data: T[];
+  columns: ColumnDef<T>[];
 };
 
-export const Table = () => {
+export const Table = <T,>({ data, columns }: Props<T>) => {
   const [rowSelection, setRowSelection] = useState({});
-
-  const columnHelper = createColumnHelper<TCanvas>();
-
-  const defaultData: TCanvas[] = [
-    {
-      title: 'tanner',
-      content: 'linsley',
-    },
-    {
-      title: 'miller',
-      content: 'Baccks',
-    },
-  ];
-
-  // const columns = [
-  //   columnHelper.accessor((row) => row.title, {
-  //     id: 'select',
-  //     header: (info) => (
-  //       <CheckBox
-  //         name={info.header.id}
-  //         checked={table.getIsAllRowsSelected()}
-  //         handleCheck={table.getToggleAllRowsSelectedHandler()}
-  //       />
-  //     ),
-  //     cell: (info) => (
-  //       <CheckBox
-  //         name={info.getValue()}
-  //         checked={info.row.getIsSelected()}
-  //         handleCheck={info.row.getToggleSelectedHandler()}
-  //       />
-  //     ),
-  //   }),
-  //   columnHelper.accessor((row) => row.title, {
-  //     id: 'title',
-  //     cell: (info) => info.getValue(),
-  //   }),
-  //   columnHelper.accessor((row) => row.content, {
-  //     id: 'content',
-  //     cell: (info) => info.getValue(),
-  //   }),
-  // ];
-
-  const columns: ColumnDef<TCanvas>[] = [
-    {
-      id: 'select',
-      header: (info) => (
-        <CheckBox
-          name={info.header.id}
-          checked={table.getIsAllRowsSelected()}
-          handleCheck={table.getToggleAllRowsSelectedHandler()}
-        />
-      ),
-      cell: ({ row }) => (
-        <CheckBox name={row.id} checked={row.getIsSelected()} handleCheck={row.getToggleSelectedHandler()} />
-      ),
-    },
-    {
-      accessorKey: 'title',
-      cell: (info) => info.getValue(),
-    },
-    {
-      accessorKey: 'content',
-      cell: (info) => info.getValue(),
-    },
-  ];
-
-  const [data, setData] = useState(() => [...defaultData]);
 
   const table = useReactTable({
     data,
@@ -88,23 +19,27 @@ export const Table = () => {
     state: {
       rowSelection,
     },
+    columnResizeMode: 'onChange',
     onRowSelectionChange: setRowSelection,
     getCoreRowModel: getCoreRowModel(),
   });
-  console.log(rowSelection);
+
   return (
-    // <div className={styles.table}>
-    //   <TableHeading />
-    // </div>
     <table className={styles.table}>
       <thead>
         {table.getHeaderGroups().map((headerGroup) => (
           <tr key={headerGroup.id} className={styles.tableRow}>
             {headerGroup.headers.map((header) => (
-              <th
-                className={cl(styles.tableCell, { [styles.tableCell_select]: header.id === 'select' })}
-                key={header.id}>
+              <th style={{ width: header.getSize() }} className={styles.tableCell} key={header.id}>
                 {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
+                {header.column.getCanResize() && (
+                  <div
+                    onMouseDown={header.getResizeHandler()}
+                    onTouchStart={header.getResizeHandler()}
+                    className={cl(styles.tableResizer, {
+                      [styles.tableResizer_active]: header.column.getIsResizing(),
+                    })}></div>
+                )}
               </th>
             ))}
           </tr>
