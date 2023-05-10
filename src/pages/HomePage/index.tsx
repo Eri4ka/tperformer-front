@@ -8,10 +8,11 @@ import { CanvasTable } from './components/CanvasTable';
 export const HomePage = () => {
   return (
     <ContentLayout>
-      <Heading text='Home' />
-      <ButtonsGroup>
-        <BaseButton additional>New Canvas</BaseButton>
-      </ButtonsGroup>
+      <Heading text='Home'>
+        <ButtonsGroup>
+          <BaseButton additional>New Canvas</BaseButton>
+        </ButtonsGroup>
+      </Heading>
       <CanvasTable />
     </ContentLayout>
   );

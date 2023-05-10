@@ -1,36 +1,63 @@
-import { ColumnDef, flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table';
+import {
+  ColumnDef,
+  FilterFn,
+  flexRender,
+  getCoreRowModel,
+  getFilteredRowModel,
+  useReactTable,
+} from '@tanstack/react-table';
 import cl from 'classnames';
 import { useState } from 'react';
 
-import { TableHeading } from './components/TableHeading';
 import { TableSelection } from './components/TableSelection';
 import styles from './styles.module.scss';
+import { SearchField } from '../SearchField';
 
 type Props<T> = {
   data: T[];
   columns: ColumnDef<T>[];
+  headingText?: string;
+  showSelection?: boolean;
+  filterFn?: FilterFn<T>;
 };
 
-export const Table = <T,>({ data, columns }: Props<T>) => {
+export const Table = <T,>({ data, columns, headingText, showSelection = false, filterFn }: Props<T>) => {
   const [rowSelection, setRowSelection] = useState({});
+  const [globalFilter, setGlobalFilter] = useState('');
+
+  const handleSetGlobalFilterValue = (value: string) => setGlobalFilter(value);
+  const handleRemoveGlobalFilterValue = () => setGlobalFilter('');
 
   const table = useReactTable({
     data,
     columns,
     state: {
       rowSelection,
+      globalFilter,
     },
     columnResizeMode: 'onChange',
     onRowSelectionChange: setRowSelection,
+    onGlobalFilterChange: setGlobalFilter,
+    globalFilterFn: filterFn,
     getCoreRowModel: getCoreRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
   });
-
+  console.log(globalFilter);
   return (
     <div className={styles.wrapper}>
-      <TableSelection
-        numSelected={Object.keys(rowSelection).length}
-        numTotal={table.getPreFilteredRowModel().rows.length}
+      {headingText && <h2 className={styles.heading}>{headingText}</h2>}
+      <SearchField
+        className={styles.search}
+        value={globalFilter}
+        handleChange={handleSetGlobalFilterValue}
+        handleClear={handleRemoveGlobalFilterValue}
       />
+      {showSelection && (
+        <TableSelection
+          numSelected={Object.keys(rowSelection).length}
+          numTotal={table.getPreFilteredRowModel().rows.length}
+        />
+      )}
       <table className={styles.table}>
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (

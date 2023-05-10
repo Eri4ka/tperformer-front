@@ -2,6 +2,7 @@ import { ColumnDef } from '@tanstack/react-table';
 
 import { CheckBox } from '@/components/CheckBox';
 import { Table } from '@/components/Table';
+import { fuzzyFilter } from '@/components/Table/helpers';
 import { TCanvas } from '@/mytypes/canvas';
 
 const defaultData: TCanvas[] = [
@@ -37,6 +38,7 @@ const columns: ColumnDef<TCanvas>[] = [
     header: 'Title',
     cell: (info) => info.getValue(),
     size: 278,
+    filterFn: fuzzyFilter,
   },
   {
     accessorKey: 'сontent',
@@ -52,5 +54,5 @@ const columns: ColumnDef<TCanvas>[] = [
 ];
 
 export const CanvasTable = () => {
-  return <Table data={defaultData} columns={columns} />;
+  return <Table data={defaultData} columns={columns} headingText='All canvases' showSelection filterFn={fuzzyFilter} />;
 };

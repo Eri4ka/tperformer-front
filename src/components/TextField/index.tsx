@@ -62,7 +62,7 @@ export const TextField: FC<Props> = ({
               interactive
             />
           )}
-          {value.length > 0 && <IconLayout icon={<CancelIc />} onClick={handleClearField} />}
+          {value && <IconLayout icon={<CancelIc />} onClick={handleClearField} interactive />}
           {icon}
         </div>
       </div>
