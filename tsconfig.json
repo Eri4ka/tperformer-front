@@ -27,7 +27,8 @@
       "@/components/*": ["components/*"],
       "@/styles/*": ["styles/*"],
       "@/pages/*": ["pages/*"],
-      "@/mytypes/*": ["types/*"]
+      "@/mytypes/*": ["types/*"],
+      "@/hooks/*": ["hooks/*"]
     }
   },
   "include": ["src"],

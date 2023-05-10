@@ -7,7 +7,7 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 import cl from 'classnames';
-import { useState } from 'react';
+import { useDeferredValue, useState } from 'react';
 
 import { TableSelection } from './components/TableSelection';
 import styles from './styles.module.scss';
