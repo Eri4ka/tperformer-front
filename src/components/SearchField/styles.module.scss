@@ -23,6 +23,18 @@
   color: var(--black-00);
   padding: 0.75rem 4rem 0.75rem 2.75rem;
   transition: all var(--transition-delay) var(--transition-timing);
+
+  &:hover {
+    border-color: var(--stroke-00);
+  }
+
+  &:focus {
+    border-color: var(--stroke-00);
+  }
+
+  &::placeholder {
+    color: var(--gray-02);
+  }
 }
 
 .iconWrapper {

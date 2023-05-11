@@ -12,7 +12,7 @@ const defaultData: TCanvas[] = [
     created: '5/3/2023',
   },
   {
-    title: 'Title',
+    title: 'Titme',
     сontent: 'Text about canvas ',
     created: '1/3/2023',
   },
@@ -54,5 +54,14 @@ const columns: ColumnDef<TCanvas>[] = [
 ];
 
 export const CanvasTable = () => {
-  return <Table data={defaultData} columns={columns} headingText='All canvases' showSelection filterFn={fuzzyFilter} />;
+  return (
+    <Table
+      data={defaultData}
+      columns={columns}
+      headingText='All canvases'
+      showSelection
+      showSearch
+      filterFn={fuzzyFilter}
+    />
+  );
 };

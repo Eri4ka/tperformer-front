@@ -7,7 +7,7 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 import cl from 'classnames';
-import { useDeferredValue, useState } from 'react';
+import { useState } from 'react';
 
 import { TableSelection } from './components/TableSelection';
 import styles from './styles.module.scss';
@@ -18,15 +18,22 @@ type Props<T> = {
   columns: ColumnDef<T>[];
   headingText?: string;
   showSelection?: boolean;
+  showSearch?: boolean;
   filterFn?: FilterFn<T>;
 };
 
-export const Table = <T,>({ data, columns, headingText, showSelection = false, filterFn }: Props<T>) => {
+export const Table = <T,>({
+  data,
+  columns,
+  headingText,
+  showSelection = false,
+  showSearch = false,
+  filterFn,
+}: Props<T>) => {
   const [rowSelection, setRowSelection] = useState({});
   const [globalFilter, setGlobalFilter] = useState('');
 
   const handleSetGlobalFilterValue = (value: string) => setGlobalFilter(value);
-  const handleRemoveGlobalFilterValue = () => setGlobalFilter('');
 
   const table = useReactTable({
     data,
@@ -42,16 +49,11 @@ export const Table = <T,>({ data, columns, headingText, showSelection = false, f
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
   });
-  console.log(globalFilter);
+
   return (
     <div className={styles.wrapper}>
       {headingText && <h2 className={styles.heading}>{headingText}</h2>}
-      <SearchField
-        className={styles.search}
-        value={globalFilter}
-        handleChange={handleSetGlobalFilterValue}
-        handleClear={handleRemoveGlobalFilterValue}
-      />
+      {showSearch && <SearchField className={styles.search} onChange={handleSetGlobalFilterValue} />}
       {showSelection && (
         <TableSelection
           numSelected={Object.keys(rowSelection).length}
