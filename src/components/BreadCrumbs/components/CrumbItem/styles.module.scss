@@ -1,0 +1,14 @@
+.crumb {
+  display: flex;
+  align-items: center;
+  gap: var(--margin-3xs);
+
+  &Elem {
+    color: var(--gray-03);
+    transition: color var(--transition-delay) var(--transition-timing);
+
+    &:hover {
+      color: var(--indigo);
+    }
+  }
+}
