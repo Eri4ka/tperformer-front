@@ -1,8 +1,29 @@
 .icon {
-  height: 1.5rem;
-  width: 1.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  cursor: pointer;
+
+  &_xxs {
+    height: 0.75rem;
+    width: 0.75rem;
+  }
+
+  &_s {
+    height: 1.5rem;
+    width: 1.5rem;
+  }
+
+  &_m {
+    height: 2rem;
+    width: 2rem;
+  }
+
+  &_l {
+    height: 2.75rem;
+    width: 2.75rem;
+  }
+
+  &_inter {
+    cursor: pointer;
+  }
 }

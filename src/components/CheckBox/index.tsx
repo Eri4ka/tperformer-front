@@ -5,7 +5,7 @@ import styles from './styles.module.scss';
 
 type Props = {
   name: string;
-  label: string | ReactElement;
+  label?: string | ReactElement;
   error?: string;
   className?: string;
   handleCheck: (event: ChangeEvent<HTMLInputElement>) => void;
@@ -23,7 +23,7 @@ export const CheckBox: FC<Props> = ({ name, label, error, checked, className, ha
         onChange={handleCheck}
       />
       <label htmlFor={name} className={cl(styles.checkboxLabel, { [styles.checkboxLabel_error]: error })}>
-        <div className={styles.checkboxText}>{label}</div>
+        {label && <div className={styles.checkboxText}>{label}</div>}
       </label>
     </div>
   );

@@ -1,7 +1,9 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
+import { AppLayout } from '@/components/AppLayout';
 import { ForgotPasswordConfirmPage } from '@/pages/ForgotPasswordConfirmPage';
 import { ForgotPasswordPage } from '@/pages/ForgotPasswordPage';
+import { HomePage } from '@/pages/HomePage';
 import { ResetPasswordConfirmPage } from '@/pages/ResetPasswordConfirmPage';
 import { ResetPasswordPage } from '@/pages/ResetPasswordPage';
 import { SignInHelpConfirmPage } from '@/pages/SignInHelpConfirmPage';
@@ -13,7 +15,13 @@ import { SignUpPage } from '@/pages/SignUpPage';
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <div>hi</div>,
+    element: <AppLayout />,
+    children: [
+      {
+        index: true,
+        element: <HomePage />,
+      },
+    ],
   },
   {
     path: '/signin',
