@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import { AppLayout } from '@/components/AppLayout';
+import { CanvasPage } from '@/pages/CanvasPage';
 import { ForgotPasswordConfirmPage } from '@/pages/ForgotPasswordConfirmPage';
 import { ForgotPasswordPage } from '@/pages/ForgotPasswordPage';
 import { HomePage } from '@/pages/HomePage';
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <HomePage />,
+      },
+      {
+        path: ':canvasId',
+        element: <CanvasPage />,
       },
     ],
   },
