@@ -1,6 +1,8 @@
 import { BreadCrumbs } from '@/components/BreadCrumbs';
 import { ContentLayout } from '@/components/ContentLayout';
-import { SettingsMenu } from '@/components/SettingsMenu';
+import { SideMenu } from '@/components/SideMenu';
+
+import { SettingsForm } from './components/SettingsForm';
 
 export const CanvasPage = () => {
   const crumbsList = [
@@ -21,7 +23,9 @@ export const CanvasPage = () => {
       <ContentLayout>
         <BreadCrumbs data={crumbsList} />
       </ContentLayout>
-      <SettingsMenu>hi</SettingsMenu>
+      <SideMenu title='Settings'>
+        <SettingsForm />
+      </SideMenu>
     </>
   );
 };

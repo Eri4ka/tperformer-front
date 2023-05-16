@@ -6,9 +6,9 @@ import { ReactComponent as QuestIc } from '@/assets/images/text-field/question.s
 import { AuthFormLayout } from '@/components/AuthFormLayout';
 import { AuthHeading } from '@/components/AuthHeading';
 import { BaseButton, ButtonVariant } from '@/components/BaseButton';
-import { CheckBox } from '@/components/CheckBox';
+import { CheckBox } from '@/components/CheckField/CheckBox';
 import { IconLayout } from '@/components/IconLayout';
-import { TextField } from '@/components/TextField';
+import { TextField } from '@/components/Input/TextField';
 
 import styles from './styles.module.scss';
 import { Tooltip } from '../../../../components/Tooltip';

@@ -1,6 +1,6 @@
 import { ColumnDef } from '@tanstack/react-table';
 
-import { CheckBox } from '@/components/CheckBox';
+import { CheckBox } from '@/components/CheckField/CheckBox';
 import { Table } from '@/components/Table';
 import { fuzzyFilter } from '@/components/Table/helpers';
 import { TCanvas } from '@/mytypes/canvas';

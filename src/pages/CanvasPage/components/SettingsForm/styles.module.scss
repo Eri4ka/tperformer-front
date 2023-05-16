@@ -1,0 +1,14 @@
+.form {
+  &Field {
+    margin-bottom: var(--margin-s);
+  }
+
+  &Customization {
+  }
+
+  &Title {
+    color: var(--black-00);
+    font-size: 1rem;
+    font-weight: 600;
+  }
+}

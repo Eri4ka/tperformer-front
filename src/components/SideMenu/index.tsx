@@ -7,10 +7,11 @@ import { IconLayout } from '@/components/IconLayout';
 import styles from './styles.module.scss';
 
 type Props = {
+  title: string;
   children: ReactNode;
 };
 
-export const SettingsMenu: FC<Props> = ({ children }) => {
+export const SideMenu: FC<Props> = ({ title, children }) => {
   const [isOpenMenu, setIsOpenMenu] = useState(false);
 
   const handleToggleMenu = () => setIsOpenMenu((current) => !current);
@@ -20,7 +21,10 @@ export const SettingsMenu: FC<Props> = ({ children }) => {
       <button className={styles.menuButton} onClick={handleToggleMenu}>
         <IconLayout icon={<SettingsIc />} />
       </button>
-      <div className={styles.menuWrapper}>{children}</div>
+      <div className={styles.menuWrapper}>
+        <h2 className={styles.menuTitle}>{title}</h2>
+        {children}
+      </div>
     </div>
   );
 };
