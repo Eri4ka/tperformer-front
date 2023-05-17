@@ -5,7 +5,7 @@ import * as Yup from 'yup';
 import { ReactComponent as QuestIc } from '@/assets/images/text-field/question.svg';
 import { AuthFormLayout } from '@/components/AuthFormLayout';
 import { AuthHeading } from '@/components/AuthHeading';
-import { BaseButton, ButtonVariant } from '@/components/BaseButton';
+import { BaseButton, ButtonVariant } from '@/components/Button/BaseButton';
 import { CheckBox } from '@/components/CheckField/CheckBox';
 import { IconLayout } from '@/components/IconLayout';
 import { TextField } from '@/components/Input/TextField';

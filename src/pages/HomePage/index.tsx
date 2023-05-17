@@ -1,4 +1,4 @@
-import { BaseButton } from '@/components/BaseButton';
+import { BaseButton } from '@/components/Button/BaseButton';
 import { ButtonsGroup } from '@/components/ButtonsGroup';
 import { ContentLayout } from '@/components/ContentLayout';
 import { Heading } from '@/components/Heading';

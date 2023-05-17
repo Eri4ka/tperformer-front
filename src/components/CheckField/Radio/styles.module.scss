@@ -40,6 +40,12 @@
         border-color: var(--purple-02);
       }
     }
+
+    &:focus:not(:disabled):not(:checked) {
+      & + .checkboxLabel::before {
+        border-width: 2px;
+      }
+    }
   }
 
   &Label {

@@ -21,7 +21,7 @@ export const SideMenu: FC<Props> = ({ title, children }) => {
       <button className={styles.menuButton} onClick={handleToggleMenu}>
         <IconLayout icon={<SettingsIc />} />
       </button>
-      <div className={styles.menuWrapper}>
+      <div className={cl(styles.menuWrapper, { [styles.menuWrapper_open]: isOpenMenu })}>
         <h2 className={styles.menuTitle}>{title}</h2>
         {children}
       </div>

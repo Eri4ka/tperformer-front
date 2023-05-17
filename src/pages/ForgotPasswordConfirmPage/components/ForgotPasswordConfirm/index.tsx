@@ -3,7 +3,7 @@ import { Link, useSearchParams } from 'react-router-dom';
 import AppLink from '@/components/AppLink';
 import { AuthFormLayout } from '@/components/AuthFormLayout';
 import { AuthHeading } from '@/components/AuthHeading';
-import { BaseButton } from '@/components/BaseButton';
+import { BaseButton } from '@/components/Button/BaseButton';
 
 import styles from './styles.module.scss';
 

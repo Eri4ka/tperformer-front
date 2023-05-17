@@ -16,6 +16,11 @@
     flex-direction: column;
     padding: 1.5rem;
     height: 100%;
+    visibility: hidden;
+
+    &_open {
+      visibility: visible;
+    }
   }
 
   &Title {
@@ -40,6 +45,10 @@
 
     &:active {
       background-color: var(--purple-00);
+    }
+
+    &:focus {
+      background-color: var(--lily);
     }
   }
 }

@@ -4,7 +4,7 @@ import * as Yup from 'yup';
 
 import { AuthFormLayout } from '@/components/AuthFormLayout';
 import { AuthHeading } from '@/components/AuthHeading';
-import { BaseButton } from '@/components/BaseButton';
+import { BaseButton } from '@/components/Button/BaseButton';
 import { TextField } from '@/components/Input/TextField';
 
 import styles from './styles.module.scss';
