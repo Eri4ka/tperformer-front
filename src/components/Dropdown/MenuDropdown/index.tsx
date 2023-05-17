@@ -1,5 +1,7 @@
 import cl from 'classnames';
-import { FC, useEffect, useRef, useState } from 'react';
+import { FC, useState } from 'react';
+
+import { useToggle } from '@/hooks/useToggle';
 
 import styles from './styles.module.scss';
 import { TDropdownList } from '../types';
@@ -9,37 +11,20 @@ type Props = {
 };
 
 export const MenuDropdown: FC<Props> = ({ valueList }) => {
+  const { isOpen, handleToggle, targetRef } = useToggle<HTMLButtonElement>();
   const [selectedValue, setSelectedValue] = useState('');
-  const [isOpenMenu, setIsOpenMenu] = useState(false);
-  const targetRef = useRef<HTMLDivElement>(null);
 
   const handleSelectValue = (value: TDropdownList['value']) => {
     setSelectedValue((current) => (current === value ? '' : value));
   };
 
-  const handleToggleMenu = () => setIsOpenMenu((current) => !current);
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (!targetRef.current?.contains(event.target as HTMLDivElement)) {
-        setIsOpenMenu(false);
-      }
-    };
-
-    window.addEventListener('click', handleClickOutside);
-
-    return () => {
-      window.removeEventListener('click', handleClickOutside);
-    };
-  }, []);
-
   return (
     <div className={styles.dropdown}>
       <div className={styles.dropdownLabel}>Mode</div>
-      <button className={styles.dropdownField} onClick={handleToggleMenu} ref={targetRef}>
+      <button className={styles.dropdownField} onClick={handleToggle} ref={targetRef}>
         {selectedValue}
       </button>
-      {isOpenMenu && (
+      {isOpen && (
         <ul className={styles.menu}>
           {valueList?.map((item) => (
             <li
