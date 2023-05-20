@@ -1,0 +1,41 @@
+.range {
+  font-size: 0.875rem;
+  color: var(--black-00);
+  font-family: var(--secondary-font);
+
+  &Info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: var(--margin-xs);
+  }
+
+  &Value {
+    border: 1px solid var(--white-00);
+    border-radius: var(--border-radius-04);
+    width: 2.813rem;
+    height: 1.375rem;
+    text-align: end;
+    padding: 0 0.25rem;
+
+    &::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    &:focus {
+      border-color: var(--wind);
+    }
+
+    &:active {
+      border-color: var(--wind);
+    }
+  }
+
+  &_disabled {
+    color: var(--gray-02);
+  }
+}

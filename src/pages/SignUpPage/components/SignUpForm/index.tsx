@@ -6,8 +6,8 @@ import { ReactComponent as QuestIc } from '@/assets/images/text-field/question.s
 import { AuthFormLayout } from '@/components/AuthFormLayout';
 import { AuthHeading } from '@/components/AuthHeading';
 import { BaseButton, ButtonVariant } from '@/components/Button/BaseButton';
-import { CheckBox } from '@/components/CheckField/CheckBox';
 import { IconLayout } from '@/components/IconLayout';
+import { CheckBox } from '@/components/Input/CheckBox';
 import { TextField } from '@/components/Input/TextField';
 
 import styles from './styles.module.scss';

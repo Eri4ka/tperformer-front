@@ -7,10 +7,11 @@ import styles from './styles.module.scss';
 import { TDropdownList } from '../types';
 
 type Props = {
+  label?: string;
   valueList: TDropdownList[];
 };
 
-export const MenuDropdown: FC<Props> = ({ valueList }) => {
+export const MenuDropdown: FC<Props> = ({ label, valueList }) => {
   const { isOpen, handleToggle, targetRef } = useToggle<HTMLButtonElement>();
   const [selectedValue, setSelectedValue] = useState('');
 
@@ -20,7 +21,7 @@ export const MenuDropdown: FC<Props> = ({ valueList }) => {
 
   return (
     <div className={styles.dropdown}>
-      <div className={styles.dropdownLabel}>Mode</div>
+      {label && <div className={styles.dropdownLabel}>{label}</div>}
       <button className={styles.dropdownField} onClick={handleToggle} ref={targetRef}>
         {selectedValue}
       </button>

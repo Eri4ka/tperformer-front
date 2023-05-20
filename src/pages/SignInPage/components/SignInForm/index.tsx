@@ -8,7 +8,7 @@ import { ReactComponent as GoogleIc } from '@/assets/images/social/google.svg';
 import AppLink from '@/components/AppLink';
 import { AuthFormLayout } from '@/components/AuthFormLayout';
 import { BaseButton, ButtonVariant } from '@/components/Button/BaseButton';
-import { CheckBox } from '@/components/CheckField/CheckBox';
+import { CheckBox } from '@/components/Input/CheckBox';
 import { TextField } from '@/components/Input/TextField';
 
 import styles from './styles.module.scss';

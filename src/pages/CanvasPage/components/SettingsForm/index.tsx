@@ -1,6 +1,7 @@
-import { Radio } from '@/components/CheckField/Radio';
 import { MenuDropdown } from '@/components/Dropdown/MenuDropdown';
 import { MenuField } from '@/components/Input/MenuField';
+import { Radio } from '@/components/Input/Radio';
+import { Range } from '@/components/Input/Range';
 
 import styles from './styles.module.scss';
 
@@ -19,7 +20,8 @@ export const SettingsForm = () => {
       <div className={styles.formCustomization}>
         <h2 className={styles.formTitle}>API</h2>
         <Radio name='api' label='Default' />
-        <MenuDropdown valueList={drop1} />
+        <MenuDropdown label='Mode' valueList={drop1} />
+        <Range step={1} min={0} max={100} />
       </div>
     </div>
   );
