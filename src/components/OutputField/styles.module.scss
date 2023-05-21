@@ -1,0 +1,22 @@
+.output {
+  width: 100%;
+  background-color: var(--white-00);
+  border-radius: var(--border-radius-16);
+  border: 1.5px solid var(--gray-03);
+  box-shadow: var(--box-shadow-output);
+  padding: 2rem 0.75rem 2rem 2rem;
+
+  &Wrapper {
+    overflow: scroll;
+    height: 100%;
+    padding-right: 1.25rem;
+  }
+
+  &Content {
+    display: flex;
+    flex-direction: column;
+    font-size: 1rem;
+    color: var(--black-00);
+    gap: 0.5rem;
+  }
+}

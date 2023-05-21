@@ -10,7 +10,7 @@ type Props = {
   isDisabled?: boolean;
 } & InputHTMLAttributes<HTMLInputElement>;
 
-export const RequestField: FC<Props> = ({ name, placeholder, value, handleChange, isDisabled }) => {
+export const RequestField: FC<Props> = ({ name, placeholder, value, handleChange, isDisabled, ...props }) => {
   return (
     <input
       className={styles.input}
@@ -20,6 +20,7 @@ export const RequestField: FC<Props> = ({ name, placeholder, value, handleChange
       value={value}
       onChange={handleChange}
       disabled={isDisabled}
+      {...props}
     />
   );
 };
