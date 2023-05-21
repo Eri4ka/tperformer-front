@@ -1,0 +1,14 @@
+.enter {
+  width: 100%;
+  max-width: 888px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+
+  &Buttons {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+  }
+}

@@ -2,10 +2,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 12px;
   font-size: 1rem;
   font-weight: 600;
-  padding: 0.75rem 1.25rem;
   gap: 4px;
   width: 100%;
   white-space: nowrap;
@@ -67,5 +65,23 @@
       background-color: var(--gray-03);
       color: var(--gray-02);
     }
+  }
+
+  &_xs {
+    border-radius: var(--border-radius-08);
+    padding: 0 0.5rem;
+    height: 2rem;
+  }
+
+  &_s {
+    border-radius: var(--border-radius-08);
+    padding: 0 1.25rem;
+    height: 2rem;
+  }
+
+  &_m {
+    border-radius: var(--border-radius-12);
+    padding: 0 1.25rem;
+    height: 3rem;
   }
 }
