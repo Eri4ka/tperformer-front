@@ -2,6 +2,7 @@ import { BreadCrumbs } from '@/components/BreadCrumbs';
 import { ContentLayout } from '@/components/ContentLayout';
 import { SideMenu } from '@/components/SideMenu';
 
+import { Request } from './components/Request';
 import { SettingsForm } from './components/SettingsForm';
 
 export const CanvasPage = () => {
@@ -22,6 +23,7 @@ export const CanvasPage = () => {
     <>
       <ContentLayout>
         <BreadCrumbs data={crumbsList} />
+        <Request />
       </ContentLayout>
       <SideMenu title='Settings'>
         <SettingsForm />
