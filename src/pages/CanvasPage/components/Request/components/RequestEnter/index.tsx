@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { FC } from 'react';
 
 import { ReactComponent as PlusIc } from '@/assets/images/common/plus.svg';
 import { BaseButton, ButtonSize, ButtonVariant } from '@/components/Button/BaseButton';
@@ -8,18 +8,18 @@ import { OutputField } from '@/components/OutputField';
 
 import styles from './styles.module.scss';
 
-export const RequestEnter = () => {
-  const [isOutputActive, setIsOutputActive] = useState(false);
+type Props = {
+  isRequestEnterOpen: boolean;
+  onOpenRequestEnter: () => void;
+};
 
+export const RequestEnter: FC<Props> = ({ isRequestEnterOpen, onOpenRequestEnter }) => {
   return (
     <div className={styles.enter}>
-      {isOutputActive ? (
-        <OutputField className={styles.enterOutput}>
-          <span>You are</span>
-          <span>You are creating exercises for a learning plan for your students.</span>
-        </OutputField>
+      {isRequestEnterOpen ? (
+        <OutputField className={styles.enterOutput} />
       ) : (
-        <RequestField name='request' placeholder='Type here ...' onFocus={() => setIsOutputActive(true)} />
+        <RequestField name='request' placeholder='Type here ...' onFocus={onOpenRequestEnter} />
       )}
       <div className={styles.enterButtons}>
         <ButtonsGroup>

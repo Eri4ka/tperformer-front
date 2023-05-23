@@ -1,12 +1,19 @@
+import cl from 'classnames';
+import { FC } from 'react';
+
 import { ReactComponent as PlusIc } from '@/assets/images/common/plus.svg';
 import { ReactComponent as SettingsIc } from '@/assets/images/common/settings.svg';
 import { IconLayout } from '@/components/IconLayout';
 
 import styles from './styles.module.scss';
 
-export const RequestHelp = () => {
+type Props = {
+  isVisible: boolean;
+};
+
+export const RequestHelp: FC<Props> = ({ isVisible }) => {
   return (
-    <div className={styles.help}>
+    <div className={cl(styles.help, { [styles.help_visible]: isVisible })}>
       <span className={styles.helpText}>
         Add the snippet by clicking
         <IconLayout icon={<PlusIc />} className={styles.helpIcon} />
