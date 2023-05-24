@@ -14,9 +14,22 @@
 
   &Content {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
     font-size: 1rem;
     color: var(--black-00);
     gap: 0.5rem;
   }
+}
+
+.drop {
+  width: 240px;
+}
+
+.editable {
+  font-size: 1rem;
+  outline: none;
+  min-width: 30px;
+  display: inline-block;
 }

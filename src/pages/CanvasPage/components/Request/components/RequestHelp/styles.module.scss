@@ -1,4 +1,5 @@
 .help {
+  position: absolute;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -6,6 +7,10 @@
   visibility: hidden;
   opacity: 0;
   transition: all var(--transition-delay) var(--transition-timing);
+  left: 50%;
+  top: 13.125rem;
+  width: 100%;
+  transform: translateX(-50%);
 
   &_visible {
     visibility: visible;

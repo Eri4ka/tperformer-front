@@ -20,6 +20,7 @@ export const MenuField: FC<Props> = ({ name, label, placeholder, value, handleCh
       </label>
       <input
         className={styles.input}
+        id={name}
         name={name}
         type='text'
         placeholder={placeholder}
