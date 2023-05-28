@@ -1,11 +1,10 @@
 import cl from 'classnames';
-import { FC, KeyboardEvent, ReactNode, useMemo, useRef, useState } from 'react';
+import { FC, KeyboardEvent, useRef, useState } from 'react';
 
 import styles from './styles.module.scss';
 import { MenuDropdown } from '../Dropdown/MenuDropdown';
 
 type Props = {
-  children?: ReactNode;
   className?: string;
 };
 
@@ -16,31 +15,69 @@ const drop1 = [
   { id: 4, value: 'Edit' },
 ];
 
-export const OutputField: FC<Props> = ({ children, className }) => {
-  const dropRef = useRef<HTMLButtonElement[]>([]);
+type TContentValue = { id: number; type: 'div' | 'dropdown' };
 
-  const handleCallSymbol = (e: KeyboardEvent) => {
+const initalValue: TContentValue[] = [{ id: 1, type: 'div' }];
+
+export const OutputField: FC<Props> = ({ className }) => {
+  const divRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  const [contentValue, setContentValue] = useState<TContentValue[]>(initalValue);
+
+  const handleAddElements = (e: KeyboardEvent) => {
     if (e.key === '/') {
-      setContentValue((current) => [
-        ...current,
-        <MenuDropdown ref={el => dropRef.current[current.length + 1]} valueList={drop1} key={current.length + 1} className={styles.drop} />,
-        <div className={styles.editable} contentEditable onKeyDown={handleCallSymbol} key={current.length + 2} />,
-      ]);
-      dropRef.current?.focus();
-
+      addFewElements();
+    }
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      addDivElement();
     }
   };
-  console.log(dropRef.current.[1]);
 
-  const [contentValue, setContentValue] = useState<ReactNode[]>([
-    <div className={styles.editable} contentEditable onKeyDown={handleCallSymbol} key={1} />,
-  ]);
+  const addFewElements = () => {
+    setContentValue((content) => [
+      ...content,
+      {
+        id: content.length + 1,
+        type: 'dropdown',
+      },
+      {
+        id: content.length + 2,
+        type: 'div',
+      },
+    ]);
+  };
 
+  const addDivElement = () => {
+    setContentValue((content) => [
+      ...content,
+      {
+        id: content.length + 1,
+        type: 'div',
+      },
+    ]);
+  };
 
   return (
     <div className={cl(styles.output, className)}>
       <div className={styles.outputWrapper}>
-        <div className={styles.outputContent}>{contentValue}</div>
+        <div className={styles.outputContent}>
+          {contentValue.map((item) => {
+            if (item.type === 'dropdown') {
+              return <MenuDropdown valueList={drop1} key={item.id} className={styles.drop} />;
+            }
+
+            return (
+              <div
+                className={styles.editable}
+                contentEditable
+                onKeyDown={handleAddElements}
+                key={item.id}
+                ref={(el) => (divRefs.current[item.id] = el)}
+              />
+            );
+          })}
+        </div>
       </div>
     </div>
   );

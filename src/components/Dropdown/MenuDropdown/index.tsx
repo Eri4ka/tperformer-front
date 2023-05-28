@@ -1,5 +1,5 @@
 import cl from 'classnames';
-import { FC, useState, forwardRef, ForwardedRef, useImperativeHandle } from 'react';
+import { FC, useState } from 'react';
 
 import { useToggle } from '@/hooks/useToggle';
 
@@ -10,18 +10,15 @@ type Props = {
   label?: string;
   valueList: TDropdownList[];
   className?: string;
-  ref: ForwardedRef<HTMLButtonElement>;
 };
 
-export const MenuDropdown: FC<Props> = forwardRef(({ label, valueList, className }, ref) => {
+export const MenuDropdown: FC<Props> = ({ label, valueList, className }) => {
   const { isOpen, handleToggle, targetRef } = useToggle<HTMLButtonElement>();
   const [selectedValue, setSelectedValue] = useState('');
 
   const handleSelectValue = (value: TDropdownList['value']) => {
     setSelectedValue((current) => (current === value ? '' : value));
   };
-
-  useImperativeHandle(ref, () => targetRef.current);
 
   return (
     <div className={cl(styles.dropdown, className)}>
@@ -44,4 +41,4 @@ export const MenuDropdown: FC<Props> = forwardRef(({ label, valueList, className
       )}
     </div>
   );
-});
+};
