@@ -1,19 +1,13 @@
 import cl from 'classnames';
 import { FC, KeyboardEvent, useRef, useState } from 'react';
 
+import { RequestDropwdown } from '@/components/Dropdown/RequestDropdown';
+
 import styles from './styles.module.scss';
-import { MenuDropdown } from '../Dropdown/MenuDropdown';
 
 type Props = {
   className?: string;
 };
-
-const drop1 = [
-  { id: 1, value: 'Complete' },
-  { id: 2, value: 'Chat' },
-  { id: 3, value: 'Insert' },
-  { id: 4, value: 'Edit' },
-];
 
 type TContentValue = { id: number; type: 'div' | 'dropdown' };
 
@@ -64,7 +58,7 @@ export const OutputField: FC<Props> = ({ className }) => {
         <div className={styles.outputContent}>
           {contentValue.map((item) => {
             if (item.type === 'dropdown') {
-              return <MenuDropdown valueList={drop1} key={item.id} className={styles.drop} />;
+              return <RequestDropwdown key={item.id} />;
             }
 
             return (

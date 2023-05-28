@@ -14,7 +14,7 @@ export const useToggle = <T extends HTMLElement>(): THookReturn<T> => {
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (!targetRef.current?.contains(event.target as T)) {
+      if (targetRef.current && !targetRef.current?.contains(event.target as T)) {
         setIsOpen(false);
       }
     };
