@@ -20,6 +20,7 @@ export const OutputField: FC<Props> = ({ className }) => {
 
   const handleAddElements = (e: KeyboardEvent) => {
     if (e.key === '/') {
+      e.preventDefault();
       addFewElements();
     }
     if (e.key === 'Enter') {
@@ -68,6 +69,7 @@ export const OutputField: FC<Props> = ({ className }) => {
                 onKeyDown={handleAddElements}
                 key={item.id}
                 ref={(el) => (divRefs.current[item.id] = el)}
+                placeholder='Type here...'
               />
             );
           })}

@@ -17,6 +17,7 @@ type Props = {
   onClear: () => void;
   placeholder: string;
   activePlaceholder: string;
+  pluralizedValues: string;
 };
 
 export const MultiDropdown: FC<Props> = ({
@@ -27,10 +28,15 @@ export const MultiDropdown: FC<Props> = ({
   onClear,
   placeholder,
   activePlaceholder,
+  pluralizedValues,
 }) => {
   const { isOpen, handleToggle, targetRef } = useToggle<HTMLInputElement>();
   const [inputValue, setInputValue] = useState('');
   const [isInputActive, setIsInputActive] = useState(false);
+
+  const selectedValueLength = (pluralizedValues && pluralizedValues.length * 16) || 0;
+  const inputValueLength = (targetRef.current && targetRef.current.value.length * 16) || 0;
+  const inputLength = inputValue ? inputValueLength : selectedValueLength;
 
   const debouncedValue = useDebounce<string>(inputValue, 300);
 
@@ -75,6 +81,7 @@ export const MultiDropdown: FC<Props> = ({
           onFocus={handleFocus}
           onBlur={handleBlur}
           onChange={handleChange}
+          style={{ width: inputLength }}
         />
         <div className={styles.tagIcon}>
           <IconLayout icon={<CancelIc />} size={IconSize.xs} onClick={handleClear} interactive />

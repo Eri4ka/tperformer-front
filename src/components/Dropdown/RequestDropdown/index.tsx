@@ -58,6 +58,7 @@ export const RequestDropwdown = () => {
         onAddAll={onSetAllValues}
         onClear={onClearMultiValues}
         selectedValues={multiValues}
+        pluralizedValues={pluralizeMultiValues()}
         placeholder={pluralizeMultiValues() || 'Tap'}
         activePlaceholder='Write'
       />
