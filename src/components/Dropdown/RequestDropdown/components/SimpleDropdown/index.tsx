@@ -30,8 +30,8 @@ export const SimpleDropdown: FC<Props> = ({
   const [inputValue, setInputValue] = useState('');
   const [isInputActive, setIsInputActive] = useState(false);
 
-  const selectedValueLength = (selectedValue && selectedValue.value.length * 20) || 0;
-  const inputValueLength = (targetRef.current && targetRef.current.value.length * 16) || 0;
+  const selectedValueLength = (selectedValue && (selectedValue.value.length + 5) * 10) || 0;
+  const inputValueLength = (targetRef.current && (targetRef.current.value.length + 5) * 10) || 0;
   const inputLength = inputValue ? inputValueLength : selectedValueLength;
 
   const debouncedValue = useDebounce<string>(inputValue, 300);

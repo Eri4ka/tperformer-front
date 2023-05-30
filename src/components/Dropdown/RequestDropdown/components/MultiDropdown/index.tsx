@@ -34,8 +34,8 @@ export const MultiDropdown: FC<Props> = ({
   const [inputValue, setInputValue] = useState('');
   const [isInputActive, setIsInputActive] = useState(false);
 
-  const selectedValueLength = (pluralizedValues && pluralizedValues.length * 16) || 0;
-  const inputValueLength = (targetRef.current && targetRef.current.value.length * 16) || 0;
+  const selectedValueLength = (pluralizedValues && (pluralizedValues.length + 5) * 10) || 0;
+  const inputValueLength = (targetRef.current && (targetRef.current.value.length + 5) * 10) || 0;
   const inputLength = inputValue ? inputValueLength : selectedValueLength;
 
   const debouncedValue = useDebounce<string>(inputValue, 300);
