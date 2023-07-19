@@ -18,6 +18,7 @@ type Props = {
   placeholder: string;
   activePlaceholder: string;
   pluralizedValues: string;
+  isNotSelectable: boolean;
 };
 
 export const MultiDropdown: FC<Props> = ({
@@ -29,6 +30,7 @@ export const MultiDropdown: FC<Props> = ({
   placeholder,
   activePlaceholder,
   pluralizedValues,
+  isNotSelectable,
 }) => {
   const { isOpen, handleToggle, targetRef } = useToggle<HTMLInputElement>();
   const [inputValue, setInputValue] = useState('');
@@ -82,9 +84,10 @@ export const MultiDropdown: FC<Props> = ({
           onBlur={handleBlur}
           onChange={handleChange}
           style={{ width: inputLength }}
+          disabled={isNotSelectable}
         />
-        <div className={styles.tagIcon}>
-          <IconLayout icon={<CancelIc />} size={IconSize.xs} onClick={handleClear} interactive />
+        <div className={cl(styles.tagIcon, { [styles.tagIcon_disabled]: isNotSelectable })}>
+          <IconLayout icon={<CancelIc />} size={IconSize.xs} onClick={handleClear} interactive={!isNotSelectable} />
         </div>
       </div>
       {isOpen && (

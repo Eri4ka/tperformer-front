@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { FC, useEffect, useMemo, useState } from 'react';
 
 import { TDropdownList } from '@/components/Dropdown/types';
+import { TDropdownValue } from '@/components/OutputField/types';
 
 import { MultiDropdown } from './components/MultiDropdown';
 import { SimpleDropdown } from './components/SimpleDropdown';
@@ -18,9 +19,17 @@ const valueList = [
   { id: 9, value: 'Some' },
 ];
 
-export const RequestDropwdown = () => {
+type Props = {
+  position: number;
+  addValues: ({ position, value }: TDropdownValue) => void;
+};
+
+export const RequestDropwdown: FC<Props> = ({ position, addValues }) => {
   const [simpleValue, setSimpleValue] = useState<TDropdownList>();
   const [multiValues, setMultiValues] = useState<TDropdownList[]>([]);
+
+  const isNotSelectableMultiDropdown = !simpleValue;
+  const pluralizeMultiValues = useMemo(() => multiValues.map((item) => item.value).join(', '), [multiValues]);
 
   const onSetSimpleValue = (value: TDropdownList) => setSimpleValue(value);
 
@@ -39,7 +48,15 @@ export const RequestDropwdown = () => {
 
   const onClearMultiValues = () => setMultiValues([]);
 
-  const pluralizeMultiValues = () => multiValues.map((item) => item.value).join(', ');
+  useEffect(() => {
+    if (isNotSelectableMultiDropdown) {
+      setMultiValues([]);
+    }
+  }, [isNotSelectableMultiDropdown]);
+
+  useEffect(() => {
+    addValues({ position, value: pluralizeMultiValues });
+  }, [addValues, multiValues, position, pluralizeMultiValues]);
 
   return (
     <div className={styles.dropdown}>
@@ -58,9 +75,10 @@ export const RequestDropwdown = () => {
         onAddAll={onSetAllValues}
         onClear={onClearMultiValues}
         selectedValues={multiValues}
-        pluralizedValues={pluralizeMultiValues()}
-        placeholder={pluralizeMultiValues() || 'Tap'}
+        pluralizedValues={pluralizeMultiValues}
+        placeholder={pluralizeMultiValues || 'Tap'}
         activePlaceholder='Write'
+        isNotSelectable={isNotSelectableMultiDropdown}
       />
     </div>
   );

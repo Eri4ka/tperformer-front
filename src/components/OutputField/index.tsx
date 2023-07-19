@@ -1,36 +1,25 @@
 import cl from 'classnames';
-import { FC, KeyboardEvent, useRef, useState } from 'react';
+import { FC, KeyboardEvent, useCallback, useMemo, useRef, useState } from 'react';
 
 import { RequestDropwdown } from '@/components/Dropdown/RequestDropdown';
 
+import { getDataFromDropdownsAndFields } from './helpers';
 import styles from './styles.module.scss';
+import { TDropdownValue, TOutputField } from './types';
 
 type Props = {
   className?: string;
 };
 
-type TContentValue = { id: number; type: 'div' | 'dropdown' };
-
-const initalValue: TContentValue[] = [{ id: 1, type: 'div' }];
+const initalOutputData: TOutputField[] = [{ id: 1, type: 'field' }];
 
 export const OutputField: FC<Props> = ({ className }) => {
-  const divRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const fieldRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const [dropdownValues, setDropdownValues] = useState<TDropdownValue[]>([]);
+  const [outputData, setOutputData] = useState<TOutputField[]>(initalOutputData);
 
-  const [contentValue, setContentValue] = useState<TContentValue[]>(initalValue);
-
-  const handleAddElements = (e: KeyboardEvent) => {
-    if (e.key === '/') {
-      e.preventDefault();
-      addFewElements();
-    }
-    if (e.key === 'Enter') {
-      e.preventDefault();
-      addDivElement();
-    }
-  };
-
-  const addFewElements = () => {
-    setContentValue((content) => [
+  const addDropdownAndFieldToOutputData = () => {
+    setOutputData((content) => [
       ...content,
       {
         id: content.length + 1,
@@ -38,37 +27,66 @@ export const OutputField: FC<Props> = ({ className }) => {
       },
       {
         id: content.length + 2,
-        type: 'div',
+        type: 'field',
       },
     ]);
   };
 
-  const addDivElement = () => {
-    setContentValue((content) => [
+  const addFieldToOutputData = () => {
+    setOutputData((content) => [
       ...content,
       {
         id: content.length + 1,
-        type: 'div',
+        type: 'field',
       },
     ]);
   };
+
+  const handleAddToData = (e: KeyboardEvent) => {
+    if (e.key === '/') {
+      e.preventDefault();
+      addDropdownAndFieldToOutputData();
+    }
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      addFieldToOutputData();
+    }
+  };
+
+  const handleAddDropdownValues = useCallback(({ position, value }: TDropdownValue) => {
+    setDropdownValues((current) => {
+      const copyCurrent = [...current];
+      const index = copyCurrent.findIndex((item) => item.position === position);
+
+      if (index !== -1) {
+        copyCurrent[index].value = value;
+        return copyCurrent;
+      }
+
+      return [...copyCurrent, { position, value }];
+    });
+  }, []);
+
+  const dataFromDropdownsAndFields = useMemo(() => {
+    return getDataFromDropdownsAndFields(fieldRefs, dropdownValues);
+  }, [dropdownValues]);
 
   return (
     <div className={cl(styles.output, className)}>
       <div className={styles.outputWrapper}>
         <div className={styles.outputContent}>
-          {contentValue.map((item) => {
+          {outputData.map((item) => {
             if (item.type === 'dropdown') {
-              return <RequestDropwdown key={item.id} />;
+              return <RequestDropwdown key={item.id} position={item.id} addValues={handleAddDropdownValues} />;
             }
 
             return (
               <div
                 className={styles.editable}
                 contentEditable
-                onKeyDown={handleAddElements}
+                onKeyDown={handleAddToData}
                 key={item.id}
-                ref={(el) => (divRefs.current[item.id] = el)}
+                ref={(el) => (fieldRefs.current[item.id] = el)}
                 placeholder='Type here...'
               />
             );
