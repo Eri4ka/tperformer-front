@@ -1,0 +1,7 @@
+.crumbs {
+  &List {
+    display: flex;
+    align-items: center;
+    gap: var(--margin-3xs);
+  }
+}

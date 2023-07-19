@@ -1,0 +1,99 @@
+.tag {
+  position: relative;
+  min-width: 77px;
+  height: 100%;
+
+  &Input {
+    background-color: var(--white-00);
+    height: 100%;
+    width: 100%;
+    border-radius: var(--border-radius-10);
+    padding: 0.5rem 2rem 0.5rem 0.7rem;
+    font-family: var(--secondary-font);
+    color: var(--black-00);
+    font-size: 1rem;
+    text-overflow: ellipsis;
+    min-width: 90px;
+    max-width: 336px;
+
+    &::placeholder {
+      color: var(--gray-02);
+    }
+  }
+
+  &Icon {
+    position: absolute;
+    display: flex;
+    top: 50%;
+    right: 0.75rem;
+    transform: translateY(-50%);
+    color: var(--black-00);
+  }
+}
+
+.menu {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background-color: var(--white-00);
+  box-shadow: var(--box-shadow-dropdown);
+  border-radius: var(--border-radius-12);
+  width: 100%;
+  max-height: 16rem;
+  bottom: -0.5rem;
+  transform: translateY(100%);
+  z-index: 2;
+
+  &Content {
+    overflow: scroll;
+    width: 100%;
+  }
+
+  &Item {
+    height: 2.5rem;
+    color: var(--black-00);
+    font-size: 1rem;
+    font-weight: 600;
+    width: 100%;
+    padding: 0.5rem 1rem;
+    white-space: nowrap;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    transition: background-color var(--transition-delay) var(--transition-timing);
+    text-align: start;
+    cursor: pointer;
+
+    &:nth-child(1) {
+      border-top-left-radius: var(--border-radius-12);
+      border-top-right-radius: var(--border-radius-12);
+    }
+
+    &:nth-last-child(1) {
+      border-bottom-left-radius: var(--border-radius-12);
+      border-bottom-right-radius: var(--border-radius-12);
+    }
+
+    &:hover {
+      background-color: var(--wind-light);
+    }
+
+    &:focus {
+      background-color: var(--wind-light);
+    }
+
+    &_active {
+      position: relative;
+      background-color: var(--wind-light);
+
+      &::after {
+        content: '';
+        position: absolute;
+        width: 1.5rem;
+        height: 1.5rem;
+        right: 0.75rem;
+        background: url('src/assets/images/request-dropdown/mark.svg') no-repeat center;
+      }
+    }
+  }
+}

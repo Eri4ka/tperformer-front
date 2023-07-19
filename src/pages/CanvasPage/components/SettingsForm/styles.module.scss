@@ -1,0 +1,17 @@
+.form {
+  &Field {
+    margin-bottom: var(--margin-s);
+  }
+
+  &Customization {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  &Title {
+    color: var(--black-00);
+    font-size: 1rem;
+    font-weight: 600;
+  }
+}

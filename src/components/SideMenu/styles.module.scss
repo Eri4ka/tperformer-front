@@ -1,0 +1,54 @@
+.menu {
+  position: relative;
+  max-width: 0;
+  width: 100%;
+  background-color: var(--white-00);
+  border-top-left-radius: var(--border-radius-24);
+  transition: max-width var(--transition-delay) var(--transition-timing);
+
+  &_open {
+    max-width: 278px;
+    margin-right: var(--margin-xxs);
+  }
+
+  &Wrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    height: 100%;
+    visibility: hidden;
+
+    &_open {
+      visibility: visible;
+    }
+  }
+
+  &Title {
+    color: var(--black-00);
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 1.125rem;
+  }
+
+  &Button {
+    position: absolute;
+    background-color: var(--purple-00);
+    padding: 0.25rem 0.75rem;
+    border-radius: 1.5rem 0px 0px 1.5rem;
+    top: 1.5rem;
+    left: -3rem;
+    transition: background-color var(--transition-delay) var(--transition-timing);
+
+    &:hover {
+      background-color: var(--violet);
+    }
+
+    &:active {
+      background-color: var(--purple-00);
+    }
+
+    &:focus {
+      background-color: var(--lily);
+    }
+  }
+}

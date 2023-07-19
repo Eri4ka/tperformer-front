@@ -1,0 +1,10 @@
+.heading {
+  margin-bottom: var(--margin-l);
+
+  &Text {
+    color: var(--black-00);
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: var(--margin-m);
+  }
+}

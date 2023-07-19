@@ -1,0 +1,78 @@
+.checkbox {
+  display: inline-flex;
+
+  &Radio {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+
+    &:checked {
+      & + .checkboxLabel::before {
+        background: var(--indigo) center no-repeat;
+        border-color: var(--indigo);
+        background-image: url('src/assets/images/radio/rectangle.svg');
+      }
+
+      &:focus {
+        & + .checkboxLabel::before {
+          border: 2px solid var(--purple-03);
+        }
+      }
+    }
+
+    &:disabled {
+      & + .checkboxLabel::before {
+        background: var(--gray-03);
+        border-color: var(--gray-03);
+      }
+    }
+
+    &:hover:not(:disabled):not(:checked) {
+      & + .checkboxLabel::before {
+        background-color: var(--purple-00);
+        opacity: 0.56;
+      }
+    }
+
+    &:hover:not(:disabled):checked {
+      & + .checkboxLabel::before {
+        background-color: var(--purple-02);
+        border-color: var(--purple-02);
+      }
+    }
+
+    &:focus:not(:disabled):not(:checked) {
+      & + .checkboxLabel::before {
+        border-width: 2px;
+      }
+    }
+  }
+
+  &Label {
+    display: inline-flex;
+    align-items: center;
+    user-select: none;
+    font-family: var(--secondary-font);
+    font-size: 0.875rem;
+    color: var(--black-00);
+    gap: 0.75rem;
+    cursor: pointer;
+
+    &:before {
+      content: '';
+      display: inline-block;
+      width: 1.5rem;
+      height: 1.5rem;
+      border: 1px solid var(--stroke-01);
+      border-radius: 50%;
+      background-color: var(--white-00);
+      transition-property: background-color, opacity;
+      transition-duration: var(--transition-delay);
+      transition-timing-function: var(--transition-timing);
+    }
+  }
+
+  &Text {
+    flex: 1;
+  }
+}

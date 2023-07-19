@@ -1,6 +1,6 @@
 import { FC, ReactNode } from 'react';
 
-import { BackButton } from '@/components/BackButton';
+import { BackButton } from '@/components/Button/BackButton';
 
 import styles from './styles.module.scss';
 

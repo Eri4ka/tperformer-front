@@ -1,0 +1,31 @@
+.help {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  visibility: hidden;
+  opacity: 0;
+  transition: all var(--transition-delay) var(--transition-timing);
+  left: 50%;
+  top: 13.125rem;
+  width: 100%;
+  transform: translateX(-50%);
+
+  &_visible {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  &Text {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--gray-03);
+    text-align: center;
+    user-select: none;
+  }
+
+  &Icon {
+    margin: 0 0.875rem;
+  }
+}

@@ -1,0 +1,44 @@
+.output {
+  width: 100%;
+  background-color: var(--white-00);
+  border-radius: var(--border-radius-16);
+  border: 1.5px solid var(--gray-03);
+  box-shadow: var(--box-shadow-output);
+  padding: 2rem 0.75rem 2rem 2rem;
+
+  &Wrapper {
+    overflow: scroll;
+    height: 100%;
+    padding-right: 1.25rem;
+  }
+
+  &Content {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    font-size: 1rem;
+    min-height: 2.5rem;
+    color: var(--black-00);
+    gap: 0.5rem;
+  }
+}
+
+.drop {
+  width: 240px;
+}
+
+.editable {
+  font-size: 1rem;
+  outline: none;
+  min-width: 30px;
+  display: inline-block;
+  white-space: pre-wrap;
+  word-break: break-word;
+  cursor: text;
+
+  &:first-child:empty:after {
+    content: attr(placeholder);
+    color: var(--gray-02);
+  }
+}

@@ -1,0 +1,82 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.heading {
+  font-weight: 600;
+  font-size: 1.5rem;
+}
+
+.search {
+  max-width: 379px;
+}
+
+.table {
+  border-spacing: 0;
+
+  &Row {
+    color: var(--black-00);
+    font-size: 0.875rem;
+
+    &_body {
+      font-size: 1rem;
+
+      &:hover .tableCell::after {
+        background-color: var(--wind-light);
+      }
+    }
+  }
+
+  &Cell {
+    position: relative;
+    padding: 1rem 1rem 1rem 0;
+    font-weight: 400;
+    text-align: left;
+    border-bottom: 1px solid var(--gray-04);
+    z-index: 0;
+
+    &::after {
+      content: '';
+      position: absolute;
+      background-color: transparent;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      transition: all var(--transition-delay) var(--transition-timing);
+    }
+
+    &:first-child::after {
+      width: calc(100% + 2rem);
+      left: -2rem;
+    }
+
+    &:last-child::after {
+      width: calc(100% + 2rem);
+    }
+  }
+
+  &Resizer {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 5px;
+    background-color: var(--wind-light);
+    cursor: col-resize;
+    user-select: none;
+    touch-action: none;
+    opacity: 0;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    &_active {
+      background-color: var(--wind);
+    }
+  }
+}
