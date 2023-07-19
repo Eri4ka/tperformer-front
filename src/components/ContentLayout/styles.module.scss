@@ -1,4 +1,6 @@
 .contentLayout {
+  display: flex;
+  flex-direction: column;
   background-color: var(--white-00);
   flex: 1 1 auto;
   border-radius: var(--border-radius-24) var(--border-radius-24) 0 0;

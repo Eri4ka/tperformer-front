@@ -1,0 +1,34 @@
+.menuField {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  font-size: 0.875rem;
+  font-family: var(--secondary-font);
+  margin-bottom: 0.25rem;
+
+  &_disabled {
+    color: var(--gray-02);
+  }
+}
+
+.input {
+  font-size: 0.875rem;
+  width: 100%;
+  height: 2rem;
+  background-color: var(--white-00);
+  border-radius: var(--border-radius-04);
+  border: 1px solid var(--stroke-01);
+  color: var(--black-00);
+  padding: 0.5rem 0.75rem;
+  transition: all var(--transition-delay) var(--transition-timing);
+
+  &::placeholder {
+    color: var(--gray-02);
+  }
+
+  &:disabled {
+    color: var(--gray-02);
+  }
+}

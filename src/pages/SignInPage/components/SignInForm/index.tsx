@@ -7,9 +7,9 @@ import { ReactComponent as DiscordIc } from '@/assets/images/social/discord.svg'
 import { ReactComponent as GoogleIc } from '@/assets/images/social/google.svg';
 import AppLink from '@/components/AppLink';
 import { AuthFormLayout } from '@/components/AuthFormLayout';
-import { BaseButton, ButtonVariant } from '@/components/BaseButton';
-import { CheckBox } from '@/components/CheckBox';
-import { TextField } from '@/components/TextField';
+import { BaseButton, ButtonVariant } from '@/components/Button/BaseButton';
+import { CheckBox } from '@/components/Input/CheckBox';
+import { TextField } from '@/components/Input/TextField';
 
 import styles from './styles.module.scss';
 

@@ -5,10 +5,10 @@ import * as Yup from 'yup';
 import { ReactComponent as QuestIc } from '@/assets/images/text-field/question.svg';
 import { AuthFormLayout } from '@/components/AuthFormLayout';
 import { AuthHeading } from '@/components/AuthHeading';
-import { BaseButton, ButtonVariant } from '@/components/BaseButton';
-import { CheckBox } from '@/components/CheckBox';
+import { BaseButton, ButtonVariant } from '@/components/Button/BaseButton';
 import { IconLayout } from '@/components/IconLayout';
-import { TextField } from '@/components/TextField';
+import { CheckBox } from '@/components/Input/CheckBox';
+import { TextField } from '@/components/Input/TextField';
 
 import styles from './styles.module.scss';
 import { Tooltip } from '../../../../components/Tooltip';

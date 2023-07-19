@@ -1,0 +1,95 @@
+.dropdown {
+  position: relative;
+
+  &Field {
+    display: flex;
+    position: relative;
+    font-size: 0.875rem;
+    width: 100%;
+    height: 2rem;
+    background-color: var(--white-00);
+    border-radius: var(--border-radius-04);
+    border: 1px solid var(--stroke-01);
+    color: var(--black-00);
+    padding: 0.25rem 0.75rem;
+    transition: border-color var(--transition-delay) var(--transition-timing);
+    cursor: pointer;
+
+    &::after {
+      content: '';
+      position: absolute;
+      width: 1.5rem;
+      height: 1.5rem;
+      right: 0.5rem;
+      background: url('src/assets/images/menu-dropdown/arrow.svg') no-repeat 50%;
+    }
+
+    &:hover {
+      border-color: var(--wind-dark);
+    }
+
+    &:focus {
+      border-color: var(--wind-dark);
+    }
+  }
+
+  &Label {
+    font-size: 0.875rem;
+    font-family: var(--secondary-font);
+    margin-bottom: var(--margin-3xs);
+  }
+}
+
+.menu {
+  position: absolute;
+  background-color: var(--white-00);
+  border: 1px solid var(--stroke-01);
+  box-shadow: var(--box-shadow-dropdown);
+  border-radius: var(--border-radius-04);
+  width: 100%;
+  max-height: 8.75rem;
+  overflow-y: scroll;
+  bottom: -0.5rem;
+  transform: translateY(100%);
+  z-index: 2;
+
+  &Item {
+    height: 2rem;
+    color: var(--black-00);
+    font-size: 0.875rem;
+    padding: 0.25rem 0.75rem;
+    white-space: nowrap;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    transition: background-color var(--transition-delay) var(--transition-timing);
+    cursor: pointer;
+
+    &:nth-child(1) {
+      border-top-left-radius: var(--border-radius-04);
+      border-top-right-radius: var(--border-radius-04);
+    }
+
+    &:nth-last-child(1) {
+      border-bottom-left-radius: var(--border-radius-04);
+      border-bottom-right-radius: var(--border-radius-04);
+    }
+
+    &:hover {
+      background-color: var(--wind-light);
+    }
+
+    &_active {
+      position: relative;
+      background-color: var(--wind-light);
+
+      &::after {
+        content: '';
+        position: absolute;
+        width: 1.5rem;
+        height: 1.5rem;
+        right: 0.75rem;
+        background: url('src/assets/images/menu-dropdown/mark.svg') no-repeat center;
+      }
+    }
+  }
+}

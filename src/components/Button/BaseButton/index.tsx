@@ -13,10 +13,17 @@ export enum ButtonVariant {
   flat = 'button_flat',
 }
 
+export enum ButtonSize {
+  xs = 'button_xs',
+  s = 'button_s',
+  m = 'button_m',
+}
+
 type Props = {
-  children: ReactNode;
+  children?: ReactNode;
   className?: string;
   variant?: ButtonVariant;
+  size?: ButtonSize;
   /**
    * отображается иконка "Плюса"
    */
@@ -28,6 +35,7 @@ type Props = {
 export const BaseButton: FC<Props> = ({
   className,
   variant = ButtonVariant.primary,
+  size = ButtonSize.m,
   additional,
   isLoading,
   children,
@@ -38,7 +46,7 @@ export const BaseButton: FC<Props> = ({
   const loaderClass = variant === ButtonVariant.primary ? LoaderVariant.primary : LoaderVariant.secondary;
 
   return (
-    <button className={cl(styles.button, styles[variant], className)} {...props}>
+    <button className={cl(styles.button, styles[variant], styles[size], className)} {...props}>
       {isLoading ? (
         <Loader variant={loaderClass} />
       ) : (

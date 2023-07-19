@@ -15,5 +15,3 @@ export const Heading: FC<Props> = ({ text, children }) => {
     </div>
   );
 };
-
-export default Heading;
