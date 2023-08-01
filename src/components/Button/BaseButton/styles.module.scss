@@ -9,6 +9,10 @@
   white-space: nowrap;
   transition: all var(--transition-delay) var(--transition-timing);
 
+  &:disabled {
+    cursor: auto;
+  }
+
   &_primary {
     background-color: var(--black-00);
     color: var(--white-00);

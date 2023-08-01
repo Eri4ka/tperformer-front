@@ -23,9 +23,12 @@
     /* Paths */
     "baseUrl": "src",
     "paths": {
+      "@/api/*": ["api/*"],
       "@/assets/*": ["assets/*"],
       "@/components/*": ["components/*"],
+      "@/helpers/*": ["helpers/*"],
       "@/styles/*": ["styles/*"],
+      "@/store/*": ["store/*"],
       "@/pages/*": ["pages/*"],
       "@/mytypes/*": ["types/*"],
       "@/hooks/*": ["hooks/*"]

@@ -47,6 +47,7 @@ export const TextField: FC<Props> = ({
       <div className={styles.inputWrapper}>
         <input
           className={cl(styles.input, { [styles.input_error]: error })}
+          id={name}
           name={name}
           type={togglePasswordShown ? 'text' : type}
           placeholder={placeholder}
