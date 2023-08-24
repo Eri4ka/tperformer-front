@@ -1,4 +1,5 @@
 import { Formik } from 'formik';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 
@@ -9,15 +10,21 @@ import { BaseButton, ButtonVariant } from '@/components/Button/BaseButton';
 import { IconLayout } from '@/components/IconLayout';
 import { CheckBox } from '@/components/Input/CheckBox';
 import { TextField } from '@/components/Input/TextField';
+import { Tooltip } from '@/components/Tooltip';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { fetchCreateUser } from '@/store/slices/authSlice';
 
 import styles from './styles.module.scss';
-import { Tooltip } from '../../../../components/Tooltip';
 
 export const SignUpForm = () => {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
+  const registrationErrors = useAppSelector((state) => state.authReducer.registerErrors);
+  const registrationStatus = useAppSelector((state) => state.authReducer.registerStatus);
 
   const initialValues = {
-    fullname: '',
+    username: '',
     email: '',
     password: '',
     apikey: '',
@@ -26,12 +33,14 @@ export const SignUpForm = () => {
   };
 
   const validationSchema = Yup.object({
-    fullname: Yup.string().min(2, 'Min 2 symbols').required('Required'),
-    email: Yup.string().email('Not valid e-mail').required('Required'),
-    password: Yup.string().min(6, 'Min 6 symbols').required('Required'),
-    apikey: Yup.string().matches(/^sk-\w{48}$/gi, 'Not valid apikey'),
     privacy: Yup.bool().oneOf([true]),
   });
+
+  useEffect(() => {
+    if (registrationStatus === 'success') {
+      navigate('success');
+    }
+  }, [navigate, registrationStatus]);
 
   return (
     <AuthFormLayout>
@@ -45,18 +54,24 @@ set-up your account'
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={(values) => {
-          console.log(values);
-          navigate('success');
+          const requestData = {
+            username: values.username,
+            email: values.email,
+            password1: values.password,
+            password2: values.password,
+          };
+
+          dispatch(fetchCreateUser(requestData));
         }}>
         {({ handleSubmit, handleChange, handleBlur, setFieldValue, values, errors, touched }) => (
           <form onSubmit={handleSubmit} noValidate>
             <TextField
               type='text'
-              name='fullname'
+              name='username'
               label='Full name*'
               placeholder='Evgen Pelmen'
-              value={values.fullname}
-              error={touched.fullname && errors.fullname ? errors.fullname : ''}
+              value={values.username}
+              error={registrationErrors.username ? registrationErrors.username[0] : ''}
               handleChange={handleChange}
               handleBlur={handleBlur}
               handleClear={setFieldValue}
@@ -67,7 +82,7 @@ set-up your account'
               label='Email*'
               placeholder='example@gmail.com'
               value={values.email}
-              error={touched.email && errors.email ? errors.email : ''}
+              error={registrationErrors.email ? registrationErrors.email[0] : ''}
               handleChange={handleChange}
               handleBlur={handleBlur}
               handleClear={setFieldValue}
@@ -78,7 +93,7 @@ set-up your account'
               label='Password*'
               placeholder='Create your password'
               value={values.password}
-              error={touched.password && errors.password ? errors.password : ''}
+              error={registrationErrors.password1 ? registrationErrors.password1[0] : ''}
               handleChange={handleChange}
               handleBlur={handleBlur}
               handleClear={setFieldValue}
@@ -89,12 +104,11 @@ set-up your account'
               label='OpenAI API key (optional)'
               placeholder='Bkduf-AGRTL-Gbarejcd'
               value={values.apikey}
-              error={touched.apikey && errors.apikey ? errors.apikey : ''}
               handleChange={handleChange}
               handleBlur={handleBlur}
               handleClear={setFieldValue}
               icon={
-                <Tooltip id='apikey' content='OpenAI API key (optional)'>
+                <Tooltip id='apikey-tip' content='OpenAI API key (optional)'>
                   <IconLayout icon={<QuestIc />} />
                 </Tooltip>
               }
@@ -119,9 +133,16 @@ set-up your account'
                 handleCheck={handleChange}
               />
             </div>
-            <BaseButton type='submit' variant={ButtonVariant.primary} className={styles.buttonWrapper}>
+            <BaseButton
+              type='submit'
+              variant={ButtonVariant.primary}
+              className={styles.buttonWrapper}
+              isLoading={registrationStatus === 'loading'}>
               Continue
             </BaseButton>
+            <span className={styles.signError}>
+              {registrationErrors.non_field_errors ? registrationErrors.non_field_errors[0] : ''}
+            </span>
           </form>
         )}
       </Formik>

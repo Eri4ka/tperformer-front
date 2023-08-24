@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import { AppLayout } from '@/components/AppLayout';
+import { ProtectedRoute } from '@/components/ProtectedRoute';
 import { CanvasPage } from '@/pages/CanvasPage';
 import { ForgotPasswordConfirmPage } from '@/pages/ForgotPasswordConfirmPage';
 import { ForgotPasswordPage } from '@/pages/ForgotPasswordPage';
@@ -19,12 +20,17 @@ const router = createBrowserRouter([
     element: <AppLayout />,
     children: [
       {
-        index: true,
-        element: <HomePage />,
-      },
-      {
-        path: ':canvasId',
-        element: <CanvasPage />,
+        element: <ProtectedRoute />,
+        children: [
+          {
+            index: true,
+            element: <HomePage />,
+          },
+          {
+            path: ':canvasId',
+            element: <CanvasPage />,
+          },
+        ],
       },
     ],
   },

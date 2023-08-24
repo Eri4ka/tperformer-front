@@ -10,7 +10,7 @@
       & + .checkboxLabel::before {
         background: var(--indigo);
         border-color: var(--indigo);
-        background-image: url('src/assets/images/checkbox/mark.svg');
+        background-image: url('/src/assets/images/checkbox/mark.svg');
         background-repeat: no-repeat;
         background-position: center;
       }

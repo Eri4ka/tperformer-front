@@ -5,6 +5,8 @@ import { ReactComponent as HelpIc } from '@/assets/images/common/help.svg';
 import { ReactComponent as BurgerIc } from '@/assets/images/header/burger.svg';
 import { ReactComponent as LogoIc } from '@/assets/images/signin/logo.svg';
 import { IconLayout, IconSize } from '@/components/IconLayout';
+import { useAppDispatch } from '@/store/hooks';
+import { fetchLogoutUser } from '@/store/slices/authSlice';
 
 import styles from './styles.module.scss';
 
@@ -13,6 +15,8 @@ type Props = {
 };
 
 export const Header: FC<Props> = ({ onBurger }) => {
+  const dispatch = useAppDispatch();
+
   return (
     <header className={styles.header}>
       <div className={styles.headerWrapper}>
@@ -27,7 +31,7 @@ export const Header: FC<Props> = ({ onBurger }) => {
             <IconLayout icon={<HelpIc />} />
             <span className={styles.helpText}>Help</span>
           </div>
-          <div className={styles.profile}>
+          <div className={styles.profile} onClick={() => dispatch(fetchLogoutUser())}>
             <div className={styles.profileIcon}>
               <span className={styles.profileName}>A</span>
             </div>

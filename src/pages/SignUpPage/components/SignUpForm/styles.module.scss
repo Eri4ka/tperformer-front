@@ -11,4 +11,10 @@
   &Link {
     text-decoration-line: underline !important;
   }
+
+  &Error {
+    color: var(--red-01);
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+  }
 }
