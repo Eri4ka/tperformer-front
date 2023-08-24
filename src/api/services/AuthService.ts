@@ -1,5 +1,6 @@
+import Cookies from 'js-cookie';
+
 import { REGISTRATION_ENDPOINT, LOGIN_ENDPOINT, USER_ENDPOINT, LOGOUT_ENDPOINT } from '../constants';
-import { authHeader } from '../helpers/authHeader';
 import { request } from '../request';
 import {
   TRegistrationReqBody,
@@ -8,6 +9,7 @@ import {
   TLoginReqBody,
   TLoginResErrBody,
   TDetailResBody,
+  TUserResBody,
 } from '../types/authTypes';
 
 class AuthService {
@@ -18,10 +20,6 @@ class AuthService {
       data,
     });
 
-    if (response.key) {
-      localStorage.setItem('token', JSON.stringify(response.key));
-    }
-
     return response;
   };
 
@@ -30,32 +28,27 @@ class AuthService {
       url: LOGIN_ENDPOINT,
       method: 'POST',
       data,
+      headers: {
+        'x-csrftoken': Cookies.get('csrftoken'),
+      },
+      withCredentials: false,
     });
-
-    if (response.key) {
-      localStorage.setItem('token', JSON.stringify(response.key));
-    }
 
     return response;
   };
 
   logout = async () => {
-    const response = await request<TDetailResBody, TDetailResBody>({
+    await request<TDetailResBody, TDetailResBody>({
       url: LOGOUT_ENDPOINT,
       method: 'POST',
-      headers: authHeader(),
+      withCredentials: false,
     });
-
-    localStorage.removeItem('token');
-
-    return response;
   };
 
   user = async () => {
-    const response = await request({
+    const response = await request<TUserResBody, TDetailResBody>({
       url: USER_ENDPOINT,
       method: 'GET',
-      headers: authHeader(),
     });
     return response;
   };

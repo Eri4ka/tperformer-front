@@ -29,7 +29,7 @@ export const SignInForm = () => {
   };
 
   useEffect(() => {
-    dispatch(fetchUser());
+    dispatch(fetchUser(''));
   }, [dispatch]);
 
   useEffect(() => {

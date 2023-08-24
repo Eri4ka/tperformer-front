@@ -33,10 +33,6 @@ export const SignUpForm = () => {
   };
 
   const validationSchema = Yup.object({
-    // username: Yup.string().min(2, 'Min 2 symbols').required('Required'),
-    // email: Yup.string().email('Not valid e-mail').required('Required'),
-    // password: Yup.string().min(6, 'Min 6 symbols').required('Required'),
-    // apikey: Yup.string().matches(/^sk-\w{48}$/gi, 'Not valid apikey'),
     privacy: Yup.bool().oneOf([true]),
   });
 
@@ -76,7 +72,6 @@ set-up your account'
               placeholder='Evgen Pelmen'
               value={values.username}
               error={registrationErrors.username ? registrationErrors.username[0] : ''}
-              // error={touched.username && errors.username ? errors.username : ''}
               handleChange={handleChange}
               handleBlur={handleBlur}
               handleClear={setFieldValue}
@@ -88,7 +83,6 @@ set-up your account'
               placeholder='example@gmail.com'
               value={values.email}
               error={registrationErrors.email ? registrationErrors.email[0] : ''}
-              // error={touched.email && errors.email ? errors.email : ''}
               handleChange={handleChange}
               handleBlur={handleBlur}
               handleClear={setFieldValue}
@@ -100,7 +94,6 @@ set-up your account'
               placeholder='Create your password'
               value={values.password}
               error={registrationErrors.password1 ? registrationErrors.password1[0] : ''}
-              // error={touched.password && errors.password ? errors.password : ''}
               handleChange={handleChange}
               handleBlur={handleBlur}
               handleClear={setFieldValue}
@@ -111,7 +104,6 @@ set-up your account'
               label='OpenAI API key (optional)'
               placeholder='Bkduf-AGRTL-Gbarejcd'
               value={values.apikey}
-              // error={touched.apikey && errors.apikey ? errors.apikey : ''}
               handleChange={handleChange}
               handleBlur={handleBlur}
               handleClear={setFieldValue}

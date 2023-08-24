@@ -2,7 +2,13 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 import { TAxiosError } from '@/api/request';
 import AuthService from '@/api/services/AuthService';
-import { TRegistrationReqBody, TRegistrationResErrBody, TLoginReqBody, TLoginResErrBody } from '@/api/types/authTypes';
+import {
+  TRegistrationReqBody,
+  TRegistrationResErrBody,
+  TLoginReqBody,
+  TLoginResErrBody,
+  TDetailResBody,
+} from '@/api/types/authTypes';
 
 import { TStateStatus } from '../types';
 
@@ -12,6 +18,7 @@ type AuthState = {
   registerErrors: TRegistrationResErrBody;
   loginStatus: TStateStatus;
   loginErrors: TLoginResErrBody;
+  userError: string;
 };
 
 const registerErrors: TRegistrationResErrBody = {
@@ -34,6 +41,7 @@ const initialState: AuthState = {
   registerErrors,
   loginStatus: 'init',
   loginErrors,
+  userError: '',
 };
 
 export const authSlice = createSlice({
@@ -73,6 +81,17 @@ export const authSlice = createSlice({
         if (action.payload && typeof action.payload === 'object') {
           state.loginErrors = action.payload;
         }
+      })
+      .addCase(fetchUser.fulfilled, (state) => {
+        state.authorized = true;
+      })
+      .addCase(fetchUser.rejected, (state, action) => {
+        state.authorized = false;
+
+        if (action.payload && typeof action.payload === 'object') {
+          state.userError = action.payload.detail;
+        }
+        console.log(action);
       });
   },
 });
@@ -115,19 +134,22 @@ export const fetchLogoutUser = createAsyncThunk('auth/fetchLogoutUser', async (_
   dispatch(authActions.logOut());
 });
 
-export const fetchUser = createAsyncThunk('auth/fetchUser', async (_, { rejectWithValue }) => {
-  try {
-    const data = await AuthService.user();
+export const fetchUser = createAsyncThunk<unknown, unknown, { rejectValue: TDetailResBody }>(
+  'auth/fetchUser',
+  async (_, { rejectWithValue }) => {
+    try {
+      const data = await AuthService.user();
 
-    return data;
-  } catch (err) {
-    const error = err as TAxiosError<any>;
+      return data;
+    } catch (err) {
+      const error = err as TAxiosError<TDetailResBody>;
 
-    if (!error.response) {
-      throw err;
+      if (!error.response) {
+        throw err;
+      }
+      return rejectWithValue(error.response.data);
     }
-    return rejectWithValue(error.response.data);
-  }
-});
+  },
+);
 
 export const { reducer: authReducer, actions: authActions } = authSlice;

@@ -67,9 +67,9 @@ export const OutputField: FC<Props> = ({ className }) => {
     });
   }, []);
 
-  const dataFromDropdownsAndFields = useMemo(() => {
-    return getDataFromDropdownsAndFields(fieldRefs, dropdownValues);
-  }, [dropdownValues]);
+  // const dataFromDropdownsAndFields = useMemo(() => {
+  //   return getDataFromDropdownsAndFields(fieldRefs, dropdownValues);
+  // }, [dropdownValues]);
 
   return (
     <div className={cl(styles.output, className)}>

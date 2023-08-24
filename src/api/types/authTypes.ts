@@ -21,3 +21,11 @@ export type TLoginReqBody = {
 };
 
 export type TLoginResErrBody = Record<keyof TLoginReqBody | 'non_field_errors', string[]>;
+
+export type TUserResBody = {
+  email: string;
+  first_name: string;
+  last_name: string;
+  pk: number;
+  username: string;
+};
