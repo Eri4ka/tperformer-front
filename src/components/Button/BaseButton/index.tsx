@@ -46,7 +46,7 @@ export const BaseButton: FC<Props> = ({
   const loaderClass = variant === ButtonVariant.primary ? LoaderVariant.primary : LoaderVariant.secondary;
 
   return (
-    <button className={cl(styles.button, styles[variant], styles[size], className)} {...props}>
+    <button className={cl(styles.button, styles[variant], styles[size], className)} {...props} disabled={isLoading}>
       {isLoading ? (
         <Loader variant={loaderClass} />
       ) : (
