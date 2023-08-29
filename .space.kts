@@ -14,13 +14,13 @@ job("Run npm build and publish files") {
                 npm install
                 echo "Start build..."
                 npm run build 
-                #echo "Run publishing..."
-                #cd dist
-                #zip -qr tperformer_frontend.zip *
-                #curl -i \
-                #    -H "Authorization: Bearer ${'$'}TOKEN" \
-                #    ${'$'}REGISTRY \
-                #    --upload-file tperformer_frontend.zip
+                echo "Run publishing..."
+                cd dist
+                zip -qr tperformer_frontend.zip *
+                curl -i \
+                    -H "Authorization: Bearer ${'$'}TOKEN" \
+                    ${'$'}REGISTRY \
+                    --upload-file tperformer_frontend.zip
             """
         }
 /*             requirements {
