@@ -9,8 +9,8 @@ job("Run npm build and publish files") {
             interpreter = "/bin/sh"
             content = """
                 apt update && apt install zip curl -y
-                echo "Install npm dependencies..."
-                npm ci
+                #echo "Install npm dependencies..."
+                #npm ci
                 echo "Start build..."
                 npm run build 
                 echo "Run publishing..."
