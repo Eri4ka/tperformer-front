@@ -10,17 +10,17 @@ job("Run npm build and publish files") {
             content = """
                 apt update && apt install zip curl -y
                 echo "Install npm dependencies..."
-                export NODE_ENV=production 
-                npm ci
+                #export NODE_ENV=production 
+                npm install
                 echo "Start build..."
                 npm run build 
-                echo "Run publishing..."
-                cd dist
-                zip -qr tperformer_frontend.zip *
-                curl -i \
-                    -H "Authorization: Bearer ${'$'}TOKEN" \
-                    ${'$'}REGISTRY \
-                    --upload-file tperformer_frontend.zip
+                #echo "Run publishing..."
+                #cd dist
+                #zip -qr tperformer_frontend.zip *
+                #curl -i \
+                #    -H "Authorization: Bearer ${'$'}TOKEN" \
+                #    ${'$'}REGISTRY \
+                #    --upload-file tperformer_frontend.zip
             """
         }
 /*             requirements {
