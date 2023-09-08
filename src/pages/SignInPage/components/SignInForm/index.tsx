@@ -28,10 +28,6 @@ export const SignInForm = () => {
     remember: false,
   };
 
-  // useEffect(() => {
-  //   dispatch(fetchUser(''));
-  // }, [dispatch]);
-
   useEffect(() => {
     if (loginStatus === 'success') {
       navigate('/');
@@ -110,7 +106,11 @@ export const SignInForm = () => {
         <BaseButton variant={ButtonVariant.flat} className={styles.buttonWrapper} icon={<AppleIc />}>
           Continue with Apple
         </BaseButton>
-        <BaseButton variant={ButtonVariant.flat} className={styles.buttonWrapper} icon={<DiscordIc />}>
+        <BaseButton
+          variant={ButtonVariant.flat}
+          className={styles.buttonWrapper}
+          icon={<DiscordIc />}
+          onClick={() => window.location.replace(import.meta.env.VITE_DISCORD_OAUTH2_URL)}>
           Continue with Discord
         </BaseButton>
         <AppLink text="Сant't log in?" href='help' />
