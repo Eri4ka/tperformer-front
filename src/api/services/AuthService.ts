@@ -28,10 +28,7 @@ class AuthService {
       url: LOGIN_ENDPOINT,
       method: 'POST',
       data,
-      headers: {
-        'x-csrftoken': Cookies.get('csrftoken'),
-      },
-      withCredentials: false,
+      withCredentials: true,
     });
 
     return response;
