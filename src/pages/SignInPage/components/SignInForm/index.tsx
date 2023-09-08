@@ -28,9 +28,9 @@ export const SignInForm = () => {
     remember: false,
   };
 
-  useEffect(() => {
-    dispatch(fetchUser(''));
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(fetchUser(''));
+  // }, [dispatch]);
 
   useEffect(() => {
     if (loginStatus === 'success') {
