@@ -2,9 +2,7 @@ import { Formik } from 'formik';
 import { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { ReactComponent as AppleIc } from '@/assets/images/social/apple.svg';
 import { ReactComponent as DiscordIc } from '@/assets/images/social/discord.svg';
-import { ReactComponent as GoogleIc } from '@/assets/images/social/google.svg';
 import AppLink from '@/components/AppLink';
 import { AuthFormLayout } from '@/components/AuthFormLayout';
 import { BaseButton, ButtonVariant } from '@/components/Button/BaseButton';
@@ -14,6 +12,7 @@ import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { fetchLoginUser, fetchUser } from '@/store/slices/authSlice';
 
 import styles from './styles.module.scss';
+import { GoogleSignInButton } from './components/GoogleSignInButton';
 
 export const SignInForm = () => {
   const dispatch = useAppDispatch();
@@ -100,12 +99,7 @@ export const SignInForm = () => {
         <span className={styles.dividerLine} />
       </div>
       <div className={styles.buttonsBlock}>
-        <BaseButton variant={ButtonVariant.flat} className={styles.buttonWrapper} icon={<GoogleIc />}>
-          Continue with Google
-        </BaseButton>
-        <BaseButton variant={ButtonVariant.flat} className={styles.buttonWrapper} icon={<AppleIc />}>
-          Continue with Apple
-        </BaseButton>
+        <GoogleSignInButton className={styles.buttonWrapper} />
         <BaseButton
           variant={ButtonVariant.flat}
           className={styles.buttonWrapper}

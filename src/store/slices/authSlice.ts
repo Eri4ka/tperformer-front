@@ -149,7 +149,7 @@ export const fetchDiscordLoginUser = createAsyncThunk<unknown, TDiscordCallbackB
       return rejectWithValue(error.response.data);
     }
   },
-); // TODO: rejectValue
+);
 
 export const fetchLogoutUser = createAsyncThunk('auth/fetchLogoutUser', async (_, { dispatch }) => {
   await AuthService.logout();

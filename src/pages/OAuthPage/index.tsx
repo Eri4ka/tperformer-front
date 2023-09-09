@@ -1,18 +1,20 @@
+import { useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+
 import { useAppDispatch } from '@/store/hooks';
 import { fetchDiscordLoginUser } from '@/store/slices/authSlice';
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 
-export const DiscordAuthPage = () => {
+export const OAuthPage = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const { service } = useParams();
 
   useEffect(() => {
     const searchParams = new URLSearchParams(window.location.search);
     const code = searchParams.get('code');
 
-    if (code) {
-      dispatch(fetchDiscordLoginUser({ code }));
+    if (code && service) {
+      dispatch(fetchDiscordLoginUser({ code, service }));
     }
 
     navigate('/signin');

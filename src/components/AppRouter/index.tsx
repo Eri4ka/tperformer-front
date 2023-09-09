@@ -13,7 +13,7 @@ import { SignInHelpPage } from '@/pages/SignInHelpPage';
 import { SignInPage } from '@/pages/SignInPage';
 import { SignUpConfirmPage } from '@/pages/SignUpConfirmPage';
 import { SignUpPage } from '@/pages/SignUpPage';
-import { DiscordAuthPage } from '@/pages/DiscordAuthPage';
+import { OAuthPage } from '@/pages/OAuthPage';
 
 const router = createBrowserRouter([
   {
@@ -59,8 +59,8 @@ const router = createBrowserRouter([
         path: 'callback',
         children: [
           {
-            path: 'discord',
-            element: <DiscordAuthPage />,
+            path: ':service',
+            element: <OAuthPage />,
           },
         ],
       },
