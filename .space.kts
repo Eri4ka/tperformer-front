@@ -1,4 +1,11 @@
 job("Run npm build and publish files") {
+    startOn {
+        gitPush {
+            anyBranchMatching {
+                +"master"
+            }
+        }
+    }
     container(displayName = "Run build and publish script", image = "node:20") {
         env["REGISTRY"] = "https://files.pkg.jetbrains.space/tperformer/p/main/landing/tperformer_frontend/"
         env["TOKEN"] = "{{ project:token-file-registry }}"
