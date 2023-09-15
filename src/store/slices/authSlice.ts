@@ -11,8 +11,8 @@ import {
 } from '@/api/types/authTypes';
 
 import { TStateStatus } from '../types';
-import { TDiscordCallbackBody } from '@/api/types/discordAuthTypes';
-import DiscordAuthService from '@/api/services/DiscordAuthService';
+import { OAuthCallbackBody } from '@/api/types/OAuthTypes';
+import OAuthService from '@/api/services/OAuthService';
 
 type AuthState = {
   authorized: boolean;
@@ -84,7 +84,7 @@ export const authSlice = createSlice({
           state.loginErrors = action.payload;
         }
       })
-      .addCase(fetchDiscordLoginUser.fulfilled, (state) => {
+      .addCase(fetchOAuthLoginUser.fulfilled, (state) => {
         state.loginStatus = 'success';
         state.authorized = true;
       })
@@ -135,11 +135,11 @@ export const fetchLoginUser = createAsyncThunk<unknown, TLoginReqBody, { rejectV
   },
 );
 
-export const fetchDiscordLoginUser = createAsyncThunk<unknown, TDiscordCallbackBody, { rejectValue: unknown }>(
-  'auth/fetchDiscordLoginUser',
+export const fetchOAuthLoginUser = createAsyncThunk<unknown, OAuthCallbackBody, { rejectValue: unknown }>(
+  'auth/fetchOAuthLoginUser',
   async (args, { rejectWithValue }) => {
     try {
-      await DiscordAuthService.login(args);
+      await OAuthService.login(args);
     } catch (err) {
       const error = err as TAxiosError<unknown>;
 

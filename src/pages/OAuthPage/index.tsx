@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { useAppDispatch } from '@/store/hooks';
-import { fetchDiscordLoginUser } from '@/store/slices/authSlice';
+import { fetchOAuthLoginUser } from '@/store/slices/authSlice';
 
 export const OAuthPage = () => {
   const dispatch = useAppDispatch();
@@ -10,12 +10,7 @@ export const OAuthPage = () => {
   const { service } = useParams();
 
   useEffect(() => {
-    const searchParams = new URLSearchParams(window.location.search);
-    const code = searchParams.get('code');
-
-    if (code && service) {
-      dispatch(fetchDiscordLoginUser({ code, service }));
-    }
+    if (service) dispatch(fetchOAuthLoginUser({ query: window.location.search, service }));
 
     navigate('/signin');
   });
