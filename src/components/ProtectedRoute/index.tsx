@@ -5,7 +5,7 @@ import { useAppSelector } from '@/store/hooks';
 export const ProtectedRoute = () => {
   const isAuthorized = useAppSelector((state) => state.authReducer.authorized);
 
-  if (!isAuthorized) {
+  if (isAuthorized) {
     return <Outlet />;
   }
 
