@@ -15,8 +15,8 @@ const crumbsList = [
   },
   {
     id: 2,
-    path: '/dsdsd',
-    name: 'New canvas',
+    path: '/bla',
+    name: 'bla',
   },
 ];
 

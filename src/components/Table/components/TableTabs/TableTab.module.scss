@@ -1,0 +1,42 @@
+.tabContainer {
+	display: flex;
+	flex-direction: row;
+	gap: 16px;
+	margin-bottom: 43px;
+
+	.tabItem {
+		cursor: pointer;
+		position: relative;
+		font-size: 16px;
+		font-style: normal;
+		font-weight: 600;
+		line-height: normal;
+		color: var(--black-00);
+		transition: all var(--transition-delay) var(--transition-timing);
+		text-transform: capitalize;
+		&::before {
+			transition: all var(--transition-delay) var(--transition-timing);
+			content: '';
+			position: absolute;
+			left: 0;
+			bottom: -8px;
+			width: 100%;
+			height: 3px;
+		}
+		&.active {
+			color: var(--indigo);
+			&::before{
+				background-color: var(--indigo);
+			}
+		}
+
+		&:hover {
+			transition: all var(--transition-delay) var(--transition-timing);
+			color: var(--indigo);
+		}
+
+		&:disabled {
+			color: var(--gray-03);
+		}
+	}
+}

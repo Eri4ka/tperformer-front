@@ -1,0 +1,11 @@
+.text {
+	font-size: 24px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: normal;
+	color: var(--black-00);
+
+	&:hover {
+		background-color: rgba(88, 86, 214, 0.10);
+	}
+}

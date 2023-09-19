@@ -15,7 +15,7 @@ const SECTIONS: TSection[] = [
     text: 'Home',
   },
   {
-    href: '/snippets',
+    href: '/publicSnippets',
     icon: <SnippetsIc />,
     text: 'Snippets',
   },

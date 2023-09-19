@@ -36,6 +36,9 @@
     text-align: left;
     border-bottom: 1px solid var(--gray-04);
     z-index: 0;
+    &.cellHeader{
+      color: var(--gray-02);
+    }
 
     &::after {
       content: '';
