@@ -9,3 +9,10 @@
 		background-color: rgba(88, 86, 214, 0.10);
 	}
 }
+
+.input{
+	@extend .text;
+	&:hover {
+	background-color: inherit;
+}
+}

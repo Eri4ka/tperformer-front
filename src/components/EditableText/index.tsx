@@ -31,7 +31,7 @@ const EditableText: React.FC<EditableSpanPropsType> = ({value, onChange, disable
     }
 
     return editMode
-            ? <input className={styles.text} value={title} onChange={changeTitle} autoFocus onBlur={activateViewMode}/>
+            ? <input className={styles.input} value={title} onChange={changeTitle} autoFocus onBlur={activateViewMode}/>
             : <Tooltip id={'edit'} content={'Double click to edit'}><span className={styles.text} onDoubleClick={activateEditMode}>{value}</span></Tooltip>
 };
 

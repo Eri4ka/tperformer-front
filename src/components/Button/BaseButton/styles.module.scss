@@ -70,6 +70,23 @@
       color: var(--gray-02);
     }
   }
+  &_icon{
+    background-color: var(--gray-07);
+    color: var(--black-00);
+
+    &:hover {
+      background-color: var(--purple-00);
+    }
+
+    &:active {
+      background-color: var(--gray-03);
+    }
+
+    &:disabled {
+      background-color: var(--gray-03);
+      color: var(--gray-02);
+    }
+  }
 
   &_xs {
     border-radius: var(--border-radius-08);

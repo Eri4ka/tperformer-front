@@ -1,30 +1,29 @@
 import {BreadCrumbs} from "@/components/BreadCrumbs";
 import {ContentLayout} from "@/components/ContentLayout";
-import EditableText from "@/components/EditableText";
+import Header from "@/pages/CreateSnippetsPage/components/Header";
+import TextArea from "@/pages/CreateSnippetsPage/components/TextArea";
 
+const crumbsList = [
+    {
+        id: 1,
+        path: '/publicSnippets',
+        name: 'publicSnippets',
+    },
+    {
+        id: 2,
+        path: '/publicSnippets/newTitle',
+        name: 'newTitle',
+    },
+];
 const CreateSnippetsPage = () => {
-    const crumbsList = [
-        {
-            id: 1,
-            path: '/publicSnippets',
-            name: 'publicSnippets',
-        },
-        {
-            id: 2,
-            path: '/publicSnippets/newTitle',
-            name: 'newTitle',
-        },
-    ];
  
     return (
         <ContentLayout>
             <BreadCrumbs data={crumbsList}/>
+            <Header/>
+            <TextArea/>
 
-            <EditableText
-                value={'NewTitle'}
-                onChange={()=>{
-                console.log('bla')}}
-                disabled={false}/>
+
         </ContentLayout>
     );
 };
