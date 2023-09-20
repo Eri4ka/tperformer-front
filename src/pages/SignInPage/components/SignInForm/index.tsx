@@ -2,7 +2,6 @@ import { Formik } from 'formik';
 import { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { ReactComponent as AppleIc } from '@/assets/images/social/apple.svg';
 import { ReactComponent as DiscordIc } from '@/assets/images/social/discord.svg';
 import { ReactComponent as GoogleIc } from '@/assets/images/social/google.svg';
 import AppLink from '@/components/AppLink';
@@ -27,10 +26,6 @@ export const SignInForm = () => {
     password: '',
     remember: false,
   };
-
-  useEffect(() => {
-    dispatch(fetchUser(''));
-  }, [dispatch]);
 
   useEffect(() => {
     if (loginStatus === 'success') {
@@ -104,13 +99,18 @@ export const SignInForm = () => {
         <span className={styles.dividerLine} />
       </div>
       <div className={styles.buttonsBlock}>
-        <BaseButton variant={ButtonVariant.flat} className={styles.buttonWrapper} icon={<GoogleIc />}>
+        <BaseButton
+          variant={ButtonVariant.flat}
+          className={styles.buttonWrapper}
+          icon={<GoogleIc />}
+          onClick={() => window.location.replace(import.meta.env.VITE_API_URL + 'api/auth/google/login')}>
           Continue with Google
         </BaseButton>
-        <BaseButton variant={ButtonVariant.flat} className={styles.buttonWrapper} icon={<AppleIc />}>
-          Continue with Apple
-        </BaseButton>
-        <BaseButton variant={ButtonVariant.flat} className={styles.buttonWrapper} icon={<DiscordIc />}>
+        <BaseButton
+          variant={ButtonVariant.flat}
+          className={styles.buttonWrapper}
+          icon={<DiscordIc />}
+          onClick={() => window.location.replace(import.meta.env.VITE_API_URL + 'api/auth/discord/login')}>
           Continue with Discord
         </BaseButton>
         <AppLink text="Сant't log in?" href='help' />

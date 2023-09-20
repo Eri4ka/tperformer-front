@@ -11,6 +11,8 @@ import {
 } from '@/api/types/authTypes';
 
 import { TStateStatus } from '../types';
+import { OAuthCallbackBody } from '@/api/types/OAuthTypes';
+import OAuthService from '@/api/services/OAuthService';
 
 type AuthState = {
   authorized: boolean;
@@ -82,6 +84,10 @@ export const authSlice = createSlice({
           state.loginErrors = action.payload;
         }
       })
+      .addCase(fetchOAuthLoginUser.fulfilled, (state) => {
+        state.loginStatus = 'success';
+        state.authorized = true;
+      })
       .addCase(fetchUser.fulfilled, (state) => {
         state.authorized = true;
       })
@@ -120,6 +126,22 @@ export const fetchLoginUser = createAsyncThunk<unknown, TLoginReqBody, { rejectV
       await AuthService.login(args);
     } catch (err) {
       const error = err as TAxiosError<TLoginResErrBody>;
+
+      if (!error.response) {
+        throw err;
+      }
+      return rejectWithValue(error.response.data);
+    }
+  },
+);
+
+export const fetchOAuthLoginUser = createAsyncThunk<unknown, OAuthCallbackBody, { rejectValue: unknown }>(
+  'auth/fetchOAuthLoginUser',
+  async (args, { rejectWithValue }) => {
+    try {
+      await OAuthService.login(args);
+    } catch (err) {
+      const error = err as TAxiosError<unknown>;
 
       if (!error.response) {
         throw err;

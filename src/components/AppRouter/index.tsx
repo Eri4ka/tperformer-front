@@ -3,10 +3,11 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { AppLayout } from '@/components/AppLayout';
 import { ProtectedRoute } from '@/components/ProtectedRoute';
 import { CanvasPage } from '@/pages/CanvasPage';
-import CreateSnippetsPage from "@/pages/CreateSnippetsPage";
+import CreateSnippetsPage from '@/pages/CreateSnippetsPage';
 import { ForgotPasswordConfirmPage } from '@/pages/ForgotPasswordConfirmPage';
 import { ForgotPasswordPage } from '@/pages/ForgotPasswordPage';
 import { HomePage } from '@/pages/HomePage';
+import { OAuthPage } from '@/pages/OAuthPage';
 import { ResetPasswordConfirmPage } from '@/pages/ResetPasswordConfirmPage';
 import { ResetPasswordPage } from '@/pages/ResetPasswordPage';
 import { SignInHelpConfirmPage } from '@/pages/SignInHelpConfirmPage';
@@ -14,7 +15,7 @@ import { SignInHelpPage } from '@/pages/SignInHelpPage';
 import { SignInPage } from '@/pages/SignInPage';
 import { SignUpConfirmPage } from '@/pages/SignUpConfirmPage';
 import { SignUpPage } from '@/pages/SignUpPage';
-import SnippetsPage from "@/pages/SnippetsPage";
+import SnippetsPage from '@/pages/SnippetsPage';
 
 const router = createBrowserRouter([
   {
@@ -29,11 +30,11 @@ const router = createBrowserRouter([
             element: <HomePage />,
           },
           {
-            path:'/publicSnippets',
+            path: '/publicSnippets',
             element: <SnippetsPage />,
           },
           {
-            path:'/publicSnippets/:title',
+            path: '/publicSnippets/:title',
             element: <CreateSnippetsPage />,
           },
           {
@@ -61,6 +62,15 @@ const router = createBrowserRouter([
           {
             path: 'success',
             element: <SignInHelpConfirmPage />,
+          },
+        ],
+      },
+      {
+        path: 'callback',
+        children: [
+          {
+            path: ':service',
+            element: <OAuthPage />,
           },
         ],
       },
