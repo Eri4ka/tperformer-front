@@ -4,11 +4,11 @@ import {TAxiosError} from '@/api/request';
 import snippetsService from "@/api/services/SnippetsService.ts";
 import {
     TCreateSnippetErrBody,
-    TCreateSnippetReqBody,
     TCreateSnippetResBody,
     TGetAllSnippetsErrBody,
     TGetAllSnippetsReqBody,
-    TRemoveErrBody, TRemoveReqBody,
+    TRemoveErrBody,
+    TRemoveReqBody,
     TSnippetResBody,
     TUpdateSnippetReqBody
 } from "@/api/types/snippetsType.ts";
@@ -65,7 +65,7 @@ export const snippetsSlice = createSlice({
                 state.snippetStatus = 'loading';
             })
             .addCase(createSnippet.fulfilled, (state, action) => {
-                if(action.payload!==null) state.snippet=action.payload
+                if (action.payload !== null) state.snippet = action.payload
                 state.snippetStatus = 'success';
 
             })
@@ -79,12 +79,12 @@ export const snippetsSlice = createSlice({
                 state.snippetStatus = 'loading';
             })
             .addCase(updateSnippet.fulfilled, (state) => {
-               state.snippet= {
-                   id: 0,
-                   content: 'enter your snippet',
-                   title: `New snippet_${date}`,
-                   hidden: false
-               };
+                state.snippet = {
+                    id: 0,
+                    content: 'enter your snippet',
+                    title: `New snippet_${date}`,
+                    hidden: false
+                };
                 state.snippetStatus = 'success';
 
             })
@@ -98,7 +98,7 @@ export const snippetsSlice = createSlice({
                 state.snippetStatus = 'loading';
             })
             .addCase(removeSnippet.fulfilled, (state) => {
-                state.snippet= {
+                state.snippet = {
                     id: 0,
                     content: 'enter your snippet',
                     title: `New snippet_${date}`,
@@ -136,8 +136,8 @@ export const fetchSnippets = createAsyncThunk<
     }
 });
 export const createSnippet = createAsyncThunk<
-    TCreateSnippetResBody|null,
-    TCreateSnippetReqBody,
+    TCreateSnippetResBody | null,
+    'create'|'duplicate',
     {
         rejectValue: TCreateSnippetErrBody,
         state: RootState
@@ -147,8 +147,8 @@ export const createSnippet = createAsyncThunk<
 
         const id = getState().snippetsReducer.snippet.id
 
-        if (id === 0) {
-         const res=   await snippetsService.createSnippet({
+        if ((id === 0 && args === 'create')||args==="duplicate") {
+            const res = await snippetsService.createSnippet({
                 title: `New snippet_${date}`,
                 content: 'enter your spippet',
                 hidden: false
@@ -167,7 +167,7 @@ export const createSnippet = createAsyncThunk<
     }
 });
 export const updateSnippet = createAsyncThunk<
-    TCreateSnippetResBody|null,
+    TCreateSnippetResBody | null,
     unknown,
     {
         rejectValue: TCreateSnippetErrBody,
@@ -177,7 +177,7 @@ export const updateSnippet = createAsyncThunk<
     try {
         const snippet = getState().snippetsReducer.snippet
         if (snippet.title.trim() !== '' && snippet.content.trim() !== '') {
-           const res= await snippetsService.updateSnippet(snippet)
+            const res = await snippetsService.updateSnippet(snippet)
             return res.data
         }
         return null

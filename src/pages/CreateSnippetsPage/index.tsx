@@ -25,7 +25,7 @@ const CreateSnippetsPage = () => {
     const dispatch=useAppDispatch()
     console.log('CreateSnippetsPage')
     useEffect(()=>{
-        dispatch(createSnippet(null))
+        dispatch(createSnippet("create"))
 
         return ()=>{
             dispatch(updateSnippet(null))

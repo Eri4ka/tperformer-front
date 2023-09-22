@@ -44,7 +44,8 @@ const Header = () => {
                     className={styles.iconButton}
                     variant={ButtonVariant.icon}
                     onClick={() => {
-                        dispatch(createSnippet(null))
+                        console.log('click')
+                        dispatch(createSnippet("duplicate"))
                     }}
                     icon={<CopyCreateIc/>}
                     disabled={false}/>
