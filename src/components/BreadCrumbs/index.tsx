@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import {FC, memo} from 'react';
 
 import { CrumbItem } from './components/CrumbItem';
 import styles from './styles.module.scss';
@@ -8,7 +8,8 @@ type Props = {
   data: TCrumb[];
 };
 
-export const BreadCrumbs: FC<Props> = ({ data }) => {
+export const BreadCrumbs: FC<Props> = memo(({ data }) => {
+    console.log('BreadCrumbs')
   return (
     <div className={styles.crumbs}>
       <ul className={styles.crumbsList}>
@@ -20,4 +21,4 @@ export const BreadCrumbs: FC<Props> = ({ data }) => {
       </ul>
     </div>
   );
-};
+});

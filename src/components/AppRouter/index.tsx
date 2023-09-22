@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import { AppLayout } from '@/components/AppLayout';
+import {route} from "@/components/AppRouter/constants.ts";
 import { ProtectedRoute } from '@/components/ProtectedRoute';
 import { CanvasPage } from '@/pages/CanvasPage';
 import CreateSnippetsPage from '@/pages/CreateSnippetsPage';
@@ -19,7 +20,7 @@ import SnippetsPage from '@/pages/SnippetsPage';
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: route.home,
     element: <AppLayout />,
     children: [
       {
@@ -30,11 +31,11 @@ const router = createBrowserRouter([
             element: <HomePage />,
           },
           {
-            path: '/publicSnippets',
+            path: route.publicSnippets,
             element: <SnippetsPage />,
           },
           {
-            path: '/publicSnippets/:title',
+            path: route.CreateSnippet,
             element: <CreateSnippetsPage />,
           },
           {

@@ -1,4 +1,3 @@
-import Cookies from 'js-cookie';
 
 import { REGISTRATION_ENDPOINT, LOGIN_ENDPOINT, USER_ENDPOINT, LOGOUT_ENDPOINT } from '../constants';
 import { request } from '../request';
@@ -28,7 +27,7 @@ class AuthService {
       url: LOGIN_ENDPOINT,
       method: 'POST',
       data,
-      withCredentials: true,
+      withCredentials: false,
     });
 
     return response;

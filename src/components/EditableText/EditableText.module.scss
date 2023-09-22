@@ -1,3 +1,5 @@
+.container{
+	position: relative;
 .text {
 	font-size: 24px;
 	font-style: normal;
@@ -8,11 +10,24 @@
 	&:hover {
 		background-color: rgba(88, 86, 214, 0.10);
 	}
+
 }
 
-.input{
+.input {
+	position: relative;
 	@extend .text;
+	width: 100%;
+	max-width: 70vw;
+
 	&:hover {
-	background-color: inherit;
+		background-color: inherit;
+	}
+}
+.error{
+	position: absolute;
+	font-size: 24px;
+	color: red;
+	left: 0;
+	bottom: 0;
 }
 }

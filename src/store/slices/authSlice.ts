@@ -1,18 +1,21 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import Cookies from "js-cookie";
 
 import { TAxiosError } from '@/api/request';
 import AuthService from '@/api/services/AuthService';
+import OAuthService from '@/api/services/OAuthService';
 import {
   TRegistrationReqBody,
   TRegistrationResErrBody,
   TLoginReqBody,
   TLoginResErrBody,
-  TDetailResBody,
+  TDetailResBody, TAuthResBody,
 } from '@/api/types/authTypes';
+import { OAuthCallbackBody } from '@/api/types/OAuthTypes';
 
 import { TStateStatus } from '../types';
-import { OAuthCallbackBody } from '@/api/types/OAuthTypes';
-import OAuthService from '@/api/services/OAuthService';
+
+
 
 type AuthState = {
   authorized: boolean;
@@ -73,7 +76,8 @@ export const authSlice = createSlice({
         state.loginStatus = 'loading';
         state.loginErrors = loginErrors;
       })
-      .addCase(fetchLoginUser.fulfilled, (state) => {
+      .addCase(fetchLoginUser.fulfilled, (state,action) => {
+        Cookies.set('token', action.payload.key)
         state.loginStatus = 'success';
         state.authorized = true;
       })
@@ -119,11 +123,12 @@ export const fetchCreateUser = createAsyncThunk<
   }
 });
 
-export const fetchLoginUser = createAsyncThunk<unknown, TLoginReqBody, { rejectValue: TLoginResErrBody }>(
+export const fetchLoginUser = createAsyncThunk<TAuthResBody, TLoginReqBody, { rejectValue: TLoginResErrBody }>(
   'auth/fetchLoginUser',
   async (args, { rejectWithValue }) => {
     try {
-      await AuthService.login(args);
+      const res=await AuthService.login(args);
+      return res.data
     } catch (err) {
       const error = err as TAxiosError<TLoginResErrBody>;
 

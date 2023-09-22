@@ -1,13 +1,14 @@
 import {ColumnDef} from '@tanstack/react-table';
 import {useState} from "react";
 
+import {TSnippetResBody} from "@/api/types/snippetsType.ts";
 import {CheckBox} from '@/components/Input/CheckBox';
 import {Table} from '@/components/Table';
 import TableTabs from "@/components/Table/components/TableTabs";
 import {fuzzyFilter} from '@/components/Table/helpers';
 import {TSnippets, Ttab} from "@/pages/SnippetsPage/components/SnippetsTable/types";
 
-const columns: ColumnDef<TSnippets>[] = [
+const columns: ColumnDef<TSnippetResBody>[] = [
     // {
     //     accessorKey: 'select',
     //     header: (info) => (
@@ -30,7 +31,7 @@ const columns: ColumnDef<TSnippets>[] = [
         filterFn: fuzzyFilter,
     },
     {
-        accessorKey: 'discription',
+        accessorKey: 'content',
         header: 'Discription',
         cell: (info) => info.getValue(),
         size: 785,
@@ -44,7 +45,7 @@ const columns: ColumnDef<TSnippets>[] = [
 const tabData=['public']
 
 type Props={
-    data:TSnippets[]
+    data:TSnippetResBody[]
 }
 export const SnippetsTable:React.FC<Props> = ({data}) => {
     const [tabActive,setActiveTab]=useState<Ttab>('public')

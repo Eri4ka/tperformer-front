@@ -1,7 +1,7 @@
 .textarea {
 	position: relative;
 	z-index: 1;
-	min-height: 629px;
+	min-height: 50vh;
 	padding: 32px;
 	border-radius: 16px;
 	border: 1.5px solid var(--gray-03);
@@ -12,6 +12,7 @@
 	font-weight: 400;
 	line-height: normal;
 	resize: none;
+
 
 	&::-webkit-scrollbar {
 		width: 20px;

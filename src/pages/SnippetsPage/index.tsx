@@ -1,3 +1,4 @@
+import {useEffect} from "react";
 import {useNavigate} from "react-router-dom";
 
 import {BaseButton} from "@/components/Button/BaseButton";
@@ -5,42 +6,16 @@ import {ButtonsGroup} from "@/components/ButtonsGroup";
 import {ContentLayout} from "@/components/ContentLayout";
 import {Heading} from "@/components/Heading";
 import {SnippetsTable} from "@/pages/SnippetsPage/components/SnippetsTable";
-import {TSnippets} from "@/pages/SnippetsPage/components/SnippetsTable/types";
+import {useAppDispatch, useAppSelector} from "@/store/hooks.ts";
+import {fetchSnippets} from "@/store/slices/snippetsSlice.ts";
 
-const defaultData: TSnippets[] = [
-    {
-        title: 'Title',
-        discription: 'Text about canvas ',
-        created: '5/3/2023',
-    },
-    {
-        title: 'bla',
-        discription: 'Text about canvas ',
-        created: '1/3/2023',
-    },
-    {
-        title: 'fff',
-        discription: 'Text about canvas ',
-        created: '1/3/2023',
-    },
-    {
-        title: 'asdasda',
-        discription: 'Text about canvas ',
-        created: '1/3/2023',
-    },
-    {
-        title: 'fsrgerggere',
-        discription: 'Text about canvas ',
-        created: '1/3/2023',
-    },
-    {
-        title: 'vbttybbt',
-        discription: 'Text about canvas ',
-        created: '1/3/2023',
-    },
-];
 const Snippets = () => {
     const router=useNavigate()
+    const snippets=useAppSelector(state => state.snippetsReducer.snippets)
+    const dispatch=useAppDispatch()
+    useEffect(()=>{
+           dispatch(fetchSnippets({}))
+    },[])
     return (
         <ContentLayout>
             <Heading text='Snippets'>
@@ -48,7 +23,7 @@ const Snippets = () => {
                     <BaseButton onClick={()=>router(`/publicSnippets/newTitle`)} additional>Create</BaseButton>
                 </ButtonsGroup>
             </Heading>
-            <SnippetsTable data={defaultData} />
+            <SnippetsTable data={snippets} />
         </ContentLayout>
     );
 };

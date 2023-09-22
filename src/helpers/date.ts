@@ -4,3 +4,4 @@ export const addMonths = (count: number): Date => {
 
   return date;
 };
+export const date=new Date().toLocaleDateString()
