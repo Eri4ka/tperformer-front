@@ -1,9 +1,8 @@
-import {ChangeEvent, memo, useEffect, useState} from "react";
+import {ChangeEvent, memo, useState} from "react";
 
 import {Tooltip} from "@/components/Tooltip";
-import {useDebounce} from "@/hooks/useDebounce.ts";
 import {useAppDispatch, useAppSelector} from "@/store/hooks.ts";
-import {snippetsAction, updateSnippet} from "@/store/slices/snippetsSlice.ts";
+import {snippetsAction} from "@/store/slices/snippetsSlice.ts";
 
 import styles from './EditableText.module.scss'
 
@@ -13,20 +12,8 @@ type EditableSpanPropsType = {
 }
 const EditableText: React.FC<EditableSpanPropsType> = memo(({disabled}) => {
     const title = useAppSelector(state => state.snippetsReducer.snippet.title)
-
-    const id = useAppSelector(state => state.snippetsReducer.snippet.id)
-
     const [editMode, setEditMode] = useState(false);
     const dispatch = useAppDispatch()
-
-    const debouncedTitle = useDebounce<string>(title, 500)
-
-    useEffect(() => {
-        if (id === 0 || title.trim() === '') return
-
-        dispatch(updateSnippet({}))
-    }, [debouncedTitle])
-    console.log(title)
 
     const activateEditMode = () => {
         if (disabled) {

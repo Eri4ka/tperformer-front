@@ -42,7 +42,6 @@ export const snippetsSlice = createSlice({
         changeSnippet: (state, action: PayloadAction<TUpdateSnippetReqBody>) => {
 
             state.snippet = {...state.snippet, ...action.payload}
-            // state.snippet.title=action.payload.title
         }
 
     },
@@ -66,7 +65,7 @@ export const snippetsSlice = createSlice({
                 state.snippetStatus = 'loading';
             })
             .addCase(createSnippet.fulfilled, (state, action) => {
-                state.snippet = action.payload
+                if(action.payload!==null) state.snippet=action.payload
                 state.snippetStatus = 'success';
 
             })
@@ -79,11 +78,36 @@ export const snippetsSlice = createSlice({
             .addCase(updateSnippet.pending, (state) => {
                 state.snippetStatus = 'loading';
             })
-            .addCase(updateSnippet.fulfilled, (state,) => {
+            .addCase(updateSnippet.fulfilled, (state) => {
+               state.snippet= {
+                   id: 0,
+                   content: 'enter your snippet',
+                   title: `New snippet_${date}`,
+                   hidden: false
+               };
                 state.snippetStatus = 'success';
 
             })
             .addCase(updateSnippet.rejected, (state, action) => {
+                state.snippetStatus = 'error';
+                if (action.payload && typeof action.payload === 'object') {
+                    state.errors = action.payload;
+                }
+            })
+            .addCase(removeSnippet.pending, (state) => {
+                state.snippetStatus = 'loading';
+            })
+            .addCase(removeSnippet.fulfilled, (state) => {
+                state.snippet= {
+                    id: 0,
+                    content: 'enter your snippet',
+                    title: `New snippet_${date}`,
+                    hidden: false
+                };
+                state.snippetStatus = 'success';
+
+            })
+            .addCase(removeSnippet.rejected, (state, action) => {
                 state.snippetStatus = 'error';
                 if (action.payload && typeof action.payload === 'object') {
                     state.errors = action.payload;
@@ -112,7 +136,7 @@ export const fetchSnippets = createAsyncThunk<
     }
 });
 export const createSnippet = createAsyncThunk<
-    TCreateSnippetResBody,
+    TCreateSnippetResBody|null,
     TCreateSnippetReqBody,
     {
         rejectValue: TCreateSnippetErrBody,
@@ -121,13 +145,17 @@ export const createSnippet = createAsyncThunk<
 >('snippets/createSnippets', async (args, {rejectWithValue, getState}) => {
     try {
 
-        if(args===null){
-            const {content,hidden,title}=getState().snippetsReducer.snippet
-            const res=await snippetsService.createSnippet({title,content,hidden})
+        const id = getState().snippetsReducer.snippet.id
+
+        if (id === 0) {
+         const res=   await snippetsService.createSnippet({
+                title: `New snippet_${date}`,
+                content: 'enter your spippet',
+                hidden: false
+            })
             return res.data
         }
-        const res = await snippetsService.createSnippet(args)
-        return res.data
+        return null
 
     } catch (err) {
         const error = err as TAxiosError<TCreateSnippetErrBody>;
@@ -139,7 +167,7 @@ export const createSnippet = createAsyncThunk<
     }
 });
 export const updateSnippet = createAsyncThunk<
-    TCreateSnippetResBody,
+    TCreateSnippetResBody|null,
     unknown,
     {
         rejectValue: TCreateSnippetErrBody,
@@ -148,9 +176,11 @@ export const updateSnippet = createAsyncThunk<
 >('snippets/updateSnippet', async (_, {rejectWithValue, getState}) => {
     try {
         const snippet = getState().snippetsReducer.snippet
-
-        const res = await snippetsService.updateSnippet(snippet)
-        return res.data
+        if (snippet.title.trim() !== '' && snippet.content.trim() !== '') {
+           const res= await snippetsService.updateSnippet(snippet)
+            return res.data
+        }
+        return null
 
     } catch (err) {
         const error = err as TAxiosError<TCreateSnippetErrBody>;

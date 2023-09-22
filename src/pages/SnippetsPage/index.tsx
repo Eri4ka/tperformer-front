@@ -12,6 +12,8 @@ import {fetchSnippets} from "@/store/slices/snippetsSlice.ts";
 const Snippets = () => {
     const router=useNavigate()
     const snippets=useAppSelector(state => state.snippetsReducer.snippets)
+    const snippet=useAppSelector(state => state.snippetsReducer.snippet)
+    console.log(snippet)
     const dispatch=useAppDispatch()
     useEffect(()=>{
            dispatch(fetchSnippets({}))

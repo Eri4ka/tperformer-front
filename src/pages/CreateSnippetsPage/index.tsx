@@ -6,7 +6,7 @@ import {date} from "@/helpers/date.ts";
 import Header from "@/pages/CreateSnippetsPage/components/Header";
 import TextArea from "@/pages/CreateSnippetsPage/components/TextArea";
 import {useAppDispatch} from "@/store/hooks.ts";
-import {createSnippet, removeSnippet, snippetsAction} from "@/store/slices/snippetsSlice.ts";
+import {createSnippet, removeSnippet, updateSnippet} from "@/store/slices/snippetsSlice.ts";
 
 const crumbsList = [
     {
@@ -24,12 +24,12 @@ const crumbsList = [
 const CreateSnippetsPage = () => {
     const dispatch=useAppDispatch()
     console.log('CreateSnippetsPage')
-
     useEffect(()=>{
-        dispatch(createSnippet({title:`New snippet_${date}`, content:'enter your spippet',hidden:false}))
+        dispatch(createSnippet(null))
+
         return ()=>{
-            dispatch(removeSnippet("page"))
-            dispatch(snippetsAction.changeSnippet({title:`New snippet_${date}`, content:'enter your spippet',hidden:false, id:0}))
+            dispatch(updateSnippet(null))
+             dispatch(removeSnippet("page"))
         }
     },[])
 
