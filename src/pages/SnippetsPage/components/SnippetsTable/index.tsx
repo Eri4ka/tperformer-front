@@ -36,11 +36,7 @@ const columns: ColumnDef<TSnippetResBody>[] = [
         cell: (info) => info.getValue(),
         size: 785,
     },
-    // {
-    //     accessorKey: 'created',
-    //     header: 'Date created',
-    //     cell: (info) => info.getValue(),
-    // },
+
 ];
 const tabData=['public']
 
