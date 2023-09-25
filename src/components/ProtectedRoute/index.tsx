@@ -1,13 +1,24 @@
-import { Navigate, Outlet } from 'react-router-dom';
+import Cookies from "js-cookie";
+import {useEffect} from "react";
+import {Navigate, Outlet} from 'react-router-dom';
 
-import { useAppSelector } from '@/store/hooks';
+import {useAppDispatch, useAppSelector} from '@/store/hooks';
+import {fetchUser} from "@/store/slices/authSlice.ts";
+
 
 export const ProtectedRoute = () => {
-  const isAuthorized = useAppSelector((state) => state.authReducer.authorized);
+    const isAuthorized = useAppSelector((state) => state.authReducer.authorized);
+    const dispatch = useAppDispatch()
 
-  if (isAuthorized) {
-    return <Outlet />;
-  }
+    useEffect(() => {
+        if (Cookies.get('token')) {
+            dispatch(fetchUser({}))
+        }
+    }, [dispatch])
+    console.log(isAuthorized)
+    if (isAuthorized) {
+        return <Outlet/>;
+    }
 
-  return <Navigate to={'/signin'} replace />;
+    return <Navigate to={'/signin'}/>;
 };

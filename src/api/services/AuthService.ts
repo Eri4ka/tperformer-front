@@ -1,4 +1,6 @@
 
+import Cookies from "js-cookie";
+
 import { REGISTRATION_ENDPOINT, LOGIN_ENDPOINT, USER_ENDPOINT, LOGOUT_ENDPOINT } from '../constants';
 import { request } from '../request';
 import {
@@ -13,28 +15,28 @@ import {
 
 class AuthService {
   registraion = async (data: TRegistrationReqBody) => {
-    const response = await request<TAuthResBody, TRegistrationResErrBody, TRegistrationReqBody>({
+    return await request<TAuthResBody, TRegistrationResErrBody, TRegistrationReqBody>({
       url: REGISTRATION_ENDPOINT,
       method: 'POST',
       data,
     });
 
-    return response;
+
   };
 
   login = async (data: TLoginReqBody) => {
-    const response = await request<TAuthResBody, TLoginResErrBody, TLoginReqBody>({
+    return  await request<TAuthResBody, TLoginResErrBody, TLoginReqBody>({
       url: LOGIN_ENDPOINT,
       method: 'POST',
       data,
       withCredentials: false,
     });
 
-    return response;
+
   };
 
   logout = async () => {
-    await request<TDetailResBody, TDetailResBody>({
+   return  await request<TDetailResBody, TDetailResBody>({
       url: LOGOUT_ENDPOINT,
       method: 'POST',
       withCredentials: false,
@@ -42,11 +44,13 @@ class AuthService {
   };
 
   user = async () => {
-    const response = await request<TUserResBody, TDetailResBody>({
+    return  await request<TUserResBody, TDetailResBody>({
       url: USER_ENDPOINT,
       method: 'GET',
+      headers:{
+        authorization: `Bearer ${Cookies.get('token')}`,
+      }
     });
-    return response;
   };
 }
 

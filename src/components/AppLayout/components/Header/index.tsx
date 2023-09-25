@@ -31,7 +31,7 @@ export const Header: FC<Props> = ({ onBurger }) => {
             <IconLayout icon={<HelpIc />} />
             <span className={styles.helpText}>Help</span>
           </div>
-          <div className={styles.profile} onClick={() => dispatch(fetchLogoutUser())}>
+          <div className={styles.profile} onClick={() => dispatch(fetchLogoutUser({}))}>
             <div className={styles.profileIcon}>
               <span className={styles.profileName}>A</span>
             </div>
