@@ -7,25 +7,34 @@ import {ContentLayout} from "@/components/ContentLayout";
 import {Heading} from "@/components/Heading";
 import {SnippetsTable} from "@/pages/SnippetsPage/components/SnippetsTable";
 import {useAppDispatch, useAppSelector} from "@/store/hooks.ts";
-import {fetchSnippets} from "@/store/slices/snippetsSlice.ts";
+import {createSnippet, fetchSnippets} from "@/store/slices/snippetsSlice.ts";
 
 const Snippets = () => {
-    const router=useNavigate()
-    const snippets=useAppSelector(state => state.snippetsReducer.snippets)
-    const snippet=useAppSelector(state => state.snippetsReducer.snippet)
-    console.log(snippet)
-    const dispatch=useAppDispatch()
-    useEffect(()=>{
-           dispatch(fetchSnippets({}))
-    },[])
+    const router = useNavigate()
+    const snippets = useAppSelector(state => state.snippetsReducer.snippets)
+
+    const dispatch = useAppDispatch()
+
+    useEffect(() => {
+        dispatch(fetchSnippets({}))
+    }, [dispatch])
+
     return (
         <ContentLayout>
             <Heading text='Snippets'>
                 <ButtonsGroup>
-                    <BaseButton onClick={()=>router(`/publicSnippets/newTitle`)} additional>Create</BaseButton>
+                    <BaseButton onClick={() => {
+                        dispatch(createSnippet("create"))
+                            .then((data) => {
+                                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                                // @ts-ignore
+                                if(data.payload&&data.payload.id)router(`/publicSnippets/${data.payload?.id}`)
+                            })
+                    }
+                    } additional>Create</BaseButton>
                 </ButtonsGroup>
             </Heading>
-            <SnippetsTable data={snippets} />
+            <SnippetsTable data={snippets}/>
         </ContentLayout>
     );
 };

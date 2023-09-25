@@ -2,6 +2,7 @@
 import {useNavigate} from "react-router-dom";
 
 import {ReactComponent as CopyCreateIc} from '@/assets/images/button/copyCreate.svg';
+import {ReactComponent as ShareIc} from '@/assets/images/button/share.svg';
 import {ReactComponent as TrashIc} from '@/assets/images/button/trash.svg';
 import {route} from "@/components/AppRouter/constants.ts";
 import {BaseButton, ButtonVariant} from "@/components/Button/BaseButton";
@@ -35,7 +36,15 @@ const Header = () => {
                     }}
                     icon={<TrashIc/>}
                     disabled={false}/>
-
+                {/*share button*/}
+                <BaseButton
+                    className={styles.iconButton}
+                    variant={ButtonVariant.icon}
+                    onClick={() => {
+                        navigator.clipboard.writeText( location.href );
+                    }}
+                    icon={<ShareIc/>}
+                    disabled={false}/>
                 {/*Copy snippets*/}
                 <CopySnippetsButton/>
 

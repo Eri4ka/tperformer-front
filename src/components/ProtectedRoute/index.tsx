@@ -15,7 +15,7 @@ export const ProtectedRoute = () => {
             dispatch(fetchUser({}))
         }
     }, [dispatch])
-    console.log(isAuthorized)
+
     if (isAuthorized) {
         return <Outlet/>;
     }
