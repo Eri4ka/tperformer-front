@@ -44,9 +44,10 @@ const columns: ColumnDef<TSnippetResBody>[] = [
 ];
 const tabData=['public']
 
-type Props={ч
+type Props={
     data:TSnippetResBody[]
 }
+
 export const SnippetsTable:React.FC<Props> = ({data}) => {
     const [tabActive,setActiveTab]=useState<Ttab>('public')
     return (<>
