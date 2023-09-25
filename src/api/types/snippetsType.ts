@@ -16,7 +16,6 @@ export type TGetAllSnippetsReqBody = {
     updated_at?:string;
 };
 
-export type TGetAllSnippetsErrBody = Record<keyof TGetAllSnippetsReqBody | 'non_field_errors', string[]>;
 
 export type TCreateSnippetReqBody={
     title: string;
@@ -24,7 +23,6 @@ export type TCreateSnippetReqBody={
     hidden: boolean;
 }|null
 export type TCreateSnippetErrBody= Record<keyof TCreateSnippetReqBody | 'non_field_errors', string[]>;
-export type TRemoveErrBody={ 'non_field_errors': string[]};
 
 export type TCreateSnippetResBody = {
     id: number;

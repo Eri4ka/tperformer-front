@@ -1,5 +1,5 @@
 export const route={
     home:'/',
     publicSnippets:'/publicSnippets',
-    CreateSnippet:'/publicSnippets/:title'
+    CreateSnippet:'/publicSnippets/:id'
 }

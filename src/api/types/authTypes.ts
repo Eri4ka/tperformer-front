@@ -2,7 +2,7 @@ export type TAuthResBody = {
   key: string;
 };
 
-export type TDetailResBody = {
+export type TErrorResBody = {
   detail: string;
 };
 

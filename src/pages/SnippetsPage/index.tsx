@@ -24,7 +24,7 @@ const Snippets = () => {
             <Heading text='Snippets'>
                 <ButtonsGroup>
                     <BaseButton onClick={() => {
-                        dispatch(createSnippet("create"))
+                        dispatch(createSnippet({}))
                             .then((data) => {
                                 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                                 // @ts-ignore

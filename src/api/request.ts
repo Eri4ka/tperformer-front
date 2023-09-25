@@ -1,8 +1,12 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
+import Cookies from "js-cookie";
 
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
   withCredentials: true,
+  headers:{
+    authorization: `Bearer ${Cookies.get('token')}`
+  }
 });
 
 type TRequest<T> = {
@@ -23,14 +27,13 @@ export const request = async <K, D, T = undefined>({
   withCredentials,
 }: TRequest<T>): Promise<AxiosResponse<K>> => {
   try {
-    const response = await api({
+    return  await api({
       url,
       method,
       data,
       headers,
       withCredentials,
     });
-    return response;
   } catch (error) {
     throw error as TAxiosError<D>;
   }

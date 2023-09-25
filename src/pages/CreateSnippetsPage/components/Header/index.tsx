@@ -54,7 +54,7 @@ const Header = () => {
                     variant={ButtonVariant.icon}
                     onClick={() => {
                         console.log('click')
-                        dispatch(createSnippet("duplicate"))
+                        dispatch(createSnippet({}))
                     }}
                     icon={<CopyCreateIc/>}
                     disabled={false}/>

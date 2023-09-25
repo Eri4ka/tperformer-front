@@ -1,15 +1,12 @@
-
-import Cookies from "js-cookie";
-
-import { REGISTRATION_ENDPOINT, LOGIN_ENDPOINT, USER_ENDPOINT, LOGOUT_ENDPOINT } from '../constants';
-import { request } from '../request';
+import {LOGIN_ENDPOINT, LOGOUT_ENDPOINT, REGISTRATION_ENDPOINT, USER_ENDPOINT} from '../constants';
+import {request} from '../request';
 import {
-  TRegistrationReqBody,
   TAuthResBody,
-  TRegistrationResErrBody,
+  TErrorResBody,
   TLoginReqBody,
   TLoginResErrBody,
-  TDetailResBody,
+  TRegistrationReqBody,
+  TRegistrationResErrBody,
   TUserResBody,
 } from '../types/authTypes';
 
@@ -36,7 +33,7 @@ class AuthService {
   };
 
   logout = async () => {
-   return  await request<TDetailResBody, TDetailResBody>({
+   return  await request<TErrorResBody, TErrorResBody>({
       url: LOGOUT_ENDPOINT,
       method: 'POST',
       withCredentials: false,
@@ -44,12 +41,9 @@ class AuthService {
   };
 
   user = async () => {
-    return  await request<TUserResBody, TDetailResBody>({
+    return  await request<TUserResBody, TErrorResBody>({
       url: USER_ENDPOINT,
       method: 'GET',
-      headers:{
-        authorization: `Bearer ${Cookies.get('token')}`,
-      }
     });
   };
 }

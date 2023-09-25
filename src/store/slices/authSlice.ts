@@ -5,7 +5,7 @@ import {TAxiosError} from '@/api/request';
 import AuthService from '@/api/services/AuthService';
 import OAuthService from '@/api/services/OAuthService';
 import {
-    TDetailResBody,
+    TErrorResBody,
     TLoginReqBody,
     TLoginResErrBody,
     TRegistrationReqBody,
@@ -191,12 +191,12 @@ export const fetchOAuthLoginUser = createAsyncThunk<unknown, OAuthCallbackBody, 
 export const fetchLogoutUser = createAsyncThunk<
     unknown,
     unknown,
-    { rejectValue: TDetailResBody }>('auth/fetchLogoutUser', async (_,{rejectWithValue}) => {
+    { rejectValue: TErrorResBody }>('auth/fetchLogoutUser', async (_, {rejectWithValue}) => {
     try {
         await AuthService.logout();
         Cookies.remove('token')
     } catch (err) {
-        const error = err as TAxiosError<TDetailResBody>;
+        const error = err as TAxiosError<TErrorResBody>;
 
         if (!error.response) {
             throw err;
@@ -207,14 +207,14 @@ export const fetchLogoutUser = createAsyncThunk<
 
 });
 
-export const fetchUser = createAsyncThunk<TUserResBody, unknown, { rejectValue: TDetailResBody }>(
+export const fetchUser = createAsyncThunk<TUserResBody, unknown, { rejectValue: TErrorResBody }>(
     'auth/fetchUser',
     async (_, {rejectWithValue}) => {
         try {
             const res = await AuthService.user();
             return res.data;
         } catch (err) {
-            const error = err as TAxiosError<TDetailResBody>;
+            const error = err as TAxiosError<TErrorResBody>;
 
             if (!error.response) {
                 throw err;

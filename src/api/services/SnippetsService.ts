@@ -1,11 +1,9 @@
-import Cookies from 'js-cookie';
-
+import {TErrorResBody} from "@/api/types/authTypes.ts";
 import {
-    TCreateSnippetErrBody,
-    TCreateSnippetReqBody, TCreateSnippetResBody, TSnippetResBody,
-    TGetAllSnippetsErrBody,
+    TCreateSnippetReqBody,
+    TCreateSnippetResBody,
     TGetAllSnippetsReqBody,
-    TRemoveErrBody,
+    TSnippetResBody,
     TUpdateSnippetReqBody
 } from "@/api/types/snippetsType.ts";
 
@@ -15,52 +13,40 @@ import {request} from '../request';
 class SnippetsService {
 
     getAllSnippets = async (data: TGetAllSnippetsReqBody) => {
-        const response = await request<TSnippetResBody[], TGetAllSnippetsErrBody, TGetAllSnippetsReqBody>({
+        return await request<TSnippetResBody[], TErrorResBody, TGetAllSnippetsReqBody>({
             url: '/api/prompt/snippet/',
             method: 'GET',
-            data,
-            headers: {
-                authorization: `Bearer ${Cookies.get('token')}`,
-            },
+            data
         });
-
-        return response;
+    };
+    getSnippet = async (id: number) => {
+       return  await request<TSnippetResBody, TErrorResBody, number>({
+            url: `/api/prompt/snippet/${id}`,
+            method: 'GET',
+        });
     };
     createSnippet = async (data: TCreateSnippetReqBody) => {
-        const response = await request<TCreateSnippetResBody, TCreateSnippetErrBody, TCreateSnippetReqBody>({
+       return  await request<TCreateSnippetResBody, TErrorResBody, TCreateSnippetReqBody>({
             url: '/api/prompt/snippet/',
             method: 'POST',
-            data,
-            headers: {
-                authorization: `Bearer ${Cookies.get('token')}`,
-            },
+            data
         });
-
-        return response;
     };
     updateSnippet = async (data: TUpdateSnippetReqBody) => {
-        const response = await request<TCreateSnippetResBody, TRemoveErrBody, TUpdateSnippetReqBody>({
+        return  await request<TCreateSnippetResBody, TErrorResBody, TUpdateSnippetReqBody>({
             url: `/api/prompt/snippet/${data.id}/`,
             method: 'PUT',
-            data,
-            headers: {
-                authorization: `Bearer ${Cookies.get('token')}`,
-            },
+            data
         });
 
-        return response;
     };
     removeSnippet = async (id: number) => {
-        const response = await request<null, TRemoveErrBody, number>({
+       return  await request<null, TErrorResBody, number>({
             url: `/api/prompt/snippet/${id}/`,
-            method: 'DELETE',
-            headers: {
-                authorization: `Bearer ${Cookies.get('token')}`,
-            },
+            method: 'DELETE'
         });
-
-        return response;
     };
+    
 
 }
 
