@@ -12,7 +12,7 @@ type EditableSpanPropsType = {
 }
 const EditableText: React.FC<EditableSpanPropsType> = memo(({disabled}) => {
     const title = useAppSelector(state => state.snippetsReducer.snippet.title)
-    const [editMode, setEditMode] = useState(false);
+    const [editMode, setEditMode] = useState(true);
     const dispatch = useAppDispatch()
 
     const activateEditMode = () => {
@@ -31,11 +31,11 @@ const EditableText: React.FC<EditableSpanPropsType> = memo(({disabled}) => {
 
 
     return <div className={styles.container}>{editMode
-        ? <input className={styles.input} value={title} onChange={changeTitle} autoFocus onBlur={activateViewMode}/>
+        ? <input maxLength={255} className={styles.input} value={title} onChange={changeTitle} autoFocus onBlur={activateViewMode}/>
         : <Tooltip id={'edit'} content={'Double click to edit'}>
-            <span className={styles.text} onDoubleClick={activateEditMode}>
+            <div className={styles.text} onDoubleClick={activateEditMode}>
                 {title}
-            </span>
+            </div>
         </Tooltip>}
         {title === '' && <div className={styles.error}>Require field</div>}
     </div>
