@@ -26,7 +26,6 @@ const CreateSnippetsPage = () => {
     const dispatch=useAppDispatch()
     const {id}=useParams()
 
-    console.log(id)
     useEffect(()=>{
         if(id){
         dispatch(fetchSnippet(+id))
