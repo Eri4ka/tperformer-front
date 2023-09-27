@@ -1,4 +1,6 @@
 .sidebar {
+  position: relative;
+  z-index: 1;
   width: 100%;
   max-width: 5rem;
   transition: max-width var(--transition-delay) var(--transition-timing);

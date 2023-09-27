@@ -1,10 +1,11 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import {createBrowserRouter, Navigate, RouterProvider} from 'react-router-dom';
 
 import { AppLayout } from '@/components/AppLayout';
 import {route} from "@/components/AppRouter/constants.ts";
 import { ProtectedRoute } from '@/components/ProtectedRoute';
 import { CanvasPage } from '@/pages/CanvasPage';
 import CreateSnippetsPage from '@/pages/CreateSnippetsPage';
+import Error404 from "@/pages/Erorr404";
 import { ForgotPasswordConfirmPage } from '@/pages/ForgotPasswordConfirmPage';
 import { ForgotPasswordPage } from '@/pages/ForgotPasswordPage';
 import { HomePage } from '@/pages/HomePage';
@@ -22,6 +23,7 @@ const router = createBrowserRouter([
   {
     path: route.home,
     element: <AppLayout />,
+    errorElement:<Error404/>,
     children: [
       {
         element: <ProtectedRoute />,
@@ -35,7 +37,7 @@ const router = createBrowserRouter([
             element: <SnippetsPage />,
           },
           {
-            path: route.CreateSnippet,
+            path: route.createSnippet,
             element: <CreateSnippetsPage />,
           },
           {
@@ -44,6 +46,11 @@ const router = createBrowserRouter([
           },
         ],
       },
+      {
+        path: route.error404,
+        element: <Error404 />,
+      },
+
     ],
   },
   {
@@ -116,6 +123,11 @@ const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path: '*',
+    element:  <Navigate to={route.error404} replace={true}/>,
+  },
+
 ]);
 
 export const AppRouter = () => {
