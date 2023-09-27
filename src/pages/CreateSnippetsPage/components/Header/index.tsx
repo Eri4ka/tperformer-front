@@ -53,7 +53,6 @@ const Header = () => {
                     variant={ButtonVariant.icon}
                     tooltip={'Make a copy'}
                     onClick={() => {
-                        console.log('click')
                         dispatch(createSnippet({}))
                     }}
                     icon={<CopyCreateIc/>}

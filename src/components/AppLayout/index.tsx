@@ -16,6 +16,7 @@ export const AppLayout = () => {
 
   return (
     <div className={styles.app}>
+
       <Header onBurger={handleToggleSideBarOpen} />
       <main className={styles.appLayout}>
         <SideBar isOpen={isSideBarOpen} />

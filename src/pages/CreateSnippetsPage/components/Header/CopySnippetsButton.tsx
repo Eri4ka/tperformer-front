@@ -8,6 +8,7 @@ const CopySnippetsButton = () => {
         <BaseButton
             className={styles.iconButton}
             variant={ButtonVariant.icon}
+            tooltip={'Copy text'}
             onClick={() => {
                 navigator.clipboard.writeText( content );
             }}

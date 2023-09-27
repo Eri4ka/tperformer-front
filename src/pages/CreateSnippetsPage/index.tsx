@@ -26,7 +26,6 @@ const crumbsList = [
 const CreateSnippetsPage = () => {
     const dispatch = useAppDispatch()
     const {id} = useParams()
-    console.log('bla')
     const {data}  = useLoaderData() as Awaited<ReturnType<typeof snippetsService.getSnippet>>
 
     useLayoutEffect(() => {

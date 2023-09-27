@@ -9,7 +9,6 @@ type Props = {
 };
 
 export const BreadCrumbs: FC<Props> = memo(({ data }) => {
-    console.log('BreadCrumbs')
   return (
     <div className={styles.crumbs}>
       <ul className={styles.crumbsList}>

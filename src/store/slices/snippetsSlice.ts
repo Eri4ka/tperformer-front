@@ -185,7 +185,6 @@ export const updateSnippet = createAsyncThunk<
     try {
         const snippet = getState().snippetsReducer.snippet
         if (snippet.title.trim() !== '' && snippet.content.trim() !== ''&&snippet.id!==0) {
-            console.log('updateSnippet')
             const res = await snippetsService.updateSnippet(snippet)
             return res.data
         }
