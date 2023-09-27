@@ -1,5 +1,6 @@
 export const route={
     home:'/',
     publicSnippets:'/publicSnippets',
-    CreateSnippet:'/publicSnippets/:id'
+    createSnippet:'/publicSnippets/:id',
+    error404:'/error404'
 }
