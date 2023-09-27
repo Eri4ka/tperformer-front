@@ -1,4 +1,3 @@
-
 import {useNavigate} from "react-router-dom";
 
 import {ReactComponent as CopyCreateIc} from '@/assets/images/button/copyCreate.svg';
@@ -14,12 +13,10 @@ import {createSnippet, removeSnippet} from "@/store/slices/snippetsSlice.ts";
 import styles from './Header.module.scss'
 
 
-
-
 const Header = () => {
-    
+
     const dispatch = useAppDispatch()
-    const navigate=useNavigate()
+    const navigate = useNavigate()
     return (
         <div className={styles.container}>
             <EditableText
@@ -32,7 +29,7 @@ const Header = () => {
                     variant={ButtonVariant.icon}
                     onClick={() => {
                         dispatch(removeSnippet("button"))
-                        navigate(route.publicSnippets)
+                            .then(() => navigate(route.publicSnippets))
                     }}
                     icon={<TrashIc/>}
                     disabled={false}/>
@@ -41,7 +38,7 @@ const Header = () => {
                     className={styles.iconButton}
                     variant={ButtonVariant.icon}
                     onClick={() => {
-                        navigator.clipboard.writeText( location.href );
+                        navigator.clipboard.writeText(location.href);
                     }}
                     icon={<ShareIc/>}
                     disabled={false}/>
