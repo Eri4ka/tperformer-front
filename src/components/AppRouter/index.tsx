@@ -1,5 +1,6 @@
 import {createBrowserRouter, Navigate, RouterProvider} from 'react-router-dom';
 
+import snippetsService from "@/api/services/SnippetsService.ts";
 import { AppLayout } from '@/components/AppLayout';
 import {route} from "@/components/AppRouter/constants.ts";
 import { ProtectedRoute } from '@/components/ProtectedRoute';
@@ -23,7 +24,6 @@ const router = createBrowserRouter([
   {
     path: route.home,
     element: <AppLayout />,
-    errorElement:<Error404/>,
     children: [
       {
         element: <ProtectedRoute />,
@@ -38,7 +38,12 @@ const router = createBrowserRouter([
           },
           {
             path: route.createSnippet,
+            loader:({params})=>{
+                return snippetsService.getSnippet(params.id?+params.id:0)
+                },
             element: <CreateSnippetsPage />,
+            errorElement:<Error404/>,
+
           },
           {
             path: ':canvasId',

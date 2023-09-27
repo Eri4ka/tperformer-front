@@ -40,6 +40,9 @@ export const snippetsSlice = createSlice({
         changeSnippet: (state, action: PayloadAction<TUpdateSnippetReqBody>) => {
 
             state.snippet = {...state.snippet, ...action.payload}
+        },
+        setSnippet:(state,action:PayloadAction<TSnippetResBody>)=>{
+            state.snippet=action.payload
         }
 
     },
@@ -181,7 +184,8 @@ export const updateSnippet = createAsyncThunk<
 >('snippets/updateSnippet', async (_, {rejectWithValue, getState}) => {
     try {
         const snippet = getState().snippetsReducer.snippet
-        if (snippet.title.trim() !== '' && snippet.content.trim() !== '') {
+        if (snippet.title.trim() !== '' && snippet.content.trim() !== ''&&snippet.id!==0) {
+            console.log('updateSnippet')
             const res = await snippetsService.updateSnippet(snippet)
             return res.data
         }

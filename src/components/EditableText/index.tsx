@@ -12,7 +12,7 @@ type EditableSpanPropsType = {
 }
 const EditableText: React.FC<EditableSpanPropsType> = memo(({disabled}) => {
     const title = useAppSelector(state => state.snippetsReducer.snippet.title)
-    const [editMode, setEditMode] = useState(true);
+    const [editMode, setEditMode] = useState(false);
     const dispatch = useAppDispatch()
 
     const activateEditMode = () => {
