@@ -27,6 +27,7 @@ const Header = () => {
                 <BaseButton
                     className={styles.iconButton}
                     variant={ButtonVariant.icon}
+                    tooltip={'Delete'}
                     onClick={() => {
                         dispatch(removeSnippet("button"))
                             .then(() => navigate(route.publicSnippets))
@@ -37,6 +38,7 @@ const Header = () => {
                 <BaseButton
                     className={styles.iconButton}
                     variant={ButtonVariant.icon}
+                    tooltip={'Copy url'}
                     onClick={() => {
                         navigator.clipboard.writeText(location.href);
                     }}
@@ -49,6 +51,7 @@ const Header = () => {
                 <BaseButton
                     className={styles.iconButton}
                     variant={ButtonVariant.icon}
+                    tooltip={'Make a copy'}
                     onClick={() => {
                         console.log('click')
                         dispatch(createSnippet({}))
