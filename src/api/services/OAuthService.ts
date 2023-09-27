@@ -6,6 +6,7 @@ class OAuthService {
     return await request({
       url: `api/auth/${service}/login/callback${query}`,
       method: 'GET',
+      headers: { 'content-type': 'application/x-www-form-urlencoded' },
     });
 
   };

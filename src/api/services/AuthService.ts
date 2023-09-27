@@ -16,6 +16,7 @@ class AuthService {
       url: REGISTRATION_ENDPOINT,
       method: 'POST',
       data,
+      headers:{}
     });
 
 
