@@ -1,22 +1,32 @@
-import React from "react";
+import React, {useEffect} from "react";
+
+import {useAppDispatch, useAppSelector} from "@/store/hooks.ts";
+import {appActions} from "@/store/slices/appSlice.ts";
+
+import styles from './Snackbar.module.scss'
+
 
 const Snackbar = () => {
-    const [open, setOpen] = React.useState(false);
+    const text=useAppSelector(state => state.appReducer.snackbar)
+    const dispatch=useAppDispatch()
 
-    const handleClick = () => {
-        setOpen(true);
-    };
+    useEffect(()=>{
+        if(text==='')return
+        const  timeout=setTimeout(()=>{
+               dispatch(appActions.setSnackbar(''))
+           },800)
 
-    const handleClose = (event: React.SyntheticEvent | Event, reason?: string) => {
-        if (reason === 'clickaway') {
-            return;
-        }
-
-        setOpen(false);
-    };
+       return()=>{
+           clearTimeout(timeout)
+       }
+   },[text,dispatch])
+    const classNameSnackbar=text===''? styles.container:styles.container + ' ' + styles.show
     return (
-        <div >
-            snackbar
+        <div className={classNameSnackbar} >
+            <div className={styles.icon}/>
+            <p className={styles.text}>
+                {text}
+            </p>
         </div>
     );
 };

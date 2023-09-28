@@ -8,9 +8,11 @@ import {BaseButton, ButtonVariant} from "@/components/Button/BaseButton";
 import EditableText from "@/components/EditableText";
 import CopySnippetsButton from "@/pages/CreateSnippetsPage/components/Header/CopySnippetsButton.tsx";
 import {useAppDispatch} from "@/store/hooks.ts";
+import {appActions} from "@/store/slices/appSlice.ts";
 import {createSnippet, removeSnippet} from "@/store/slices/snippetsSlice.ts";
 
 import styles from './Header.module.scss'
+
 
 
 const Header = () => {
@@ -41,6 +43,7 @@ const Header = () => {
                     tooltip={'Copy url'}
                     onClick={() => {
                         navigator.clipboard.writeText(location.href);
+                        dispatch(appActions.setSnackbar('Url copied '))
                     }}
                     icon={<ShareIc/>}
                     disabled={false}/>
@@ -53,7 +56,7 @@ const Header = () => {
                     variant={ButtonVariant.icon}
                     tooltip={'Make a copy'}
                     onClick={() => {
-                        dispatch(createSnippet({}))
+                        dispatch(createSnippet('dublicate'))
                     }}
                     icon={<CopyCreateIc/>}
                     disabled={false}/>

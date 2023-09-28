@@ -11,6 +11,7 @@ import {
     TUpdateSnippetReqBody
 } from "@/api/types/snippetsType.ts";
 import {date} from "@/helpers/date.ts";
+import {appActions} from "@/store/slices/appSlice.ts";
 import {RootState} from "@/store/store.ts";
 import {TStateStatus} from "@/store/types";
 
@@ -107,6 +108,7 @@ export const snippetsSlice = createSlice({
                 };
                 state.snippetStatus = 'success';
 
+
             })
             .addCase(removeSnippet.rejected, (state, action) => {
                 state.snippetStatus = 'error';
@@ -152,18 +154,20 @@ export const fetchSnippets = createAsyncThunk<
 });
 export const createSnippet = createAsyncThunk<
     TCreateSnippetResBody ,
-    unknown,
+    'dublicate'|'create',
     {
         rejectValue: TErrorResBody,
         state: RootState
     }
->('snippets/createSnippet', async (_, {rejectWithValue}) => {
+>('snippets/createSnippet', async (data, {rejectWithValue,dispatch}) => {
     try {
             const res = await snippetsService.createSnippet({
                 title: `New snippet_${date}`,
                 content: 'enter your spippet',
                 hidden: false
             })
+            if(data==="dublicate") dispatch(appActions.setSnackbar('Snippet dublicated'))
+            if(data==="create") dispatch(appActions.setSnackbar('Snippet created'))
             return res.data
     } catch (err) {
         const error = err as TAxiosError<TErrorResBody>;
