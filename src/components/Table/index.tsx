@@ -8,10 +8,15 @@ import {
 } from '@tanstack/react-table';
 import cl from 'classnames';
 import {useState} from 'react';
+import {useNavigate} from "react-router-dom";
+
+import {route} from "@/components/AppRouter/constants.ts";
 
 import {TableSelection} from './components/TableSelection';
 import styles from './styles.module.scss';
 import {SearchField} from '../SearchField';
+
+
 
 type Props<T> = {
     data: T[];
@@ -34,6 +39,7 @@ export const Table = <T, >({
     const [globalFilter, setGlobalFilter] = useState('');
 
     const handleSetGlobalFilterValue = (value: string) => setGlobalFilter(value);
+    const navigate=useNavigate()
 
     const table = useReactTable({
         data,
@@ -84,7 +90,9 @@ export const Table = <T, >({
                 {table.getRowModel().rows.map((row) => (
                     <tr key={row.id} className={cl(styles.tableRow, styles.tableRow_body)}>
                         {row.getVisibleCells().map((cell) => (
-                            <td className={styles.tableCell} key={cell.id}>
+                            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                           // @ts-ignore
+                            <td className={styles.tableCell} onClick={()=>navigate(`${route.publicSnippets}/${row.original.id}`)} key={cell.id}>
                                 {flexRender(cell.column.columnDef.cell, cell.getContext())}
                             </td>
                         ))}
