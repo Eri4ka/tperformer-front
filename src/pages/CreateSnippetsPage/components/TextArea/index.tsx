@@ -16,9 +16,9 @@ const TextArea =() => {
     return (
         <textarea
             className={styles.textarea}
-            value={content}
+            value={content==='Type here...'?'':content}
             onChange={onChangeHandler}
-            placeholder={'Enter text snippets'}
+            placeholder={'Type here...'}
         />
     );
 };

@@ -1,7 +1,7 @@
 .container {
 	position: absolute;
-	//transition: opacity 0.5s;
-		opacity: 0;
+	z-index: 3;
+	opacity: 0;
 	transform: translateX(-50%);
 	padding: 20px;
 	left: 50%;
@@ -13,7 +13,8 @@
 	background: var(--white-00);
 	box-shadow: 4px 4px 32px 0 rgba(199, 199, 204, 0.20), -4px -4px 32px 0px rgba(199, 199, 204, 0.20);
 	border-radius: 12px;
-	&.show{
+
+	&.show {
 		transition: opacity 0.5s;
 		opacity: 1;
 	}

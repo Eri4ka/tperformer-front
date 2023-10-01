@@ -10,6 +10,7 @@
   transition: all var(--transition-delay) var(--transition-timing);
 
   &:disabled {
+    background: #3d66b0;
     cursor: auto;
   }
 

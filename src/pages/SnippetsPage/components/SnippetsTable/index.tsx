@@ -35,6 +35,7 @@ const columns: ColumnDef<TSnippetResBody>[] = [
         header: 'Discription',
         cell: (info) => info.getValue(),
         size: 785,
+
     },
 
 ];
@@ -45,6 +46,7 @@ type Props={
 }
 
 export const SnippetsTable:React.FC<Props> = ({data}) => {
+
     const [tabActive,setActiveTab]=useState<Ttab>('public')
     return (<>
             <TableTabs tabActive={tabActive} setActiveTab={setActiveTab} tabData={tabData}/>

@@ -16,14 +16,18 @@ import {RootState} from "@/store/store.ts";
 import {TStateStatus} from "@/store/types";
 
 type SnippetsState = {
-    snippetStatus: TStateStatus;
-    snippets: TSnippetResBody[];
+    snippetsStatus: TStateStatus
+    snippets: TSnippetResBody[]
     snippet: TSnippetResBody
     errors: null | TErrorResBody
+    createSnippet: TStateStatus
+    updateSnippet: TStateStatus
+    removeSnippet: TStateStatus
+    getSnippet: TStateStatus
 };
 
 const initialState: SnippetsState = {
-    snippetStatus: 'init',
+    snippetsStatus: 'init',
     snippets: [],
     snippet: {
         id: 0,
@@ -31,6 +35,11 @@ const initialState: SnippetsState = {
         title: `New snippet_${date}`,
         hidden: false
     },
+    createSnippet: 'init',
+    updateSnippet: 'init',
+    removeSnippet: 'init',
+    getSnippet: 'init',
+
     errors: null
 };
 
@@ -42,43 +51,47 @@ export const snippetsSlice = createSlice({
 
             state.snippet = {...state.snippet, ...action.payload}
         },
-        setSnippet:(state,action:PayloadAction<TSnippetResBody>)=>{
-            state.snippet=action.payload
-        }
+        setSnippet: (state, action: PayloadAction<TSnippetResBody>) => {
+            state.snippet = action.payload
+        },
+        changeCreateStatus: (state, action: PayloadAction<TStateStatus>) => {
+            state.createSnippet = action.payload
+        },
 
     },
     extraReducers: (builder) => {
         builder
             .addCase(fetchSnippets.pending, (state) => {
-                state.snippetStatus = 'loading';
+                state.snippetsStatus = 'loading';
             })
             .addCase(fetchSnippets.fulfilled, (state, action) => {
                 state.snippets = action.payload
-                state.snippetStatus = 'success';
+                state.snippetsStatus = 'success';
 
             })
             .addCase(fetchSnippets.rejected, (state, action) => {
-                state.snippetStatus = 'error';
+                state.snippetsStatus = 'error';
                 if (action.payload && typeof action.payload === 'object') {
                     state.errors = action.payload;
                 }
             })
             .addCase(createSnippet.pending, (state) => {
-                state.snippetStatus = 'loading';
+                state.createSnippet = 'loading';
             })
             .addCase(createSnippet.fulfilled, (state, action) => {
-               state.snippet = action.payload
-                state.snippetStatus = 'success';
+                state.snippet = {...action.payload.snippet}
+
+                state.createSnippet = 'success';
 
             })
             .addCase(createSnippet.rejected, (state, action) => {
-                state.snippetStatus = 'error';
+                state.createSnippet = 'error';
                 if (action.payload && typeof action.payload === 'object') {
                     state.errors = action.payload;
                 }
             })
             .addCase(updateSnippet.pending, (state) => {
-                state.snippetStatus = 'loading';
+                state.updateSnippet = 'loading';
             })
             .addCase(updateSnippet.fulfilled, (state) => {
                 state.snippet = {
@@ -87,45 +100,45 @@ export const snippetsSlice = createSlice({
                     title: `New snippet_${date}`,
                     hidden: false
                 };
-                state.snippetStatus = 'success';
+                state.updateSnippet = 'success';
 
             })
             .addCase(updateSnippet.rejected, (state, action) => {
-                state.snippetStatus = 'error';
+                state.updateSnippet = 'error';
                 if (action.payload && typeof action.payload === 'object') {
                     state.errors = action.payload;
                 }
             })
             .addCase(removeSnippet.pending, (state) => {
-                state.snippetStatus = 'loading';
+                state.removeSnippet = 'loading';
             })
             .addCase(removeSnippet.fulfilled, (state) => {
                 state.snippet = {
                     id: 0,
-                    content: 'enter your snippet',
+                    content: 'Type here...',
                     title: `New snippet_${date}`,
                     hidden: false
                 };
-                state.snippetStatus = 'success';
+                state.removeSnippet = 'success';
 
 
             })
             .addCase(removeSnippet.rejected, (state, action) => {
-                state.snippetStatus = 'error';
+                state.removeSnippet = 'error';
                 if (action.payload && typeof action.payload === 'object') {
                     state.errors = action.payload;
                 }
             })
             .addCase(fetchSnippet.pending, (state) => {
-                state.snippetStatus = 'loading';
+                state.getSnippet = 'loading';
             })
             .addCase(fetchSnippet.fulfilled, (state, action) => {
                 state.snippet = action.payload
-                state.snippetStatus = 'success';
+                state.getSnippet = 'success';
 
             })
             .addCase(fetchSnippet.rejected, (state, action) => {
-                state.snippetStatus = 'error';
+                state.getSnippet = 'error';
                 if (action.payload && typeof action.payload === 'object') {
                     state.errors = action.payload;
                 }
@@ -153,22 +166,25 @@ export const fetchSnippets = createAsyncThunk<
     }
 });
 export const createSnippet = createAsyncThunk<
-    TCreateSnippetResBody ,
-    'dublicate'|'create',
+    { snippet: TCreateSnippetResBody, type: 'dublicate' | 'create' },
+    'dublicate' | 'create',
     {
         rejectValue: TErrorResBody,
         state: RootState
     }
->('snippets/createSnippet', async (data, {rejectWithValue,dispatch}) => {
+>('snippets/createSnippet', async (type, {rejectWithValue, dispatch}) => {
     try {
-            const res = await snippetsService.createSnippet({
-                title: `New snippet_${date}`,
-                content: 'enter your spippet',
-                hidden: false
-            })
-            if(data==="dublicate") dispatch(appActions.setSnackbar('Snippet dublicated'))
-            if(data==="create") dispatch(appActions.setSnackbar('Snippet created'))
-            return res.data
+        const res = await snippetsService.createSnippet({
+            title: `New snippet_${date}`,
+            content: 'Type here...',
+            hidden: false
+        })
+        if (type === "dublicate") dispatch(appActions.setSnackbar('Snippet dublicated'))
+        if (type === "create") {
+            dispatch(appActions.setSnackbar('Snippet created'))
+
+        }
+        return {snippet: res.data, type}
     } catch (err) {
         const error = err as TAxiosError<TErrorResBody>;
 
@@ -188,7 +204,7 @@ export const updateSnippet = createAsyncThunk<
 >('snippets/updateSnippet', async (_, {rejectWithValue, getState}) => {
     try {
         const snippet = getState().snippetsReducer.snippet
-        if (snippet.title.trim() !== '' && snippet.content.trim() !== ''&&snippet.id!==0) {
+        if (snippet.title.trim() !== '' && snippet.content.trim() !== '' && snippet.id !== 0) {
             const res = await snippetsService.updateSnippet(snippet)
             return res.data
         }
@@ -210,11 +226,13 @@ export const removeSnippet = createAsyncThunk<
         rejectValue: TErrorResBody,
         state: RootState
     }
->('snippets/removeSnippet', async (type, {rejectWithValue, getState}) => {
+>('snippets/removeSnippet', async (type, {rejectWithValue, getState, dispatch}) => {
     try {
         const snippet = getState().snippetsReducer.snippet
+
         if (snippet.title.trim() === '' || snippet.content.trim() === '' || type === 'button') {
             await snippetsService.removeSnippet(snippet.id)
+            if (type === 'button') dispatch(appActions.setSnackbar('Snippet deleted'))
         }
         return null
     } catch (err) {

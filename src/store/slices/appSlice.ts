@@ -1,9 +1,7 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
-import {removeSnippet} from "@/store/slices/snippetsSlice.ts";
-
 type AppState = {
-    snackbar: string
+    snackbar: string,
 };
 
 
@@ -19,12 +17,6 @@ export const appSlice = createSlice({
             state.snackbar = action.payload
         }
     },
-        extraReducers: (builder) => {
-            builder
-                .addCase(removeSnippet.fulfilled, (state) => {
-                    state.snackbar = 'Snippet deleted';
-                })
-        }
 
 
 });

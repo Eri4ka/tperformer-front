@@ -27,7 +27,8 @@ class AuthService {
       url: LOGIN_ENDPOINT,
       method: 'POST',
       data,
-      headers:{}
+      headers:{},
+
     });
 
 
