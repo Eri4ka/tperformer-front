@@ -5,7 +5,9 @@
   gap: 0.5rem;
   color: var(--black-00);
   transition: color var(--transition-delay) var(--transition-timing);
-
+  &.sectionActive{
+    color: var(--indigo);
+  }
   &Text {
     overflow: hidden;
     text-overflow: ellipsis;
