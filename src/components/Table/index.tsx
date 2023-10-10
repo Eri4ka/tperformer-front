@@ -17,7 +17,6 @@ import styles from './styles.module.scss';
 import {SearchField} from '../SearchField';
 
 
-
 type Props<T> = {
     data: T[];
     columns: ColumnDef<T>[];
@@ -39,7 +38,7 @@ export const Table = <T, >({
     const [globalFilter, setGlobalFilter] = useState('');
 
     const handleSetGlobalFilterValue = (value: string) => setGlobalFilter(value);
-    const navigate=useNavigate()
+    const navigate = useNavigate()
 
     const table = useReactTable({
         data,
@@ -66,12 +65,18 @@ export const Table = <T, >({
                     numTotal={table.getPreFilteredRowModel().rows.length}
                 />
             )}
-            <table className={styles.table}>
+            <table
+                style={{
+                    width: table.getCenterTotalSize(),
+                }}
+                className={styles.table}
+            >
                 <thead>
                 {table.getHeaderGroups().map((headerGroup) => (
                     <tr key={headerGroup.id} className={styles.tableRow}>
                         {headerGroup.headers.map((header) => (
-                            <th style={{width: header.getSize()}} className={styles.tableCell+ ' ' +styles.cellHeader} key={header.id}>
+                            <th style={{width: header.getSize()}} className={styles.tableCell + ' ' + styles.cellHeader}
+                                key={header.id}>
                                 {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
                                 {header.column.getCanResize() && (
                                     <div
@@ -90,9 +95,17 @@ export const Table = <T, >({
                 {table.getRowModel().rows.map((row) => (
                     <tr key={row.id} className={cl(styles.tableRow, styles.tableRow_body)}>
                         {row.getVisibleCells().map((cell) => (
+                            <td
+                                className={styles.tableCell}
+                                key={cell.id}
+                                style= {{
+                                    width: cell.column.getSize(),
+                                    whiteSpace:'normal'
+                                }}
                             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                           // @ts-ignore
-                            <td className={styles.tableCell} onClick={()=>navigate(`${route.publicSnippets}/${row.original.id}`)} key={cell.id}>
+                            // @ts-ignore
+                                onClick={() => navigate(`${route.publicSnippets}/${row.original.id}`)}
+                            >
                                 {flexRender(cell.column.columnDef.cell, cell.getContext())}
                             </td>
                         ))}

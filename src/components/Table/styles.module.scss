@@ -33,6 +33,9 @@
     cursor: pointer;
     position: relative;
     padding: 1rem 1rem 1rem 0;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    //max-width: 200px;
     font-weight: 400;
     text-align: left;
     border-bottom: 1px solid var(--gray-04);
