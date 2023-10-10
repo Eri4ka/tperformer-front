@@ -1,18 +1,15 @@
-import { Formik } from 'formik';
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import {Formik} from 'formik';
+import {useEffect} from 'react';
+import {useNavigate} from 'react-router-dom';
 import * as Yup from 'yup';
 
-import { ReactComponent as QuestIc } from '@/assets/images/text-field/question.svg';
-import { AuthFormLayout } from '@/components/AuthFormLayout';
-import { AuthHeading } from '@/components/AuthHeading';
-import { BaseButton, ButtonVariant } from '@/components/Button/BaseButton';
-import { IconLayout } from '@/components/IconLayout';
-import { CheckBox } from '@/components/Input/CheckBox';
-import { TextField } from '@/components/Input/TextField';
-import { Tooltip } from '@/components/Tooltip';
-import { useAppDispatch, useAppSelector } from '@/store/hooks';
-import { fetchCreateUser } from '@/store/slices/authSlice';
+import {AuthFormLayout} from '@/components/AuthFormLayout';
+import {AuthHeading} from '@/components/AuthHeading';
+import {BaseButton, ButtonVariant} from '@/components/Button/BaseButton';
+import {CheckBox} from '@/components/Input/CheckBox';
+import {TextField} from '@/components/Input/TextField';
+import {useAppDispatch, useAppSelector} from '@/store/hooks';
+import {fetchCreateUser} from '@/store/slices/authSlice';
 
 import styles from './styles.module.scss';
 
@@ -98,21 +95,21 @@ set-up your account'
               handleBlur={handleBlur}
               handleClear={setFieldValue}
             />
-            <TextField
-              type='text'
-              name='apikey'
-              label='OpenAI API key (optional)'
-              placeholder='Bkduf-AGRTL-Gbarejcd'
-              value={values.apikey}
-              handleChange={handleChange}
-              handleBlur={handleBlur}
-              handleClear={setFieldValue}
-              icon={
-                <Tooltip id='apikey-tip' content='OpenAI API key (optional)'>
-                  <IconLayout icon={<QuestIc />} />
-                </Tooltip>
-              }
-            />
+            {/*<TextField*/}
+            {/*  type='text'*/}
+            {/*  name='apikey'*/}
+            {/*  label='OpenAI API key (optional)'*/}
+            {/*  placeholder='Bkduf-AGRTL-Gbarejcd'*/}
+            {/*  value={values.apikey}*/}
+            {/*  handleChange={handleChange}*/}
+            {/*  handleBlur={handleBlur}*/}
+            {/*  handleClear={setFieldValue}*/}
+            {/*  icon={*/}
+            {/*    <Tooltip id='apikey-tip' content='OpenAI API key (optional)'>*/}
+            {/*      <IconLayout icon={<QuestIc />} />*/}
+            {/*    </Tooltip>*/}
+            {/*  }*/}
+            {/*/>*/}
             <div className={styles.sign}>
               <CheckBox
                 name='privacy'
