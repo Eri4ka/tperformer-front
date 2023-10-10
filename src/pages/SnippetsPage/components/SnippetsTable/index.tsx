@@ -6,7 +6,7 @@ import {CheckBox} from '@/components/Input/CheckBox';
 import {Table} from '@/components/Table';
 import TableTabs from "@/components/Table/components/TableTabs";
 import {fuzzyFilter} from '@/components/Table/helpers';
-import {TSnippets, Ttab} from "@/pages/SnippetsPage/components/SnippetsTable/types";
+import { Ttab} from "@/pages/SnippetsPage/components/SnippetsTable/types";
 
 const columns: ColumnDef<TSnippetResBody>[] = [
     // {
@@ -27,7 +27,8 @@ const columns: ColumnDef<TSnippetResBody>[] = [
         accessorKey: 'title',
         header: 'Title',
         cell: (info) => info.getValue(),
-        size: 278,
+        maxSize: 250,
+
         filterFn: fuzzyFilter,
     },
     {
@@ -35,6 +36,13 @@ const columns: ColumnDef<TSnippetResBody>[] = [
         header: 'Discription',
         cell: (info) => info.getValue(),
         size: 785,
+
+    },
+    {
+        accessorKey: 'author',
+        header: 'Author',
+        cell: (info) => info.getValue(),
+        size: 250,
 
     },
 
